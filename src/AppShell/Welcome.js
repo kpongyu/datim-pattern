@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as color_palette from '../Styles/Colors';
 import * as headings from '../Styles/Text';
-import {Container, Col, Row} from 'react-bootstrap';
 import styled from 'styled-components';
 
 

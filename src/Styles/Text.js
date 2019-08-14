@@ -24,5 +24,7 @@ export const H4 = styled.h4`
     font-family: 'Roboto', sans-serif;
     color: ${color_palette.PRIMARY_TEXT};
     font-size: 19px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 
 `;

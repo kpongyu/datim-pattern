@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './Components/Header';
-import {Container, Col, Row} from 'react-bootstrap';
 import { Route, Link, BrowserRouter as Router, Switch, DefaultRoute } from 'react-router-dom';
 import Welcome from './AppShell/Welcome';
 import Basic from './AppShell/Basic';
 import Sidebar from './Components/Sidebar';
-import Single from './AppShell/Single-Components';
+import Inputs from './AppShell/Inputs';
+import { Grid, Container} from '@material-ui/core';
 
 class App extends Component {
   render() {
@@ -15,24 +15,27 @@ class App extends Component {
       <div className="App">
       <Header/>
       <Router>
-        <Container>
+
+      <Container maxWidth="lg">
+      <Grid container maxWidth="sm">
         
-          <Row>
-            <Col xs={12} md={4}>
+         
+            <Grid item xs={12} md={3}>
               <Sidebar/>
-            </Col>
-            <Col xs={12} md={8} className="contentContainer">
+            </Grid>
+            <Grid item  xs={12} md={9} className="contentContainer">
             
             <Switch>
              
               <Route exact path="/" component={Welcome} />
               <Route path="/basic" component={Basic} />
-              <Route path="/single" component={Single} />
+              <Route path="/inputs" component={Inputs} />
               <Route exact path="/2019/datim/v2/index.html" component={Welcome} />
             </Switch>
-            </Col>
-          </Row>
+            </Grid>
+          
          
+        </Grid>
         </Container>
         </Router>
       </div>

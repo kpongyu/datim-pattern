@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import * as color_palette from './Colors';
-import {Container, Col, Row, DropdownButton, Dropdown} from 'react-bootstrap';
 
 export const PRIMARY = styled.button`
     font-family: 'Oswald', sans-serif;

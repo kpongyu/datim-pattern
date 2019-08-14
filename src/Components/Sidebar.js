@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as color_palette from '../Styles/Colors';
-import {Container, Col, Row, ButtonGroup, Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
 import './Sidebar.css';
@@ -10,13 +9,13 @@ class Sidebar extends Component {
     return (
         <SidebarContainer>
         <SidebarLogo src="./assets/pepfar.jpg"></SidebarLogo>
-        <ButtonGroup style={buttonGroupStyle} vertical>
+        <div style={buttonGroupStyle}>
 
       <NavLink exact to="/" style={sidebarButton} activeClassName="sidebarActive">Welcome</NavLink>
       <NavLink to="/basic" style={sidebarButton} activeClassName="sidebarActive">Basic</NavLink>
-      <NavLink to="/single" style={sidebarButton} activeClassName="sidebarActive">Single Components</NavLink>
+      <NavLink to="/inputs" style={sidebarButton} activeClassName="sidebarActive">Inputs</NavLink>
    
-      </ButtonGroup>
+      </div>
       </SidebarContainer>
     );
   }
@@ -24,7 +23,10 @@ class Sidebar extends Component {
 
 const buttonGroupStyle = {
     width: '100%',
-    textAlign: 'center'
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column'
+
   };
 const sidebarButton = {
     width: '100%',

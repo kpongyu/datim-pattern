@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import * as color_palette from '../Styles/Colors';
 import * as headings from '../Styles/Text';
-import {Container, Col, Row} from 'react-bootstrap';
 import styled from 'styled-components';
-import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
 import Breadcrumb from '../Components/Breadcrumb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faSortDown, faUser, faDownload, faBars,
         faFileExport, faQuestionCircle, faMapMarkerAlt,
         faCog, faExchangeAlt, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
-
+import Grid from '@material-ui/core/Grid';
 class Basic extends Component {
 
   render() {
@@ -20,6 +18,12 @@ class Basic extends Component {
      <div>
      <Breadcrumb></Breadcrumb>
       <headings.H1>Basic Palettes</headings.H1>
+
+      <Grid container spacing={0}>
+
+      
+
+<Grid item xs={12} md={6}>
        <headings.H2>Colors</headings.H2>
        <headings.H4>Primary Colors</headings.H4>
        <ColorContainer>
@@ -33,7 +37,7 @@ class Basic extends Component {
         #333333
         </ColorCube>
        </ColorContainer>
-       <hr></hr>
+      
        <headings.H4>Secondary Colors</headings.H4>
        <ColorContainer>
         <ColorCube background={color_palette.SECONDARY_BLUE} color="white">
@@ -46,10 +50,10 @@ class Basic extends Component {
         #DBDBDB
         </ColorCube>
        </ColorContainer>
+</Grid>
 
-
-
-       <hr></hr>
+<Grid item xs={12} md={6}>
+     
        <headings.H2>Fonts</headings.H2>
        <headings.H1>Heading 1: Oswald, 30px, #2b3b65</headings.H1>
        <headings.H2>Heading 2: Oswald, 24px, #1d5893</headings.H2>
@@ -57,8 +61,8 @@ class Basic extends Component {
        <headings.H4>Heading 4: Roboto, 19px, #333333</headings.H4>
        <p>Paragraph/Text: Roboto Light, 16px, #333333</p>
        <a href="#">Link: Roboto, 16px, #333333</a>
-
-       <hr></hr>
+</Grid>
+  <Grid item xs={12}>
        <headings.H2>Icons</headings.H2>
        <FlexGrid>
          <FlexGridFourthCol>faHome: <FontAwesomeIcon icon={faHome} /></FlexGridFourthCol>
@@ -74,6 +78,9 @@ class Basic extends Component {
          <FlexGridFourthCol>faSearch: <FontAwesomeIcon icon={faSearch} /></FlexGridFourthCol>
          <FlexGridFourthCol>faTimes: <FontAwesomeIcon icon={faTimes} /></FlexGridFourthCol>
        </FlexGrid>
+ </Grid>     
+    
+    </Grid>
      </div>
     );
   }
@@ -103,6 +110,10 @@ const FlexGrid = styled.div`
 `;
 const FlexGridFourthCol = styled.p`
     width: 25%;
+
+    @media (max-width: 768px){
+      width: 50%;
+    }
 `;
 
 

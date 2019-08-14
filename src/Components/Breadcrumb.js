@@ -5,7 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 const routes = {
   '/': 'Home',
   '/basic': 'Basic',
-  '/single': 'Single Components'
+  '/inputs': 'Inputs'
 };
 
 const findRouteName = url => routes[url];
@@ -47,7 +47,7 @@ const BreadcrumbsItem = ({ ...rest, match }) => {
 const Breadcrumbs = ({ ...rest, location : { pathname }, match }) => {
   const paths = getPaths(pathname);
   return (
-    <Breadcrumb>
+    <Breadcrumb style={BreadcrumbStyle}>
       {paths.map(p => <Route path={p} component={BreadcrumbsItem} />)}
     </Breadcrumb>
   );
@@ -58,3 +58,7 @@ export default props => (
     <Route path="/:path" component={Breadcrumbs} {...props} />
   </div>
 );
+
+const BreadcrumbStyle = {
+   
+};
