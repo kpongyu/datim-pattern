@@ -14,7 +14,7 @@ class Sidebar extends Component {
       <NavLink exact to="/" style={sidebarButton} activeClassName="sidebarActive">Welcome</NavLink>
       <NavLink to="/basic" style={sidebarButton} activeClassName="sidebarActive">Basic</NavLink>
       <NavLink to="/inputs" style={sidebarButton} activeClassName="sidebarActive">Inputs</NavLink>
-   
+      <NavLink to="/indicator" style={sidebarButton} activeClassName="sidebarActive">Indicator</NavLink>
       </div>
       </SidebarContainer>
     );

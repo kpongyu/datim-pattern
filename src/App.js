@@ -7,6 +7,7 @@ import Welcome from './AppShell/Welcome';
 import Basic from './AppShell/Basic';
 import Sidebar from './Components/Sidebar';
 import Inputs from './AppShell/Inputs';
+import Indicator from './AppShell/Indicator';
 import { Grid, Container} from '@material-ui/core';
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route exact path="/" component={Welcome} />
               <Route path="/basic" component={Basic} />
               <Route path="/inputs" component={Inputs} />
+              <Route path="/indicator" component={Indicator} />
               <Route exact path="/2019/datim/v2/index.html" component={Welcome} />
             </Switch>
             </Grid>
