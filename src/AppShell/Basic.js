@@ -8,18 +8,35 @@ import { faHome, faSortDown, faUser, faDownload, faBars,
         faFileExport, faQuestionCircle, faMapMarkerAlt,
         faCog, faExchangeAlt, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
 import Grid from '@material-ui/core/Grid';
-class Basic extends Component {
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-  render() {
-    console.log(this.props.location.pathname);
+const useStyles = makeStyles(theme => ({
+  container:{
+    maxWidth: '1200px',
+    margin: '0 auto',
+    paddingTop: '50px',
+    paddingLeft: '15px',
+    paddingRight: '15px'
+  }
+ 
+}));
 
+
+
+export default function Basic() {
+
+
+  const classes = useStyles();
+  
+ 
+   
     
     return (
-     <div>
+     <div className={classes.container}>
      <Breadcrumb></Breadcrumb>
       <headings.H1>Basic Palettes</headings.H1>
 
-      <Grid container spacing={0}>
+      <Grid container xs={12} maxWidth="sm" justifyContent="center" alignItems="center">
 
       
 
@@ -83,7 +100,7 @@ class Basic extends Component {
     </Grid>
      </div>
     );
-  }
+  
 }
 
 const ColorContainer = styled.div`
@@ -115,7 +132,3 @@ const FlexGridFourthCol = styled.p`
       width: 50%;
     }
 `;
-
-
-
-export default Basic;

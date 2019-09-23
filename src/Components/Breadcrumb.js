@@ -5,7 +5,8 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 const routes = {
   '/': 'Home',
   '/basic': 'Basic',
-  '/inputs': 'Inputs'
+  '/inputs': 'Inputs',
+  '/codelist': 'Codelist'
 };
 
 const findRouteName = url => routes[url];

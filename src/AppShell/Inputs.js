@@ -21,6 +21,9 @@ const options2 = [
 
 
 
+ 
+
+
 class Inputs extends Component {
 
   state = {
@@ -48,7 +51,11 @@ class Inputs extends Component {
     
     
     return (
-     <div>
+     <div style={{ maxWidth: '1200px',
+     margin: '0 auto',
+     paddingTop: '50px',
+     paddingLeft: '15px',
+     paddingRight: '15px'}}>
      <Breadcrumb></Breadcrumb>
       <headings.H1>Buttons</headings.H1>
 

@@ -16,20 +16,24 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 
-class Indicator extends Component {
+const useStyles = makeStyles(theme => ({
+  container:{
+    maxWidth: '1200px',
+    margin: '0 auto',
+    paddingTop: '50px',
+    paddingLeft: '15px',
+    paddingRight: '15px'
+  }
+ 
+}));
 
 
-   
+export default function Indicator() {
 
-
-  render() {
-
-    
-    
-
+    const classes = useStyles();
     return (
         
-        <div>
+        <div className={classes.container}>
         <headings.H1>Indicator</headings.H1>
 
 
@@ -475,7 +479,7 @@ class Indicator extends Component {
 
      </div>
     );
-  }
+  
 }
 
 
@@ -526,4 +530,3 @@ const TableTitle = styled.h4`
 
 `;
 
-export default Indicator;

@@ -12,6 +12,9 @@ class Sidebar extends Component {
         <div style={buttonGroupStyle}>
 
       <NavLink exact to="/" style={sidebarButton} activeClassName="sidebarActive">Welcome</NavLink>
+      <NavLink to="/codelist" style={sidebarButton} activeClassName="sidebarActive">Codelist</NavLink>
+
+
       <NavLink to="/basic" style={sidebarButton} activeClassName="sidebarActive">Basic</NavLink>
       <NavLink to="/inputs" style={sidebarButton} activeClassName="sidebarActive">Inputs</NavLink>
       <NavLink to="/indicator" style={sidebarButton} activeClassName="sidebarActive">Indicator</NavLink>
