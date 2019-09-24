@@ -21,7 +21,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
+import history from './history';
 
 
 
@@ -94,7 +94,7 @@ export default function App() {
       </AppBar>
 
 
-      <Router>
+      <Router history={history}>
 
       <Drawer
         className={classes.drawer}

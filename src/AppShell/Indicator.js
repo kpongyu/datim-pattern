@@ -13,7 +13,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import Breadcrumb from '../Components/Breadcrumb';
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,6 +34,7 @@ export default function Indicator() {
     return (
         
         <div className={classes.container}>
+        <Breadcrumb></Breadcrumb>
         <headings.H1>Indicator</headings.H1>
 
 

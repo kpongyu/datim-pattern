@@ -16,7 +16,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import {Table, TableBody, TableCell, TableHead, TableRow, Paper} from '@material-ui/core';
-import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
+import MaterialTable from 'material-table';
+import history from '../history';
+import { BrowserRouter, Route} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   hide:{
@@ -36,17 +38,21 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     width: '100%',
-    marginTop: theme.spacing(3),
     overflowX: 'auto',
   },
   chipContainer: {
     marginRight: '10px'
   },
   formControl:{
-    width: '90%'
+    width: '100%'
   },
   filterContainer: {
     display: 'flex',
+    paddingBottom: '20px'
+  },
+  filter: {
+    paddingLeft: '15px',
+    paddingRight: '15px'
   },
   [theme.breakpoints.down('xs')]: {
     // styles
@@ -106,17 +112,8 @@ export default function Codelist() {
     })
   };
 
-  function createData(name, description, uid, fiscal, indicatorGroup, source) {
-    return { name, description, uid, fiscal, indicatorGroup, source };
-  }
-  const rows = [
-    createData('Codelist1', 'abc', 12345, '2020', 'group1', 'source1'),
-    createData('Codelist2', 'cde', 14564, '2019', 'group2', 'source3'),
-    createData('Codelist3', 'xyz', 27689, '2018', 'group3', 'source1'),
-    createData('Codelist4', 'wze', 87313, '2019', 'group2', 'source2'),
-    createData('Codelist5', 'mze', 73978, '2020', 'group3', 'source1'),
-  ];
-
+  
+  
   
 
 
@@ -132,7 +129,7 @@ export default function Codelist() {
 
       <form className={classes.filterContainer} autoComplete="off">
 
-      <Grid item xs={12} md={4} classname={classes.filter} >
+      <Grid item xs={12} md={4} className={classes.filter} >
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="indicator">Indicator Group</InputLabel>
         <Select
@@ -150,7 +147,7 @@ export default function Codelist() {
       </FormControl>
     </Grid>
 
-    <Grid item xs={12} md={4} classname={classes.filter} >
+    <Grid item xs={12} md={4} className={classes.filter} >
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="source">Source</InputLabel>
         <Select
@@ -168,7 +165,7 @@ export default function Codelist() {
       </FormControl>
       </Grid>
 
-      <Grid item xs={12} md={4} classname={classes.filter} >
+      <Grid item xs={12} md={4} className={classes.filter} >
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="fiscal">Fiscal Year</InputLabel>
         <Select
@@ -191,6 +188,7 @@ export default function Codelist() {
       </div>
     </div>
      <div className={classes.container}>
+     <div className={classes.filterContainer}>
      <span className={values.indicatorGroup == '' ? classes.hide : classes.chipContainer}>
      <Chip 
      label={values.indicatorGroup} 
@@ -208,37 +206,37 @@ export default function Codelist() {
      onClick={removeFiscal}
      />
      </span>
+    </div>
 
-     <Paper className={classes.root}>
-     <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">UID</TableCell>
-            <TableCell align="right">Fiscal</TableCell>
-            <TableCell align="right">Indicator Group</TableCell>
-            <TableCell align="right">Source</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-              <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.button}>
-                {row.name}
-              </NavLink>
-              </TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.uid}</TableCell>
-              <TableCell align="right">{row.fiscal}</TableCell>
-              <TableCell align="right">{row.indicatorGroup}</TableCell>
-              <TableCell align="right">{row.source}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
+
+    <div className={classes.root}>
+    <Route render={({ history}) => (
+    <MaterialTable
+        title=""
+        columns={[
+          { title: 'Name', field: 'name', defaultFilter: '', filtering: false },
+          { title: 'Description', field: 'description', filtering: false},
+          { title: 'UID', field: 'uid', type: 'numeric', filtering: false },
+          { title: 'Fiscal Year', field: 'fiscal', type: 'numeric', defaultFilter: values.fiscal, filtering: false},
+          { title: 'Indicator Group', field: 'indicator', defaultFilter: values.indicatorGroup, filtering: false},
+          { title: 'Source', field: 'source', defaultFilter: values.source, filtering: false},
+        ]}
+        data={[
+          { name: 'Codelist1', description: 'abc', uid: 12345, fiscal: 2020, indicator: 'group1', source: 'source1'  },
+          { name: 'Codelist2', description: 'cde', uid: 14564, fiscal: 2019, indicator: 'group2', source: 'source3' },
+          { name: 'Codelist3', description: 'xyz', uid: 27689, fiscal: 2018, indicator: 'group3', source: 'source1' },
+          { name: 'Codelist4', description: 'wze', uid: 87313, fiscal: 2019, indicator: 'group2', source: 'source2' },
+          { name: 'Codelist5', description: 'mze', uid: 73978, fiscal: 2020, indicator: 'group3', source: 'source1' },
+        ]}        
+        options={{
+          filtering: true
+        }}
+        onRowClick={()=>{history.push('/indicator')}}
+      />
+      )} />
+      </div>
+
+
 
       </div>
      </div>
