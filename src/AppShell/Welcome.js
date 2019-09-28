@@ -12,6 +12,10 @@ import { flexbox } from '@material-ui/system';
 import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
 import {Typography,Card, CardActionArea, CardActions, CardContent, CardMedia} from '@material-ui/core';
 
+import Hero from '../../public/assets/shutterstock_516560485.jpg';
+import CardImage1 from '../../public/assets/cardImage1.png';
+import CardImage2 from '../../public/assets/cardImage2.png';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,26 +25,46 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   heroContainer:{
-    backgroundColor: '#eeeeee',
+    backgroundImage: `url(${Hero})`,
     display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column'
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    position: 'relative',
+    backgroundSize: 'cover'
   },
   heading:{
     width: '100%',
-    textAlign: 'center',
+    textAlign: 'left',
     marginTop: '50px',
-    marginBottom: '0px'
+    marginBottom: '0px',
+    color: '#ffffff',
+    fontFamily: 'EB Garamond',
+    fontWeight: 500
   },
   buttonContainer:{
     display: 'flex',
-    padding: '20px',
-    paddingBottom: '30px'
+    paddingBottom: '10px',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingRight: '20px'
   },
   button:{
     width: '100%',
-    margin: '0 auto',
-    padding: '20px',
+    float: 'left',
+    padding: '10px',
+    border: '1px solid #ffffff',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+
+    '&:hover, &:focus':{
+      backgroundColor: '#C1A783',
+      color: '#000000'
+    }
+  },
+  
+  buttonNav:{
+    width: '100%',
+    float: 'left',
+    paddingBottom: '10px'
   },
   card: {
     maxWidth: 345,
@@ -60,7 +84,69 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  heroContentContainer:{
+    maxWidth: '1200px',
+    margin: '0 auto',
+    paddingTop: '80px',
+    paddingLeft: '15px',
+    paddingRight: '15px',
+    paddingBottom: '80px',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  darken:{
+    position: "absolute",
+    width: '100%',
+    height: '100%',
+    left: 0,
+    top: 0,
+    backgroundColor: 'rgba(0,0,0,0.6)'
+  },
+  heroContent:{
+    zIndex: '10'
+  },
+  headPara:{
+    color: '#ffffff'
+  },
+  divider:{
+    width: '70px',
+    height: '3px',
+    marginTop: '1em',
+    backgroundColor: '#C1A783'
+  },
+  cardDivider:{
+    width: '50px',
+    height: '3px',
+    marginTop: '1em',
+    backgroundColor: '#C1A783',
+    marginBottom: '1em'
+  },
+  cardSection:{
+    backgroundColor: '#F7F7F7'
+  },
+  cardTitle:{
+    marginTop: 0,
+    paddingTop: '50px',
+    textAlign: 'center',
+    fontFamily: 'EB Garamond',
+    fontSize: '30px',
+    fontWeight: 500,
+    color: '#303030'
+  },
+  dividerCardTitle:{
+    margin: '0 auto',
+    width: '70px',
+    height: '3px',
+    marginTop: '1em',
+    backgroundColor: '#C1A783'
+  },
+  cardContent:{
+    borderTop: '3px solid #D55804'
   }
  
 }));
@@ -78,44 +164,55 @@ export default function Welcome(){
     return (
       <div>
       <div className={classes.heroContainer}>
-      <Grid container xs={10} md={6} maxWidth="sm" justifyContent="center" alignItems="center">
+      <div className={classes.heroContentContainer}>
+      <div className={classes.darken}></div>
+      <Grid container xs={12} md={7} maxWidth="sm" justifyContent="center" alignItems="center" className={classes.heroContent}>
    
         <headings.H1 className={classes.heading}>Welcome to OCL Metadata Browser {user == '' ? '' : ", "+ user}</headings.H1>
-        <p>
+        <div className={classes.divider}/>
+        <p className={classes.headPara}>
         Nisi orci lacinia voluptate molestias etiam massa odit iste! Temporibus quidem eveniet, 
         turpis veritatis quia neque? Consectetuer lorem duis imperdiet? Class aliquip, lacus lectus, 
         montes voluptatibus, sociosqu exercitationem! Ducimus? Ligula? Facilis.
         </p>
         <Grid item xs={12} md={6} justifyContent="center" alignItems="center" className={classes.buttonContainer}>
-        <NavLink to="/codelist" activeClassName="sidebarActive" className={classes.button}>
-        <Button variant="contained" color="primary" className={classes.button} disabled={user=='' ? true : false}>
-        CodeList
+        <NavLink to="/codelist" activeClassName="sidebarActive" className={classes.buttonNav}>
+        <Button variant="contained" color="primary" className={classes.button} >
+        CODE LISTS
       </Button>
       </NavLink>
       </Grid>
       <Grid item xs={12} md={6} justifyContent="center" alignItems="center" className={classes.buttonContainer}>
+      <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
       <Button variant="contained" color="primary" className={classes.button}>
-        Download MER Guidance
+      INDICATORS
       </Button>
+      </NavLink>
       </Grid>
 
      </Grid>
      </div>
-
+     </div>
+     <div className={classes.cardSection}>
+     <h2 className={classes.cardTitle}>RESOURCES</h2>
+     <div className={classes.dividerCardTitle}/>
       <div className={classes.container}>
+
+     
 
       <Grid item xs={10} sm={6} md={4}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://via.placeholder.com/300X150"
+          image={CardImage1}
           title="Media Title"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             Card Title
           </Typography>
+          <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
           Laboriosam vestibulum ut vero nostrud minus exercitation lacinia officiis. Dictumst. Lectus elementum.
           </Typography>
@@ -130,13 +227,14 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://via.placeholder.com/300X150"
+          image={CardImage2}
           title="Media Title"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             Card Title
           </Typography>
+          <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
           Laboriosam vestibulum ut vero nostrud minus exercitation lacinia officiis. Dictumst. Lectus elementum.
           </Typography>
@@ -151,13 +249,14 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://via.placeholder.com/300X150"
+          image={CardImage1}
           title="Media Title"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             Card Title
           </Typography>
+          <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
           Laboriosam vestibulum ut vero nostrud minus exercitation lacinia officiis. Dictumst. Lectus elementum.
           </Typography>
@@ -172,13 +271,14 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://via.placeholder.com/300X150"
+          image={CardImage2}
           title="Media Title"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             Card Title
           </Typography>
+          <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
           Laboriosam vestibulum ut vero nostrud minus exercitation lacinia officiis. Dictumst. Lectus elementum.
           </Typography>
@@ -193,13 +293,14 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://via.placeholder.com/300X150"
+          image={CardImage1}
           title="Media Title"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             Card Title
           </Typography>
+          <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
           Laboriosam vestibulum ut vero nostrud minus exercitation lacinia officiis. Dictumst. Lectus elementum.
           </Typography>
@@ -214,13 +315,14 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://via.placeholder.com/300X150"
+          image={CardImage2}
           title="Media Title"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             Card Title
           </Typography>
+          <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
           Laboriosam vestibulum ut vero nostrud minus exercitation lacinia officiis. Dictumst. Lectus elementum.
           </Typography>
@@ -230,7 +332,7 @@ export default function Welcome(){
     </Card>
       </Grid>
 
-     
+     </div>
 
 
     </div>

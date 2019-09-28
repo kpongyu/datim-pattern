@@ -12,7 +12,11 @@ import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
 import {TextField, InputAdornment} from '@material-ui/core';
+import {browserHistory} from 'react-router';
+import {Toolbar} from '@material-ui/core/';
+import AccountIcon from '@material-ui/icons/AccountCircle';
 import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
+import logo from '../../public/assets/logo.png';
 
 const drawerWidth = 240;
 
@@ -31,8 +35,8 @@ const useStyles = makeStyles(theme => ({
     minWidth: '300px'
   },
   button: {
-    color: '#ffffff',
-    float: 'right'
+    float: 'right',
+    color: '#0A314D'
   },
   textField: {
     width: '100%'
@@ -46,7 +50,35 @@ const useStyles = makeStyles(theme => ({
   },
   submitButton:{
 
+  },
+  logo:{
+    textAlign: 'center',
+    maxWidth: '200px',
+    maxHeight: '100px',
+    position: 'absolute',
+    left: '70px',
+    top: '-20px'
+  },
+  title:{
+    color: "#000000",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  logoText:{
+    paddingLeft: '10vh'
+  },
+  accountIcon:{
+    paddingRight: 10
+  },
+  [theme.breakpoints.down('xs')]: {
+    logo:{
+      
+    }
+
   }
+  
+ 
 }));
 
 
@@ -93,25 +125,31 @@ export default function Header() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const onClick = () => this.props.history.push("/");
  
     return (
       <HeaderContainer>
+      
       <Container maxWidth="lg">
       
-      <Grid container maxWidth="sm" justify="space-between" alignItems="center">
+      <Grid container maxWidth="sm" alignItems="center" >
       
-          <Grid item xs={10} md={6}>
-          
-            <Title> 
-            {/*<NavLink to="/codelist">*/}
-            OCL Metadata Browser
-             {/*</NavLink>*/}
+     
+          <Grid item xs={10}>
+         
+            <Title className={classes.title} > 
+           <a href="/">
+            <img src={logo} className={classes.logo} />
+            </a>  
             </Title>
+         
          
           </Grid>
      
           <Grid item xs={2} alignItems="flex-end">
           <Button type="button" className={classes.button} onClick={handleOpen}>
+          <AccountIcon className={classes.accountIcon}/>
          {user=='' ? 'Login': user}
         </Button>
 

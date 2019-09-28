@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './Components/Header';
+import Footer from './Components/Footer';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Welcome from './AppShell/Welcome';
 import Basic from './AppShell/Basic';
@@ -78,6 +79,7 @@ export default function App() {
           [classes.appBarShift]: open,
         })}
       >
+       <div className={classes.topBar}/>
         <Toolbar>
         <IconButton
             color="inherit"
@@ -90,8 +92,7 @@ export default function App() {
         </IconButton>
          
         <Header/>
-        </Toolbar>
-      </AppBar>
+        </Toolbar></AppBar>
 
 
       <Router history={history}>
@@ -140,6 +141,7 @@ export default function App() {
 
         </Router>
       </div>
+      <Footer></Footer>
        </StateProvider>
     );
   
@@ -157,6 +159,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor:"#ffffff"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -168,6 +171,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    color: '#0A314D'
   },
   hide: {
     display: 'none',
@@ -201,4 +205,9 @@ const useStyles = makeStyles(theme => ({
     }),
     marginLeft: 0,
   },
+  topBar:{
+    width:'100%',
+    backgroundColor: '#002134',
+    height: '30px'
+  }
 }));

@@ -17,7 +17,6 @@ import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import {Table, TableBody, TableCell, TableHead, TableRow, Paper} from '@material-ui/core';
 import MaterialTable from 'material-table';
-import history from '../history';
 import { BrowserRouter, Route} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
