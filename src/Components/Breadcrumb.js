@@ -7,7 +7,8 @@ const routes = {
   '/basic': 'Basic',
   '/inputs': 'Inputs',
   '/codelist': 'Codelist',
-  '/indicator': 'Indicator'
+  '/indicator': 'Indicator',
+  '/codelist/indicator': 'Indicator'
 };
 
 const findRouteName = url => routes[url];

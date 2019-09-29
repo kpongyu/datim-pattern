@@ -147,6 +147,11 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent:{
     borderTop: '3px solid #D55804'
+  },
+  cardContentTitle:{
+    fontSize: '16px',
+    fontWeight: '600',
+    color: '#1E3351'
   }
  
 }));
@@ -209,8 +214,8 @@ export default function Welcome(){
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Card Title
+          <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
+          What’s New
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -231,8 +236,8 @@ export default function Welcome(){
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Card Title
+          <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
+          Metadata Dimensions and Format
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -253,8 +258,8 @@ export default function Welcome(){
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Card Title
+          <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
+          Mechanism
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -275,8 +280,8 @@ export default function Welcome(){
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Card Title
+          <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
+          FAQs
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -297,8 +302,8 @@ export default function Welcome(){
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Card Title
+          <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
+          PEPFAR Guidance
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -319,8 +324,8 @@ export default function Welcome(){
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Card Title
+          <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
+          Submit a Request
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">

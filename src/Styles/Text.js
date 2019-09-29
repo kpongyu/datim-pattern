@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import * as color_palette from './Colors';
 
 export const H1 = styled.h1`
-    font-family: 'Oswald', sans-serif;
-    color: ${color_palette.PRIMARY_BLUE};
-    font-size: 30px;
+    font-family: 'EB Garamond', serif;
+    color: ${color_palette.PRIMARY_TEXT};
+    font-size: 35px;
+    font-weight: 400;
+    text-transform: uppercase
 
 `;
 

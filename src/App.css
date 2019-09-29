@@ -21,3 +21,7 @@ li.breadcrumb-item::after{
 li.breadcrumb-item:last-child::after{
   content: ''
 }
+
+.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignLeft{
+  max-width: 200px !important;
+}
