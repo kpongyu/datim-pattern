@@ -215,7 +215,7 @@ export default function Welcome(){
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
-          What’s New
+          What’s New in DATIM
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -237,7 +237,7 @@ export default function Welcome(){
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
-          Metadata Dimensions and Format
+          DATIM Training & Tutorials
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -259,7 +259,7 @@ export default function Welcome(){
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
-          Mechanism
+          PEPFAR Guidance
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -281,7 +281,7 @@ export default function Welcome(){
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
-          FAQs
+          Frequently Asked Questions (FAQ)
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -303,7 +303,7 @@ export default function Welcome(){
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
-          PEPFAR Guidance
+          Data Import and Systems Administration
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -325,7 +325,7 @@ export default function Welcome(){
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.cardContentTitle}>
-          Submit a Request
+          PEPFAR/MOH Data Alignment Activity
           </Typography>
           <div className={classes.cardDivider}/>
           <Typography variant="body2" color="textSecondary" component="p">

@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import * as color_palette from '../Styles/Colors';
 import * as headings from '../Styles/Text';
-import styled from 'styled-components';
+
 import Breadcrumb from '../Components/Breadcrumb';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faSortDown, faUser, faDownload, faBars,
-        faFileExport, faQuestionCircle, faMapMarkerAlt,
-        faCog, faExchangeAlt, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
+
+import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import MaterialTable from 'material-table';
 import {useStateValue} from '../ContextSetup';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -29,10 +26,14 @@ import Typography from '@material-ui/core/Typography';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
-
-  
-
-
+import Button from '@material-ui/core/Button';
+import Popover from '@material-ui/core/Popover';
+import Fade from '@material-ui/core/Fade';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import { withStyles } from '@material-ui/core/styles';
 
 export default function Codelist() {
   const [{ data_Elements }, dispatch] = useStateValue();
@@ -45,6 +46,18 @@ export default function Codelist() {
     dataSet: [],
     frequency: []
   });
+
+  const clearValues = event => {
+    setValues(()=>({
+      fiscal: [],
+      source: [],
+      type: [], 
+      dataSet: [],
+      frequency: []
+    }));
+
+    setDataElements(data_Elements);
+  }
 
   const handleChangeSource = event => {
     setValues(oldValues => ({
@@ -309,6 +322,29 @@ export default function Codelist() {
   
   const [search, setSearch] = React.useState("");
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const downloadData = event => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+  const popOpen = Boolean(anchorEl);
+  const popId = popOpen ? 'popover' : undefined;
+  const popHandleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [download, setDownload] = React.useState({
+    HTML: true,
+    JSON: false,
+    CSV: false,
+  });
+  const handleDownloadChange = name => event => {
+    setDownload({ ...download, [name]: event.target.checked });
+  };
+  const { HTML, JSON, CSV } = download;
+
+
+
     
     return (
       <div>
@@ -558,6 +594,54 @@ export default function Codelist() {
 </form>
 
 
+<Button variant="outlined" onClick={clearValues} className={classes.filterButton}>
+       Clear Filters
+</Button>
+<Button variant="outlined" className={classes.filterButton} onClick={downloadData}>
+      Download Data
+</Button>
+ <Popover
+        id={popId}
+        open={popOpen}
+        anchorEl={anchorEl}
+        onClose={popHandleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        
+      >
+       <FormControl component="fieldset" className={classes.formControl} className = {classes.popOver}>
+        
+        <FormGroup>
+        <FormLabel component="legend" className={classes.formLegend}>Data Format</FormLabel>
+          <FormControlLabel
+            control={<Checkbox checked={HTML} style={{color: '#D55804'}} onChange={handleDownloadChange('HTML')} value="HTML" />}
+            label="HTML"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={CSV} style={{color: '#D55804'}} onChange={handleDownloadChange('CSV')} value="CSV" />}
+            label="CSV"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox checked={JSON} style={{color: '#D55804'}} onChange={handleDownloadChange('JSON')} value="JSON" />
+            }
+            label="JSON"
+          />
+          <Button type="submit" variant="outlined" className={classes.downloadButton} onClick={()=> console.log(download, dataElements)}>
+            Download Data
+          </Button>
+        </FormGroup>
+      </FormControl>
+
+
+      </Popover>
+
 
     {dataElements.map(dataElement => (
       <ExpansionPanel>
@@ -722,6 +806,10 @@ const useStyles = makeStyles(theme => ({
     }
 
   },
+  popOver:{
+      padding: '20px',
+      minWidth: '200px'
+  },
 
   cssFocused: {},
 
@@ -753,6 +841,9 @@ const useStyles = makeStyles(theme => ({
   selectIcon:{
     fill: '#D55804'
   },
+  checkbox:{
+    color: '#D55804',
+  },
   changeBox:{
     padding: '20px',
     marginLeft: '15px',
@@ -779,6 +870,28 @@ const useStyles = makeStyles(theme => ({
   chip:{
     marginRight: '5px'
   },
+  filterButton:{
+    marginBottom: '20px',
+    marginRight: '20px',
+
+    '&:hover, &:focus':{
+      backgroundColor: '#C1A783',
+      color: '#000000'
+    }
+  },
+  downloadButton:{
+    marginRight: '20px',
+    marginTop: '10px',
+    '&:hover, &:focus':{
+      backgroundColor: '#C1A783',
+      color: '#000000'
+    }
+  },
+  formLegend:{
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontSize: '1.2em',
+    marginBottom: '10px'
+  },
   
   [theme.breakpoints.down('sm')]: {
     // styles
@@ -798,7 +911,8 @@ const useStyles = makeStyles(theme => ({
    
       paddingRight: '0px'
     },
-  }
+  },
+  
   
  
 }));
