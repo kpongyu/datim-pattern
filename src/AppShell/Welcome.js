@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   heroContainer:{
-    backgroundImage: `url(${Hero})`,
+    backgroundImage: `url('https://www.icfcreative.com/2019/datim/images/shutterstock_516560485.jpg')`,
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
@@ -210,7 +210,7 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={CardImage1}
+          image='https://www.icfcreative.com/2019/datim/images/cardImage1.png'
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
@@ -232,7 +232,7 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={CardImage2}
+          image='https://www.icfcreative.com/2019/datim/images/cardImage2.png'
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
@@ -254,7 +254,7 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={CardImage1}
+          image='https://www.icfcreative.com/2019/datim/images/cardImage1.png'
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
@@ -276,7 +276,7 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={CardImage2}
+          image='https://www.icfcreative.com/2019/datim/images/cardImage2.png'
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
@@ -298,7 +298,7 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={CardImage1}
+          image='https://www.icfcreative.com/2019/datim/images/cardImage1.png'
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>
@@ -320,7 +320,7 @@ export default function Welcome(){
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={CardImage2}
+          image='https://www.icfcreative.com/2019/datim/images/cardImage2.png'
           title="Media Title"
         />
         <CardContent className={classes.cardContent}>

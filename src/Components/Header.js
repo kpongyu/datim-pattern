@@ -140,7 +140,7 @@ export default function Header() {
          
             <Title className={classes.title} > 
            <a href="/">
-            <img src={logo} className={classes.logo} />
+            <img src='https://www.icfcreative.com/2019/datim/images/logo.png' className={classes.logo} />
             </a>  
             </Title>
          

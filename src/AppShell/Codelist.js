@@ -16,7 +16,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import MaterialTable from 'material-table';
-import { BrowserRouter, Route} from "react-router-dom";
 import {useStateValue} from '../ContextSetup';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
@@ -29,7 +28,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-
+import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
 
   
 
@@ -40,78 +39,271 @@ export default function Codelist() {
 
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    indicatorGroup: '',
-    source: '',
-    fiscal: ''
+    fiscal: [],
+    source: [],
+    type: [], 
+    dataSet: [],
+    frequency: []
   });
 
-  const handleChange = event => {
+  const handleChangeSource = event => {
     setValues(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
 
-    //dataElement is the current state of the filtered data, use dataElement not data_Element
-    const filteredDataElements = dataElements.filter(dataElement => {
-      console.log(values.indicatorGroup);
-      return (
-        
-        Object.values(dataElement).indexOf(event.target.value)>-1
-      )
-      }
-      );
-    setDataElements(filteredDataElements);
-    
-  };
-
-  const removeIndicator = e => {
-    setValues({
-      ...values,
-      indicatorGroup: ''
-    })
-    console.log(values.source);
-    const filteredDataElements = data_Elements.filter(
-      i => (i.indicator !== e.target.value && 
-        (values.source == '' ? true: i.source === values.source) &&
-        (values.fiscal == '' ? true : i.fiscal === values.fiscal)
-        
-        )
-      );
-    setDataElements(filteredDataElements);
-  };
+    const filteredDataElements = [];
 
 
-  const removeSource = e => {
-    setValues({
-      ...values,
-      source: ''
-    })
-    const filteredDataElements = data_Elements.filter(
-      i => (i.source !== e.target.value && 
-        (values.indicatorGroup =='' ? true : i.indicator === values.indicatorGroup) &&
-        (values.fiscal == '' ? true : i.fiscal === values.fiscal)
+    if(!values[event.target.name]==[]){
       
-        )
-      );
-    setDataElements(filteredDataElements);
-    
-  };
-  const removeFiscal = e => {
-    setValues({
-      ...values,
-      fiscal: ''
-    })
-    const filteredDataElements = data_Elements.filter(
-      i => (i.fiscal !== e.target.value && 
-        (values.indicatorGroup =='' ? true : i.indicator === values.indicatorGroup) &&
-        (values.source == '' ? true : i.source === values.source)
-      
-        )
 
-      );
-    setDataElements(filteredDataElements);
+      data_Elements.map(data_Element => {
+
+
+        if(
+
+          (Object.keys(values).map(function(keyName){
+            console.log(keyName);
+            if(keyName!==event.target.name){
+              return(
+                (values[keyName].length==0 ? true :
+                  values[keyName].some( item => item == data_Element.keyName))
+              )
+            }
+
+          }))
+          &&
+          (
+          event.target.value.length==0 ? true :
+          event.target.value.some( item => item == data_Element.source))
+
+          ){
+  
+        
+  
+  
+          console.log(data_Element);
+          filteredDataElements.push(data_Element);
+        }
+  
+  
+        }
+        );
+    }
     
-  };
+    
+    
+    setDataElements(filteredDataElements);
+  }
+
+  const handleChangeType = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+
+    const filteredDataElements = [];
+
+
+    if(!values[event.target.name]==[]){
+      
+
+      data_Elements.map(data_Element => {
+
+
+        if(
+          (values.fiscal.length==0 ? true :
+          values.fiscal.some( item => item == data_Element.fiscal))
+          &&
+          (values.source.length==0 ? true :
+          values.source.some( item => item == data_Element.source))
+          &&
+          (values.dataSet.length==0 ? true :
+            values.dataSet.some( item => item == data_Element.dataSet))
+          &&
+          (values.frequency.length==0 ? true :
+          values.frequency.some( item => item == data_Element.frequency))
+          &&
+          (
+          event.target.value.length==0 ? true :
+          event.target.value.some( item => item == data_Element.type))
+
+          ){
+  
+        
+  
+  
+          console.log(data_Element);
+          filteredDataElements.push(data_Element);
+        }
+  
+  
+        }
+        );
+    }
+    
+    
+    
+    setDataElements(filteredDataElements);
+  }
+
+  const handleChangeFiscal = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+
+    const filteredDataElements = [];
+
+
+    if(!values[event.target.name]==[]){
+      
+
+      data_Elements.map(data_Element => {
+
+   
+        if(
+          (values.type.length==0 ? true :
+          values.type.some( item => item == data_Element.type))
+          &&
+          (values.source.length==0 ? true :
+          values.source.some( item => item == data_Element.source))
+          &&
+          (values.dataSet.length==0 ? true :
+            values.dataSet.some( item => item == data_Element.dataSet))
+          &&
+          (values.frequency.length==0 ? true :
+          values.frequency.some( item => item == data_Element.frequency))
+          &&
+          (
+            event.target.value.length==0 ? true :
+          event.target.value.some( item => item == data_Element.fiscal))
+
+          ){
+  
+        
+  
+  
+          console.log(data_Element);
+          filteredDataElements.push(data_Element);
+        }
+  
+  
+        }
+        );
+    }
+    
+    
+    
+    setDataElements(filteredDataElements);
+  }
+
+  const handleChangeDataSet = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+
+    const filteredDataElements = [];
+
+
+    if(!values[event.target.name]==[]){
+      
+
+      data_Elements.map(data_Element => {
+
+   
+        if(
+          (values.type.length==0 ? true :
+          values.type.some( item => item == data_Element.type))
+          &&
+          (values.source.length==0 ? true :
+          values.source.some( item => item == data_Element.source))
+          &&
+          (values.fiscal.length==0 ? true :
+            values.fiscal.some( item => item == data_Element.fiscal))
+          &&
+          (values.frequency.length==0 ? true :
+          values.frequency.some( item => item == data_Element.frequency))
+          &&
+          (
+            event.target.value.length==0 ? true :
+          event.target.value.some( item => item == data_Element.dataSet))
+
+          ){
+  
+        
+  
+  
+          console.log(data_Element);
+          filteredDataElements.push(data_Element);
+        }
+  
+  
+        }
+        );
+    }
+    
+    
+    
+    setDataElements(filteredDataElements);
+  }
+
+
+  const handleChangeFrequency = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+
+    const filteredDataElements = [];
+
+
+    if(!values[event.target.name]==[]){
+      
+
+      data_Elements.map(data_Element => {
+
+   
+        if(
+          (values.type.length==0 ? true :
+          values.type.some( item => item == data_Element.type))
+          &&
+          (values.source.length==0 ? true :
+          values.source.some( item => item == data_Element.source))
+          &&
+          (values.fiscal.length==0 ? true :
+            values.fiscal.some( item => item == data_Element.fiscal))
+          &&
+          (values.dataSet.length==0 ? true :
+          values.dataSet.some( item => item == data_Element.dataSet))
+          &&
+          (
+            event.target.value.length==0 ? true :
+          event.target.value.some( item => item == data_Element.frequency))
+
+          ){
+  
+        
+  
+  
+          console.log(data_Element);
+          filteredDataElements.push(data_Element);
+        }
+  
+  
+        }
+        );
+    }
+    
+    
+    
+    setDataElements(filteredDataElements);
+  }
+
+
+  
 
   const [dataElements, setDataElements] = React.useState(data_Elements);
   
@@ -196,12 +388,50 @@ export default function Codelist() {
     
 
      <form className={classes.filterContainer} autoComplete="off">
+
+
+     <Grid item xs={12} md={4} className={classes.filter} >
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="source">Source</InputLabel>
+  <Select
+   multiple
+    value={values.source}
+    onChange={handleChangeSource}
+    className = {classes.select}
+    inputProps={{
+      name: 'source',
+      id: 'source',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
+  >
+    <MenuItem value={'DATIM'}>DATIM</MenuItem>
+    <MenuItem value={'PDH'}>PDH</MenuItem>
+    <MenuItem value={'MOH'}>MOH</MenuItem>
+  </Select>
+</FormControl>
+</Grid>
+
+
+
+
+
+
      <Grid item xs={12} md={4} className={classes.filter} >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="fiscal">Fiscal Year</InputLabel>
   <Select
+    multiple
     value={values.fiscal}
-    onChange={handleChange}
+    onChange={handleChangeFiscal}
     className = {classes.select}
     inputProps={{
       name: 'fiscal',
@@ -210,6 +440,13 @@ export default function Codelist() {
         icon: classes.selectIcon
       }
     }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
   >
     <MenuItem value={'2020'}>2020</MenuItem>
     <MenuItem value={'2019'}>2019</MenuItem>
@@ -219,87 +456,108 @@ export default function Codelist() {
 </Grid>
 
 
-<Grid item xs={12} md={4} className={classes.filter} >
-<FormControl className={classes.formControl}>
-  <InputLabel htmlFor="source">Results</InputLabel>
-  <Select
-    value={values.source}
-    onChange={handleChange}
-    className = {classes.select}
-    inputProps={{
-      name: 'source',
-      id: 'source',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-  >
-    <MenuItem value={'source1'}>Result 1</MenuItem>
-    <MenuItem value={'source2'}>Result 2</MenuItem>
-    <MenuItem value={'source3'}>Result 3</MenuItem>
-  </Select>
-</FormControl>
-</Grid>
+
 
 <Grid item xs={12} md={4} className={classes.filter} >
 <FormControl className={classes.formControl}>
-  <InputLabel htmlFor="indicator">Facility Based Code List</InputLabel>
+  <InputLabel htmlFor="type">Type</InputLabel>
   <Select
-    value={values.indicatorGroup}
-    onChange={handleChange}
+   multiple
+    value={values.type}
+    onChange={handleChangeType}
     className = {classes.select}
     inputProps={{
-      name: 'indicatorGroup',
-      id: 'indicator',
+      name: 'type',
+      id: 'type',
       classes: {
         icon: classes.selectIcon
       }
     }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
   >
-    <MenuItem value={'group1'}>Group 1</MenuItem>
-    <MenuItem value={'group2'}>Group 2</MenuItem>
-    <MenuItem value={'group3'}>Group 3</MenuItem>
+    <MenuItem value={'Results'}>Results</MenuItem>
+    <MenuItem value={'Target'}>Target</MenuItem>
+    <MenuItem value={'SIMS'}>SIMS</MenuItem>
   </Select>
 </FormControl>
 </Grid>
 
 
 
+
+
+<Grid item xs={12} md={4} className={classes.filter} >
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="dataSet">Data Set</InputLabel>
+  <Select
+   multiple
+    value={values.dataSet}
+    onChange={handleChangeDataSet}
+    className = {classes.select}
+    inputProps={{
+      name: 'dataSet',
+      id: 'dataSet',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
+  >
+    <MenuItem value={'facility'}>Facility Based Code List</MenuItem>
+    <MenuItem value={'community'}>Community Based Code List</MenuItem>
+  </Select>
+</FormControl>
+</Grid>
+
+
+
+<Grid item xs={12} md={4} className={classes.filter} >
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="frequency">Frequency</InputLabel>
+  <Select
+   multiple
+    value={values.frequency}
+    onChange={handleChangeFrequency}
+    className = {classes.select}
+    inputProps={{
+      name: 'frequency',
+      id: 'frequency',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
+  >
+    <MenuItem value={'quarterly'}>Quarterly</MenuItem>
+    <MenuItem value={'semiAnnual'}>Semi-Annual</MenuItem>
+    <MenuItem value={'annual'}>Annual</MenuItem>
+  </Select>
+</FormControl>
+</Grid>
 
 
 
 </form>
 
 
-
-
-
-
-
-
-     <div className={classes.filterContainer}>
-     <span className={classes.chipContainer, values.fiscal == '' ? classes.hide : classes.chipContainer}>
-     <Chip 
-     label={values.fiscal} 
-     onClick={removeFiscal}
-     />
-     </span>
-
-     <span className={classes.chipContainer, values.source == '' ? classes.hide : classes.chipContainer}>
-     <Chip 
-     label={values.source} 
-     onClick={removeSource}
-     />
-     </span>
-     
-     <span className={values.indicatorGroup == '' ? classes.hide : classes.chipContainer}>
-     <Chip 
-     label={values.indicatorGroup} 
-     onClick={removeIndicator} />
-     </span>
-   
-     
-    </div>
 
     {dataElements.map(dataElement => (
       <ExpansionPanel>
@@ -330,9 +588,15 @@ export default function Codelist() {
         <Grid container>
         <Grid Item  xs={12} md={8} className={classes.expansionPanelLeft}>
           <Typography>
+          <strong>Indicator Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
+          {dataElement.indicatorCode}
+          </NavLink>
+
+          <br/>
           <strong>Description</strong>: {dataElement.description}<br/>
           <strong>Short Name</strong>: {dataElement.shortName}<br/>
-          <strong>Code</strong>: {dataElement.code}
+          <strong>Code</strong>: {dataElement.code}<br/>
+          <strong>Source</strong>: {dataElement.source}
           </Typography>
         </Grid>
         <Grid Item  xs={12} md={4}>
@@ -352,7 +616,7 @@ export default function Codelist() {
         <Route render={({ history}) => (
            <div className={classes.tableContainer}>
     <MaterialTable
-        title="Category Combo Options"
+        title="Disaggregations"
         columns={[
           { title: 'Name', field: 'name', defaultFilter: '',  filtering: false },
           { title: 'UID', field: 'uid',  filtering: false  },
@@ -393,43 +657,13 @@ export default function Codelist() {
 
       ))}
       <TablePagination
-        component="nav"
+        component="ExpansionPanel"
         page={0}
         rowsPerPage={10}
         count={100}
         onChangePage={() => {}}
       />
 
-{/*
-
-    <div className={classes.root}>
-    <Route render={({ history}) => (
-    <MaterialTable
-        title=""
-        columns={[
-          { title: 'Name', field: 'name', defaultFilter: '', filtering: false, cellStyle: {maxWidth: '30%'} },
-          { title: 'Description', field: 'description', filtering: false},
-          { title: 'UID', field: 'uid', type: 'numeric', filtering: false },
-          { title: 'Fiscal Year', field: 'fiscal', type: 'numeric', defaultFilter: values.fiscal, filtering: false},
-          { title: 'Indicator Group', field: 'indicator', defaultFilter: values.indicatorGroup, filtering: false},
-          { title: 'Source', field: 'source', defaultFilter: values.source, filtering: false},
-        ]}
-        data={[
-          { name: 'Codelist1', description: 'abc', uid: 12345, fiscal: 2020, indicator: 'group1', source: 'source1'  },
-          { name: 'Codelist2', description: 'cde', uid: 14564, fiscal: 2019, indicator: 'group2', source: 'source3' },
-          { name: 'Codelist3', description: 'xyz', uid: 27689, fiscal: 2018, indicator: 'group3', source: 'source1' },
-          { name: 'Codelist4', description: 'wze', uid: 87313, fiscal: 2019, indicator: 'group2', source: 'source2' },
-          { name: 'Codelist5', description: 'mze', uid: 73978, fiscal: 2020, indicator: 'group3', source: 'source1' },
-        ]}        
-        options={{
-          filtering: true
-        }}
-        onRowClick={()=>{history.push('/indicator')}}
-      />
-      )} />
-      </div>
-
-      */}
 
 
 
@@ -542,8 +776,11 @@ const useStyles = makeStyles(theme => ({
   expansionPanelLeft:{
     paddingBottom: '30px'
   },
+  chip:{
+    marginRight: '5px'
+  },
   
-  [theme.breakpoints.down('xs')]: {
+  [theme.breakpoints.down('sm')]: {
     // styles
     filterContainer: {
       display: 'block',
@@ -556,7 +793,11 @@ const useStyles = makeStyles(theme => ({
     },
     tableContainer:{
       maxWidth: "85vw"
-    }
+    },
+    filter: {
+   
+      paddingRight: '0px'
+    },
   }
   
  

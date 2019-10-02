@@ -47,10 +47,17 @@ export default function App() {
     password: '',
     data_Elements:  [
       { name: 'CXCA_SCRN (N, DSD, Age/Sex/HIVStatus/ScreenResult/ScreenVisitType)', 
+        source: 'DATIM',
+        type: 'Results',
+        fiscal: '2020', 
+        dataSet: 'facility',
+        frequency: 'quarterly',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'On ART screened for cervical cancer', 
         description: 'Number of HIV-positive women on ART screened for cervical cancer, Facilis hac ornare voluptatibus consequatur corporis, sollicitudin libero, netus quisquam eget sequi modi montes litora parturient at', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'XWK6yAwhol8', fiscal: '2020', indicator: 'group1', source: 'source1',
+        uid: 'XWK6yAwhol8', 
+        
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -83,10 +90,16 @@ export default function App() {
       },
 
       { name: 'CXCA_SCRN (N, TA, Age/Sex/HIVStatus/ScreenResult/ScreenVisitType)', 
+        source: 'DATIM',
+        type: 'Target',
+        fiscal: '2019', 
+        dataSet: 'facility',
+        frequency: 'semiAnnual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'On ART eligible for treatment',
         description: 'Voluptatum nisl nobis! Feugiat et facilisi vehicula quos. Doloribus exercitationem cursus diamlorem, suscipit cupidatat egestas, architecto', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'D8gXql7mhrZ', fiscal: '2019', indicator: 'group2', source: 'source3',
+        uid: 'D8gXql7mhrZ', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -102,10 +115,16 @@ export default function App() {
 
 
       { name: 'CXCA_TX (N, DSD, Age/Sex/HIVStatus/TreatmentType/ScreenVisitType)', 
+        source: 'DATIM',
+        type: 'SIMS',
+        fiscal: '2018',
+        dataSet: 'community',
+        frequency: 'quarterly',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'On ART eligible for treatment ',
         description: 'Voluptatibus velit per, taciti senectus incidunt. Tellus donec commodi nunc, donec convallis', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'Z6qsl1ezjTS', fiscal: '2018', indicator: 'group3', source: 'source1',
+        uid: 'Z6qsl1ezjTS', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -120,10 +139,16 @@ export default function App() {
       },
 
       { name: 'CXCA_TX (N, TA, Age/Sex/HIVStatus/TreatmentType/ScreenVisitType)', 
+        source: 'PDH',
+        type: 'SIMS',
+        fiscal: '2019',  
+        dataSet: 'community',
+        frequency: 'annual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'Services Offered',
         description: 'Nec cubilia maiores, porro accumsan voluptatem proident reprehenderit quisquam! Tellus est rutrum, justo', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'mFvVvrRvZgo', fiscal: '2019', indicator: 'group2', source: 'source2',
+        uid: 'mFvVvrRvZgo', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -138,10 +163,16 @@ export default function App() {
       },
 
       { name: 'EMR_SITE (N, NoApp, Service Delivery Area)', 
+        source: 'MOH',
+        type: 'Results',
+        fiscal: '2020',
+        dataSet: 'community',
+        frequency: 'semiAnnual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'Providing voluntary FPS',
         description: 'Feugiat inventore penatibus odio proin, facere sit culpa mi, mauris! Sem, morbi, optio vel cras fugit nesciunt tellus', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'Duf3Ks5vfNL', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'Duf3Ks5vfNL', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -156,10 +187,16 @@ export default function App() {
       },
 
       { name: 'FPINT_SITE (N, NoApp, Serv Del Point)', 
+        source: 'PDH',
+        type: 'Results',
+        fiscal: '2020', 
+        dataSet: 'community',
+        frequency: 'annual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'GBV Care',
         description: 'Ipsam dis adipiscing mauris, eleifend laboris distinctio natoque nostrum incididunt? Natoque, fusce', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'GT81rJIJrrd', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'GT81rJIJrrd', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -174,10 +211,16 @@ export default function App() {
       },
 
       { name: 'GEND_GBV (N, DSD, Age/Sex/PEP)', 
+        source: 'MOH',
+        type: 'Target',
+        fiscal: '2020', 
+        dataSet: 'facility',
+        frequency: 'semiAnnual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'GBV Care',
         description: 'Morbi minima blandit maecenas, pharetra corporis excepturi vel lacinia a. Class laborum, pretium ad', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'OZ9CHCMYJMS', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'OZ9CHCMYJMS', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -192,10 +235,16 @@ export default function App() {
       },
 
       { name: 'GEND_GBV (N, TA, Age/Sex/PEP)', 
+        source: 'DATIM',
+        type: 'Results',
+        fiscal: '2018', 
+        dataSet: 'community',
+        frequency: 'quarterly',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'GBV Care', 
         description: 'Fugiat sed tempora in itaque curae cursus ad, deleniti voluptatibus dictum sagittis quod corporis', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'pKH3YTAShEe', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'pKH3YTAShEe', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -210,10 +259,16 @@ export default function App() {
       },
 
       { name: 'GEND_GBV (N, TA, Age/Sex/ViolenceType) v2', 
+        source: 'PDH',
+        type: 'Results',
+        fiscal: '2019', 
+        dataSet: 'community',
+        frequency: 'semiAnnual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'Health Workers', 
         description: 'Semper repudiandae expedita et, hendrerit. Repellendus hendrerit! Maiores sagittis, condimentum mus mus quod', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'yoxGr2OW5vT', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'yoxGr2OW5vT', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -228,10 +283,16 @@ export default function App() {
       },
 
       { name: 'HRH_CURR (N, DSD, CadreCategory/FinancialSupport/Expenditure)', 
+        source: 'PDH',
+        type: 'Target',
+        fiscal: '2020', 
+        dataSet: 'facility',
+        frequency: 'annual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'Number of contacts', 
         description: 'Officia quidem. Mollitia illum dolores pede sed ante tellus urna leo magnis deserunt molestiae', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'fpW7iq7zFNN', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'fpW7iq7zFNN', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -246,10 +307,16 @@ export default function App() {
       },
 
       { name: 'HTS_INDEX_FAC (N, DSD, Age Aggregated/Sex/Contacts)', 
+        source: 'PDH',
+        type: 'Results',
+        fiscal: '2020', 
+        dataSet: 'community', 
+        frequency: 'quarterly',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'Number of contacts ', 
         description: 'Mollit similique sed sem enim, quaerat modi litora! Impedit volutpat! Consequatur lectus nonummy, orci quisquam', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'wJSHzXjl3ev', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'wJSHzXjl3ev', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -264,10 +331,16 @@ export default function App() {
       },
 
       { name: 'HTS_RECENT (D, DSD, Age/Sex/HIVIndication)', 
+        source: 'DATIM',
+        type: 'Target',
+        fiscal: '2020', 
+        dataSet: 'facility',
+        frequency: 'semiAnnual',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'HTS recently tested', 
         description: 'Facere eveniet, labore convallis anim numquam, adipiscing aliquip, odit labore quae incidunt eiusmod libero', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
-        uid: 'fSXIwl6nGZV', fiscal: '2020', indicator: 'group3', source: 'source1',
+        uid: 'fSXIwl6nGZV', 
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
