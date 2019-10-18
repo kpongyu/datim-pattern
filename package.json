@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.20",
     "@fortawesome/free-solid-svg-icons": "^5.10.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
@@ -14,6 +15,7 @@
     "material-ui-next-responsive-table": "^0.5.1",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
+    "react-app-polyfill": "^1.0.4",
     "react-dom": "^16.8.6",
     "react-flexview": "^4.0.3",
     "react-hook-form": "^3.23.10",
@@ -22,6 +24,7 @@
     "react-scripts-scss-ts": "^2.17.1",
     "react-select": "^3.0.4",
     "react-super-responsive-table": "^5.0.0",
+    "react-window": "^1.8.5",
     "reactstrap": "^8.0.1",
     "styled-components": "^4.3.2"
   },
@@ -69,6 +72,19 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
   },
   "jest": {
     "collectCoverageFrom": [

@@ -25,3 +25,6 @@ li.breadcrumb-item:last-child::after{
 .MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignLeft{
   max-width: 200px !important;
 }
+.MuiExpansionPanelSummary-content.Mui-expanded{
+  margin:0;
+}

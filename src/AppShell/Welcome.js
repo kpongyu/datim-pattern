@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: '10px'
   },
   card: {
-    maxWidth: 345,
+    maxWidth: '345px',
     margin: '0 auto',
     marginBottom: '30px'
   },
@@ -85,6 +85,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
+    flexGrow: 1
   },
   heroContentContainer:{
     maxWidth: '1200px',
@@ -108,7 +109,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'rgba(0,0,0,0.6)'
   },
   heroContent:{
-    zIndex: '10'
+    zIndex: '10',
+    minWidth: '500px'
   },
   headPara:{
     color: '#ffffff'
@@ -152,6 +154,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: '16px',
     fontWeight: '600',
     color: '#1E3351'
+  },
+  cardGrid:{
+    padding: '0px 20px'
   }
  
 }));
@@ -205,7 +210,7 @@ export default function Welcome(){
 
      
 
-      <Grid item xs={10} sm={6} md={4}>
+      <Grid item xs={10} sm={6} md={4} className={classes.cardGrid}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
@@ -227,7 +232,7 @@ export default function Welcome(){
     </Card>
       </Grid>
 
-<Grid item xs={10} sm={6} md={4}>
+<Grid item xs={10} sm={6} md={4} className={classes.cardGrid}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
@@ -249,7 +254,7 @@ export default function Welcome(){
     </Card>
       </Grid>
 
-      <Grid item xs={10} sm={6} md={4}>
+      <Grid item xs={10} sm={6} md={4} className={classes.cardGrid}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
@@ -271,7 +276,7 @@ export default function Welcome(){
     </Card>
       </Grid>
 
-      <Grid item xs={10} sm={6} md={4}>
+      <Grid item xs={10} sm={6} md={4} className={classes.cardGrid}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
@@ -293,7 +298,7 @@ export default function Welcome(){
     </Card>
       </Grid>
 
-      <Grid item xs={10} sm={6} md={4} >
+      <Grid item xs={10} sm={6} md={4} className={classes.cardGrid}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
@@ -315,7 +320,7 @@ export default function Welcome(){
     </Card>
       </Grid>
 
-      <Grid item xs={10} md={4} sm={6}>
+      <Grid item xs={10} md={4} sm={6} className={classes.cardGrid}>
      <Card className={classes.card}>
       <CardActionArea>
         <CardMedia

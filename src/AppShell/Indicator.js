@@ -23,8 +23,15 @@ import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table';
 import Paper from '@material-ui/core/Paper';
 import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
-
-
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Chip from '@material-ui/core/Chip';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { FixedSizeList } from 'react-window';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,9 +67,23 @@ function a11yProps(index) {
 
 
 
+function ListItemLink(props) {
+  return  <ListItem button >
+  <ListItemText primary={`Item`} />
+</ListItem>
+}
+
+
 export default function Indicator() {
 
     const [indicatorName, setIndicatorName] = React.useState('CXCA_SCRN');
+
+    const [values, setValues] = React.useState({
+      frequency: [],
+      level: [], 
+      target: []
+    });
+
 
     const [{ indicators, data_Elements }, dispatch] = useStateValue();
     
@@ -81,14 +102,55 @@ export default function Indicator() {
 
 
 
+    const [preventionIndicator, setPreventionIndicator] = React.useState([]);
+    const [testingIndicator, setTestingIndicator] = React.useState([]);
+    const [treatmentIndicator, setTreatmentIndicator] = React.useState([]);
+    const [viralIndicator, setViralIndicator] = React.useState([]);
+    const [healthSystemIndicator, setHealthSystemIndicator] = React.useState([]);
+    const [hostCountryIndicator, setHostCountryIndicator] = React.useState([]);
+
+
+
     useEffect(() => {
+    
+    const preventionIndicatorCounter = [];
+    const testingIndicatorCounter = [];
+    const treatmentIndicatorCounter = [];
+    const viralIndicatorCounter = [];
+    const healthSystemIndicatorCounter = [];
+    const hostCountryIndicatorCounter = [];
+
     indicators.map(indicator => {
       if(indicator.name===indicatorName){
         setCurrentIndicator(indicator);
       }
+      if(indicator.group === "prevention"){
+        preventionIndicatorCounter.push(indicator.name);
+      }
+      if(indicator.group === "testing"){
+        testingIndicatorCounter.push(indicator.name);
+      }
+      if(indicator.group === "treatment"){
+        treatmentIndicatorCounter.push(indicator.name);
+      }
+      if(indicator.group === "viral"){
+        viralIndicatorCounter.push(indicator.name);
+      }
+      if(indicator.group === "health-system"){
+        healthSystemIndicatorCounter.push(indicator.name);
+      }
+      if(indicator.group === "host-country"){
+        hostCountryIndicatorCounter.push(indicator.name);
+      }
     });
+    setPreventionIndicator(preventionIndicatorCounter);
+    setTestingIndicator(testingIndicatorCounter);
+    setTreatmentIndicator(treatmentIndicatorCounter);
+    setViralIndicator(viralIndicatorCounter);
+    setHealthSystemIndicator(healthSystemIndicatorCounter);
+    setHostCountryIndicator(hostCountryIndicatorCounter);
+   
     
-
     const match = [];
 
     data_Elements.map(data_Element => {
@@ -98,13 +160,44 @@ export default function Indicator() {
     });
 
     setMatchDataElements(match);
-   
-    
 
   },[]);
 
+
+  console.log(preventionIndicator.length);
+
    
-   
+  
+  const Row = ({ index, style }) => (
+    <div style={style}>
+      {preventionIndicator[index]}
+    </div>
+  );
+  const RowTesting = ({ index, style }) => (
+    <div style={style}>
+      {testingIndicator[index]}
+    </div>
+  );
+  const RowTreatment = ({ index, style }) => (
+    <div style={style}>
+      {treatmentIndicator[index]}
+    </div>
+  );
+  const RowViral = ({ index, style }) => (
+    <div style={style}>
+      {viralIndicator[index]}
+    </div>
+  );
+  const RowHealthSystem = ({ index, style }) => (
+    <div style={style}>
+      {healthSystemIndicator[index]}
+    </div>
+  );
+  const RowHostCountry= ({ index, style }) => (
+    <div style={style}>
+      {hostCountryIndicator[index]}
+    </div>
+  );
 
 
     return (
@@ -112,6 +205,230 @@ export default function Indicator() {
         
         <div className={classes.container}>
         <Breadcrumb></Breadcrumb>
+
+        <Grid container>
+
+        <Grid item xs={12} md={3}>
+        <Paper className={classes.sidebar}>
+       <h4 className={classes.sidebarTitle}>INDICATOR NAVIGATION</h4>
+       <form className={classes.filterContainer} autoComplete="off">
+
+
+<Grid item xs={12} className={classes.filter} >
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="frequency">Reporting Frequency</InputLabel>
+<Select
+multiple
+value={values.frequency}
+onChange={console.log("change")}
+className = {classes.select}
+inputProps={{
+ name: 'frequency',
+ id: 'frequency',
+ classes: {
+   icon: classes.selectIcon
+ }
+}}
+renderValue={selected => (
+       <div className={classes.chips}>
+         {selected.map(value => (
+           <Chip key={value} label={value} className={classes.chip} />
+         ))}
+       </div>
+)}
+>
+<MenuItem value={'monthly'}>Monthly</MenuItem>
+<MenuItem value={'bimonthly'}>Bi-Monthly</MenuItem>
+<MenuItem value={'yearly'}>Yearly</MenuItem>
+</Select>
+</FormControl>
+</Grid>
+
+
+
+
+
+
+<Grid item xs={12} className={classes.filter} >
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="level">Reporting Level</InputLabel>
+<Select
+multiple
+value={values.level}
+onChange={console.log("change")}
+className = {classes.select}
+inputProps={{
+ name: 'level',
+ id: 'level',
+ classes: {
+   icon: classes.selectIcon
+ }
+}}
+renderValue={selected => (
+       <div className={classes.chips}>
+         {selected.map(value => (
+           <Chip key={value} label={value} className={classes.chip} />
+         ))}
+       </div>
+)}
+>
+<MenuItem value={'level1'}>Level1</MenuItem>
+<MenuItem value={'level2'}>Level2</MenuItem>
+<MenuItem value={'level3'}>Level3</MenuItem>
+</Select>
+</FormControl>
+</Grid>
+
+
+
+
+<Grid item xs={12} className={classes.filter} >
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="target">Target</InputLabel>
+<Select
+multiple
+value={values.target}
+onChange={console.log("change")}
+className = {classes.select}
+inputProps={{
+ name: 'target',
+ id: 'target',
+ classes: {
+   icon: classes.selectIcon
+ }
+}}
+renderValue={selected => (
+       <div className={classes.chips}>
+         {selected.map(value => (
+           <Chip key={value} label={value} className={classes.chip} />
+         ))}
+       </div>
+)}
+>
+<MenuItem value={'Target1'}>Target1</MenuItem>
+<MenuItem value={'Target2'}>Target2</MenuItem>
+<MenuItem value={'Target3'}>Target3</MenuItem>
+</Select>
+</FormControl>
+</Grid>
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+<div className={classes.sidebarGroup}>
+<p className={classes.sidebarSubtitle}>INDICATOR GROUPS</p>
+<ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.sidebarExpansionSummary}
+              >
+                <ExpandTitle className={classes.sidebarExpandTitle}>Prevention and support indicators</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+    itemSize={35}>
+                 {Row}
+              </FixedSizeList>
+              </ExpansionPanelDetails>
+</ExpansionPanel>
+<ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.sidebarExpansionSummary}
+              >
+                <ExpandTitle className={classes.sidebarExpandTitle}>Testing Indicators</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+    itemSize={35}>
+                {RowTesting}
+              </FixedSizeList>
+              </ExpansionPanelDetails>
+</ExpansionPanel>
+<ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.sidebarExpansionSummary}
+              >
+                <ExpandTitle className={classes.sidebarExpandTitle}>Treatment Indicators</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+    itemSize={35}>
+                {RowTreatment}
+              </FixedSizeList>
+              </ExpansionPanelDetails>
+</ExpansionPanel>
+<ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.sidebarExpansionSummary}
+              >
+                <ExpandTitle className={classes.sidebarExpandTitle}>Viral Suppressions Indicators</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+    itemSize={35}>
+                {RowViral}
+              </FixedSizeList>
+              </ExpansionPanelDetails>
+</ExpansionPanel>
+<ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.sidebarExpansionSummary}
+              >
+                <ExpandTitle className={classes.sidebarExpandTitle}>Health Systems Indicators</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+    itemSize={35}>
+                {RowHealthSystem}
+              </FixedSizeList>
+              </ExpansionPanelDetails>
+</ExpansionPanel>
+<ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.sidebarExpansionSummary}
+              >
+                <ExpandTitle className={classes.sidebarExpandTitle}>Host Country Indicators</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+    itemSize={35}>
+                {RowHostCountry}
+              </FixedSizeList>
+              </ExpansionPanelDetails>
+</ExpansionPanel>
+</div>
+
+        </Paper>
+        </Grid>
+
+
+        <Grid item xs={12} md={9}>
         <headings.H1>{indicatorName}</headings.H1>
 
 
@@ -675,7 +992,14 @@ export default function Indicator() {
 
 
       </TabPanel>
-     
+      </Grid>
+
+
+
+
+     </Grid>
+
+
      </div>
     );
   
@@ -758,11 +1082,14 @@ const useStyles = makeStyles(theme => ({
   },
   filterContainer: {
     display: 'flex',
-    paddingBottom: '20px'
+    flexGrow: 1,
+    paddingBottom: '20px',
+    flexDirection: 'column'
   },
   filter: {
-   
-    paddingRight: '20px'
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    minHeight: '50px',
   },
   searchForm:{
     display: 'flex',
@@ -865,7 +1192,29 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.2em',
     marginBottom: '10px'
   },
-  
+  sidebar:{
+    margin: '0em',
+    marginRight: '2em'
+
+  },
+  sidebarTitle:{
+    textAlign: 'center',
+    padding: '1em',
+    marginBottom: '0 !important'
+  },
+  sidebarExpandTitle:{
+    fontSize: '1em',
+    lineHeight:'1.4em',
+    fontWeight: 'normal',
+    color: '#000000',
+    margin: 0
+  },
+  sidebarGroup:{
+    
+   },
+   sidebarSubtitle:{
+    textAlign: 'center'
+   },
   [theme.breakpoints.down('sm')]: {
     // styles
     filterContainer: {
@@ -880,10 +1229,6 @@ const useStyles = makeStyles(theme => ({
     tableContainer:{
       maxWidth: "85vw"
     },
-    filter: {
-   
-      paddingRight: '0px'
-    },
     tabPanel:{
       width: '95vw',
       padding: '0 !important'
@@ -891,7 +1236,12 @@ const useStyles = makeStyles(theme => ({
     expansionPanel:{
       margin: '0 -24px'
     },
+    sidebar:{
+      marginRight: 0
+    }
+   
   },
+
   
   
  
