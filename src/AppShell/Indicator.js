@@ -79,9 +79,9 @@ export default function Indicator() {
     const [indicatorName, setIndicatorName] = React.useState('CXCA_SCRN');
 
     const [values, setValues] = React.useState({
-      frequency: [],
-      level: [], 
-      target: []
+      frequency: "",
+      level: "", 
+      target: ""
     });
 
 
@@ -101,7 +101,7 @@ export default function Indicator() {
     };
 
 
-
+    const [allIndicators, setAllIndicators] = React.useState([]);
     const [preventionIndicator, setPreventionIndicator] = React.useState([]);
     const [testingIndicator, setTestingIndicator] = React.useState([]);
     const [treatmentIndicator, setTreatmentIndicator] = React.useState([]);
@@ -112,7 +112,7 @@ export default function Indicator() {
 
 
     useEffect(() => {
-    
+    const allIndicatorCounter = [];
     const preventionIndicatorCounter = [];
     const testingIndicatorCounter = [];
     const treatmentIndicatorCounter = [];
@@ -121,28 +121,31 @@ export default function Indicator() {
     const hostCountryIndicatorCounter = [];
 
     indicators.map(indicator => {
+      allIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+
       if(indicator.name===indicatorName){
         setCurrentIndicator(indicator);
       }
       if(indicator.group === "prevention"){
-        preventionIndicatorCounter.push(indicator.name);
+        preventionIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
       if(indicator.group === "testing"){
-        testingIndicatorCounter.push(indicator.name);
+        testingIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
       if(indicator.group === "treatment"){
-        treatmentIndicatorCounter.push(indicator.name);
+        treatmentIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
       if(indicator.group === "viral"){
-        viralIndicatorCounter.push(indicator.name);
+        viralIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
       if(indicator.group === "health-system"){
-        healthSystemIndicatorCounter.push(indicator.name);
+        healthSystemIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
       if(indicator.group === "host-country"){
-        hostCountryIndicatorCounter.push(indicator.name);
+        hostCountryIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
     });
+    setAllIndicators(allIndicatorCounter);
     setPreventionIndicator(preventionIndicatorCounter);
     setTestingIndicator(testingIndicatorCounter);
     setTreatmentIndicator(treatmentIndicatorCounter);
@@ -168,36 +171,89 @@ export default function Indicator() {
 
    
   
-  const Row = ({ index, style }) => (
-    <div style={style}>
-      {preventionIndicator[index]}
-    </div>
+  const RowPrevention = ({ index, style }) => (
+    <ListItem button  onTouchTap={() => setIndicatorName(preventionIndicator[index][0])}>
+        <ListItemText primary={preventionIndicator[index][0]} 
+         
+        />
+    </ListItem>
   );
   const RowTesting = ({ index, style }) => (
     <div style={style}>
-      {testingIndicator[index]}
+      {testingIndicator[index][0]}
     </div>
   );
   const RowTreatment = ({ index, style }) => (
     <div style={style}>
-      {treatmentIndicator[index]}
+      {treatmentIndicator[index][0]}
     </div>
   );
   const RowViral = ({ index, style }) => (
     <div style={style}>
-      {viralIndicator[index]}
+      {viralIndicator[index][0]}
     </div>
   );
   const RowHealthSystem = ({ index, style }) => (
     <div style={style}>
-      {healthSystemIndicator[index]}
+      {healthSystemIndicator[index][0]}
     </div>
   );
   const RowHostCountry= ({ index, style }) => (
     <div style={style}>
-      {hostCountryIndicator[index]}
+      {hostCountryIndicator[index][0]}
     </div>
   );
+
+
+  const handleFilterChange = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+
+    const tempPreventionIndicator = [];
+    const tempTestingIndicator = [];
+    const tempTreatmentIndicator = [];
+    const tempViralIndicator = [];
+    const tempHealthSystemIndicator = [];
+    const tempHostCountryIndicator = [];
+
+    allIndicators.map(indicator => {
+      if((values.frequency ==='' ? true : indicator[1] === values.frequency) &&
+         (values.level ===''? true : indicator[2] === values.level) &&
+         (values.target ==='' ? true: indicator[3] === values.target) 
+        ){
+          if(indicator[4]==='prevention'){
+            tempPreventionIndicator.push(indicator);
+          }
+          if(indicator[4]==='testing'){
+            tempTestingIndicator.push(indicator);
+          }
+          if(indicator[4]==='treatment'){
+            tempTreatmentIndicator.push(indicator);
+          }
+          if(indicator[4]==='viral'){
+            tempViralIndicator.push(indicator);
+          }
+          if(indicator[4]==='health-system'){
+            tempHealthSystemIndicator.push(indicator);
+          }
+          if(indicator[4]==='host-country'){
+            tempHostCountryIndicator.push(indicator);
+          }
+        }
+    });
+    setPreventionIndicator(tempPreventionIndicator);
+    setTestingIndicator(tempTestingIndicator);
+    setTreatmentIndicator(tempTreatmentIndicator);
+    setViralIndicator(tempViralIndicator);
+    setHealthSystemIndicator(tempHealthSystemIndicator);
+    setHostCountryIndicator(tempHostCountryIndicator);
+  
+
+  };
+
+
 
 
     return (
@@ -218,9 +274,8 @@ export default function Indicator() {
 <FormControl className={classes.formControl}>
 <InputLabel htmlFor="frequency">Reporting Frequency</InputLabel>
 <Select
-multiple
 value={values.frequency}
-onChange={console.log("change")}
+onChange={handleFilterChange}
 className = {classes.select}
 inputProps={{
  name: 'frequency',
@@ -229,17 +284,10 @@ inputProps={{
    icon: classes.selectIcon
  }
 }}
-renderValue={selected => (
-       <div className={classes.chips}>
-         {selected.map(value => (
-           <Chip key={value} label={value} className={classes.chip} />
-         ))}
-       </div>
-)}
 >
 <MenuItem value={'monthly'}>Monthly</MenuItem>
-<MenuItem value={'bimonthly'}>Bi-Monthly</MenuItem>
-<MenuItem value={'yearly'}>Yearly</MenuItem>
+<MenuItem value={'semiAnnually'}>Semi-Annually</MenuItem>
+<MenuItem value={'annually'}>Annually</MenuItem>
 </Select>
 </FormControl>
 </Grid>
@@ -253,9 +301,8 @@ renderValue={selected => (
 <FormControl className={classes.formControl}>
 <InputLabel htmlFor="level">Reporting Level</InputLabel>
 <Select
-multiple
 value={values.level}
-onChange={console.log("change")}
+onChange={handleFilterChange}
 className = {classes.select}
 inputProps={{
  name: 'level',
@@ -264,13 +311,7 @@ inputProps={{
    icon: classes.selectIcon
  }
 }}
-renderValue={selected => (
-       <div className={classes.chips}>
-         {selected.map(value => (
-           <Chip key={value} label={value} className={classes.chip} />
-         ))}
-       </div>
-)}
+
 >
 <MenuItem value={'level1'}>Level1</MenuItem>
 <MenuItem value={'level2'}>Level2</MenuItem>
@@ -286,9 +327,8 @@ renderValue={selected => (
 <FormControl className={classes.formControl}>
 <InputLabel htmlFor="target">Target</InputLabel>
 <Select
-multiple
 value={values.target}
-onChange={console.log("change")}
+onChange={handleFilterChange}
 className = {classes.select}
 inputProps={{
  name: 'target',
@@ -297,17 +337,11 @@ inputProps={{
    icon: classes.selectIcon
  }
 }}
-renderValue={selected => (
-       <div className={classes.chips}>
-         {selected.map(value => (
-           <Chip key={value} label={value} className={classes.chip} />
-         ))}
-       </div>
-)}
+
 >
-<MenuItem value={'Target1'}>Target1</MenuItem>
-<MenuItem value={'Target2'}>Target2</MenuItem>
-<MenuItem value={'Target3'}>Target3</MenuItem>
+<MenuItem value={'target1'}>Target1</MenuItem>
+<MenuItem value={'target2'}>Target2</MenuItem>
+<MenuItem value={'target3'}>Target3</MenuItem>
 </Select>
 </FormControl>
 </Grid>
@@ -338,7 +372,7 @@ renderValue={selected => (
               <ExpansionPanelDetails>
               <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
     itemSize={35}>
-                 {Row}
+                 {RowPrevention}
               </FixedSizeList>
               </ExpansionPanelDetails>
 </ExpansionPanel>
@@ -352,7 +386,7 @@ renderValue={selected => (
                 <ExpandTitle className={classes.sidebarExpandTitle}>Testing Indicators</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+              <FixedSizeList height={200} width={'100%'} itemCount={testingIndicator.length}
     itemSize={35}>
                 {RowTesting}
               </FixedSizeList>
@@ -368,7 +402,7 @@ renderValue={selected => (
                 <ExpandTitle className={classes.sidebarExpandTitle}>Treatment Indicators</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+              <FixedSizeList height={200} width={'100%'} itemCount={treatmentIndicator.length}
     itemSize={35}>
                 {RowTreatment}
               </FixedSizeList>
@@ -384,7 +418,7 @@ renderValue={selected => (
                 <ExpandTitle className={classes.sidebarExpandTitle}>Viral Suppressions Indicators</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+              <FixedSizeList height={200} width={'100%'} itemCount={viralIndicator.length}
     itemSize={35}>
                 {RowViral}
               </FixedSizeList>
@@ -400,7 +434,7 @@ renderValue={selected => (
                 <ExpandTitle className={classes.sidebarExpandTitle}>Health Systems Indicators</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+              <FixedSizeList height={200} width={'100%'} itemCount={healthSystemIndicator.length}
     itemSize={35}>
                 {RowHealthSystem}
               </FixedSizeList>
@@ -416,7 +450,7 @@ renderValue={selected => (
                 <ExpandTitle className={classes.sidebarExpandTitle}>Host Country Indicators</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
+              <FixedSizeList height={200} width={'100%'} itemCount={hostCountryIndicator.length}
     itemSize={35}>
                 {RowHostCountry}
               </FixedSizeList>
@@ -934,7 +968,7 @@ renderValue={selected => (
         Indicator changes/Alerts:
         </Typography>
     <p><strong>Indicator Changes</strong>: {dataElement.indicatorChanges} <br/>
-       <strong>Reporting Frequency</strong>: {dataElement.reportFrequency} <br/>
+       <strong>Reporting Frequency</strong>: {dataElement.frequency} <br/>
        <strong>Reporting Level</strong>: {dataElement.reportingLevel} 
     </p>
       </Paper>
