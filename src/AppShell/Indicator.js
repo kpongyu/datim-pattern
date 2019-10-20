@@ -173,35 +173,33 @@ export default function Indicator() {
   
   const RowPrevention = ({ index, style }) => (
     <ListItem button  onTouchTap={() => setIndicatorName(preventionIndicator[index][0])}>
-        <ListItemText primary={preventionIndicator[index][0]} 
-         
-        />
+        <ListItemText primary={preventionIndicator[index][0]} />
     </ListItem>
   );
   const RowTesting = ({ index, style }) => (
-    <div style={style}>
-      {testingIndicator[index][0]}
-    </div>
+    <ListItem button  onTouchTap={() => setIndicatorName(testingIndicator[index][0])}>
+    <ListItemText primary={testingIndicator[index][0]} />
+    </ListItem>
   );
   const RowTreatment = ({ index, style }) => (
-    <div style={style}>
-      {treatmentIndicator[index][0]}
-    </div>
+    <ListItem button  onTouchTap={() => setIndicatorName(treatmentIndicator[index][0])}>
+    <ListItemText primary={treatmentIndicator[index][0]} />
+    </ListItem>
   );
   const RowViral = ({ index, style }) => (
-    <div style={style}>
-      {viralIndicator[index][0]}
-    </div>
+    <ListItem button  onTouchTap={() => setIndicatorName(viralIndicator[index][0])}>
+    <ListItemText primary={viralIndicator[index][0]} />
+    </ListItem>
   );
   const RowHealthSystem = ({ index, style }) => (
-    <div style={style}>
-      {healthSystemIndicator[index][0]}
-    </div>
+    <ListItem button  onTouchTap={() => setIndicatorName(healthSystemIndicator[index][0])}>
+    <ListItemText primary={healthSystemIndicator[index][0]} />
+    </ListItem>
   );
   const RowHostCountry= ({ index, style }) => (
-    <div style={style}>
-      {hostCountryIndicator[index][0]}
-    </div>
+    <ListItem button  onTouchTap={() => setIndicatorName(hostCountryIndicator[index][0])}>
+    <ListItemText primary={hostCountryIndicator[index][0]} />
+    </ListItem>
   );
 
 
