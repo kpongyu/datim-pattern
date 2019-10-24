@@ -167,37 +167,60 @@ export default function Indicator() {
   },[]);
 
 
-  console.log(preventionIndicator.length);
+
+  function updateIndicator(indicator_name){
+     //match indicator name
+     setIndicatorName(indicator_name);
+
+     //match indicator details
+
+     indicators.map(indicator => {
+       if(indicator.name===indicator_name){
+       setCurrentIndicator(indicator);
+       }
+     });
+
+     //match data element of this indicator
+     const match = [];
+     data_Elements.map(data_Element => {
+     if((data_Element.name).includes(indicator_name)){
+       match.push(data_Element);
+     }
+   });
+   setMatchDataElements(match);
+  }
+
+
 
    
   
   const RowPrevention = ({ index, style }) => (
-    <ListItem button  onTouchTap={() => setIndicatorName(preventionIndicator[index][0])}>
+    <ListItem button  onClick={() => updateIndicator(preventionIndicator[index][0])}>
         <ListItemText primary={preventionIndicator[index][0]} />
     </ListItem>
   );
   const RowTesting = ({ index, style }) => (
-    <ListItem button  onTouchTap={() => setIndicatorName(testingIndicator[index][0])}>
+    <ListItem button  onClick={() => updateIndicator(testingIndicator[index][0])}>
     <ListItemText primary={testingIndicator[index][0]} />
     </ListItem>
   );
   const RowTreatment = ({ index, style }) => (
-    <ListItem button  onTouchTap={() => setIndicatorName(treatmentIndicator[index][0])}>
+    <ListItem button  onClick={() => updateIndicator(treatmentIndicator[index][0])}>
     <ListItemText primary={treatmentIndicator[index][0]} />
     </ListItem>
   );
   const RowViral = ({ index, style }) => (
-    <ListItem button  onTouchTap={() => setIndicatorName(viralIndicator[index][0])}>
+    <ListItem button  onClick={() => updateIndicator(viralIndicator[index][0])}>
     <ListItemText primary={viralIndicator[index][0]} />
     </ListItem>
   );
   const RowHealthSystem = ({ index, style }) => (
-    <ListItem button  onTouchTap={() => setIndicatorName(healthSystemIndicator[index][0])}>
+    <ListItem button  onClick={() => updateIndicator(healthSystemIndicator[index][0])}>
     <ListItemText primary={healthSystemIndicator[index][0]} />
     </ListItem>
   );
   const RowHostCountry= ({ index, style }) => (
-    <ListItem button  onTouchTap={() => setIndicatorName(hostCountryIndicator[index][0])}>
+    <ListItem button  onClick={() => updateIndicator(hostCountryIndicator[index][0])}>
     <ListItemText primary={hostCountryIndicator[index][0]} />
     </ListItem>
   );
@@ -466,7 +489,7 @@ inputProps={{
 
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="INDICATOR DETAILS" {...a11yProps(0)} />
-          <Tab label="DATA ELEMENTS/CODE LIST" {...a11yProps(1)} />
+          <Tab label="DATA ELEMENTS" {...a11yProps(1)} />
         </Tabs>
 
 
