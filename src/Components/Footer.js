@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         minHeight: '50px',
         backgroundColor:'#002134',
-        borderBottom:'#C1A783 5px solid'
+        borderBottom:'#C1A783 5px solid',
+        marginTop: '30px'
     }
 
 }));

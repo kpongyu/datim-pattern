@@ -6,12 +6,142 @@ export const initialState = {
     user: '',
     password: '',
     data_Elements:  [
-      { name: 'CXCA_SCRN (N, DSD, Age/Sex/HIVStatus/ScreenResult/ScreenVisitType)', 
+      { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/ScreenVisitType)', 
         source: 'DATIM',
         type: 'Results',
         fiscal: '2020', 
         dataSet: 'facility',
         frequency: 'quarterly',
+        indicator:'VMMC_CIRC',
+        indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
+        category: 'On ART screened for cervical cancer', 
+        description: 'Number of HIV-positive women on ART screened for cervical cancer, Facilis hac ornare voluptatibus consequatur corporis, sollicitudin libero, netus quisquam eget sequi modi montes litora parturient at', 
+        shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
+        uid: 'XWK6yAwhol8', 
+        
+        indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
+        combos:[
+          { 
+            name: '15-19, Female, Positive, Cervical Cancer Screened - First Time, Cervical Cancer - Suspected',
+            code:'nI9rG3vPWQz',
+            uid: 'dh4TQ68p2SC',
+            ageGroup: '15-19',
+            visitType: 'firstTime',
+            visitResult: 'positive',
+          },
+          {
+            name: '15-19, Female, Positive, Cervical Cancer Screened - Follow Up, Cervical Cancer - Suspected',
+            code:'nI9rG3vPWQz',
+            uid: 'wIDT7S8yul9',
+            ageGroup: '15-19',
+            visitType: 'followUp',
+            visitResult: 'negative',
+
+          },
+          {
+            name: '15-19, Female, Positive, Cervical Cancer Screened - Follow Up, Cervical Cancer - Suspected',
+            code:'nI9rG3vPWQz',
+            uid: 'wIDT7S8yul9',
+            ageGroup: '20-24',
+            visitType: 'rescreened',
+            visitResult: 'suspected',
+
+          }
+      ]
+      },
+      { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/)', 
+      source: 'DATIM',
+      type: 'Results',
+      fiscal: '2020', 
+      dataSet: 'facility',
+      frequency: 'quarterly',
+      indicator:'VMMC_CIRC',
+      indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
+      category: 'On ART screened for cervical cancer', 
+      description: 'Number of HIV-positive women on ART screened for cervical cancer, Facilis hac ornare voluptatibus consequatur corporis, sollicitudin libero, netus quisquam eget sequi modi montes litora parturient at', 
+      shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
+      uid: 'XWK6yAwhol8', 
+      
+      indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
+      combos:[
+        { 
+          name: '15-19, Female, Positive, Cervical Cancer Screened - First Time, Cervical Cancer - Suspected',
+          code:'nI9rG3vPWQz',
+          uid: 'dh4TQ68p2SC',
+          ageGroup: '15-19',
+          visitType: 'firstTime',
+          visitResult: 'positive',
+        },
+        {
+          name: '15-19, Female, Positive, Cervical Cancer Screened - Follow Up, Cervical Cancer - Suspected',
+          code:'nI9rG3vPWQz',
+          uid: 'wIDT7S8yul9',
+          ageGroup: '15-19',
+          visitType: 'followUp',
+          visitResult: 'negative',
+
+        },
+        {
+          name: '15-19, Female, Positive, Cervical Cancer Screened - Follow Up, Cervical Cancer - Suspected',
+          code:'nI9rG3vPWQz',
+          uid: 'wIDT7S8yul9',
+          ageGroup: '20-24',
+          visitType: 'rescreened',
+          visitResult: 'suspected',
+
+        }
+    ]
+      },
+      { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/fs)', 
+    source: 'DATIM',
+    type: 'Results',
+    fiscal: '2020', 
+    dataSet: 'facility',
+    frequency: 'quarterly',
+    indicator:'VMMC_CIRC',
+    indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
+    category: 'On ART screened for cervical cancer', 
+    description: 'Number of HIV-positive women on ART screened for cervical cancer, Facilis hac ornare voluptatibus consequatur corporis, sollicitudin libero, netus quisquam eget sequi modi montes litora parturient at', 
+    shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
+    uid: 'XWK6yAwhol8', 
+    
+    indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
+    combos:[
+      { 
+        name: '15-19, Female, Positive, Cervical Cancer Screened - First Time, Cervical Cancer - Suspected',
+        code:'nI9rG3vPWQz',
+        uid: 'dh4TQ68p2SC',
+        ageGroup: '15-19',
+        visitType: 'firstTime',
+        visitResult: 'positive',
+      },
+      {
+        name: '15-19, Female, Positive, Cervical Cancer Screened - Follow Up, Cervical Cancer - Suspected',
+        code:'nI9rG3vPWQz',
+        uid: 'wIDT7S8yul9',
+        ageGroup: '15-19',
+        visitType: 'followUp',
+        visitResult: 'negative',
+
+      },
+      {
+        name: '15-19, Female, Positive, Cervical Cancer Screened - Follow Up, Cervical Cancer - Suspected',
+        code:'nI9rG3vPWQz',
+        uid: 'wIDT7S8yul9',
+        ageGroup: '20-24',
+        visitType: 'rescreened',
+        visitResult: 'suspected',
+
+      }
+  ]
+      },
+      { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/dfas)', 
+        source: 'DATIM',
+        type: 'Results',
+        fiscal: '2020', 
+        dataSet: 'facility',
+        frequency: 'quarterly',
+        indicator:'VMMC_CIRC',
         indicatorCode:'CXCA_SCRN (including CXCA_SCRN_POS)',
         category: 'On ART screened for cervical cancer', 
         description: 'Number of HIV-positive women on ART screened for cervical cancer, Facilis hac ornare voluptatibus consequatur corporis, sollicitudin libero, netus quisquam eget sequi modi montes litora parturient at', 
@@ -316,257 +446,907 @@ export const initialState = {
     ],
     indicators: [
       {
-        name: 'CXCA_SCRN',
-        group: 'prevention',
-        frequency: 'semiAnnually',
-        level: 'level1',
+        name: 'VMMC_CIRC',
+        frequency: 'Quarterly',
+        level: 'Facility',
         target: 'target1',
-        description: 'Proportion of ART patients who completed a standard course of TB preventive therapy within the semiannual reporting period',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
+        group: 'prevention',
+
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
         ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
         ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
         ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
 
       },
+
+
       {
         name: 'HTS_INDEX',
-        group: 'prevention',
-        frequency: 'semiAnnually',
-        level: 'level2',
+        frequency: 'Semi-Annually',
+        level: 'Facility',
         target: 'target1',
-        description: 'HTS_INDEX Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'prevention',
 
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'HTS_RECENT',
-        group: 'testing',
-        frequency: 'annually',
-        level: 'level1',
+        frequency: 'Annually',
+        level: 'Facility',
         target: 'target2',
-        description: 'HTS_RECENT Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'testing',
 
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'HTS_SELF',
-        group: 'treatment',
-        frequency: 'monthly',
-        level: 'level2',
+        frequency: 'Monthly',
+        level: 'Community',
         target: 'target1',
-        description: 'HTS_SELF Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'treatment',
 
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'HTS_TST',
-        group: 'viral',
-        frequency: 'semiAnnually',
-        level: 'level3',
+        frequency: 'Quarterly',
+        level: 'Facility & Community',
         target: 'target1',
-        description: 'HTS_TST Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'viral',
 
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'OVC_HIVSTAT',
-        group: 'health-system',
-        frequency: 'annually',
-        level: 'level1',
+        frequency: 'Annually',
+        level: 'Facility',
         target: 'target3',
-        description: 'OVC_HIVSTAT Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'health-system',
 
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'PMTCT_EID',
-        group: 'host-country',
-        frequency: 'annually',
-        level: 'level2',
+        frequency: 'Annually',
+        level: 'Community',
         target: 'target2',
-        description: 'PMTCT_EID Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'host-country',
 
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'PMTCT_FO',
-        group: 'health-system',
-        frequency: 'monthly',
-        level: 'level3',
+        frequency: 'Monthly',
+        level: 'Facility & Community',
         target: 'target1',
-        description: 'PMTCT_F0 Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'health-system',
 
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'PMTCT_HEI_POS',
-        group: 'testing',
-        frequency: 'annually',
-        level: 'level2',
+        frequency: 'Semi-Annually',
+        level: 'Community',
         target: 'target3',
-        description: 'PMTCT_HEI_POS Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'testing',
 
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'PMTCT_STAT',
-        group: 'prevention',
-        frequency: 'monthly',
-        level: 'level3',
+        frequency: 'Semi-Annually',
+        level: 'Facility',
         target: 'target2',
-        description: 'PMTCT_STAT Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'prevention',
 
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       },
       {
         name: 'TB_STAT',
-        group: 'treatment',
-        frequency: 'semiAnnually',
-        level: 'level1',
+        frequency: 'Quarterly',
+        level: 'Facility',
         target: 'target3',
-        description: 'TB_STAT Description',
-        numerators:[
-          'Number of ART patients who completed a course of TB preventive therapy during the reporting period (for continuous IPT programs, this includes the patients who have completed the first 6 months of isoniazid preventive therapy (IPT))',
-          'The numerator can be generated by counting the number of PLHIV on ART who are documented as having received at least six months of IPT or have completed another standard course of TB preventive therapy.'
-        ],
-        denominator:[
-          'Number of ART patients who are expected to complete a course of TB preventive therapy during the reporting period (for programs using continuous IPT, this includes only the patients who are scheduled to complete the first 6 months of therapy)',
-          'The denominator can be generated by counting the total number of patients who are scheduled to complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a prolonged or continuous regimen) in the semiannual reporting period.'
-        ],
-        indicatorChanges:[
-          'Numerator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.',
-          'Denominator disaggregates have been changed to capture Age/Sex by Type of TB preventive therapy (TPT) by ART Start.'
-        ],
-        reportingLevel: 'Facility',
-        howToUse: 'This indicator measures the performance of HIV programs in scaling up TB preventive therapy, with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy will inform programs on their relative use of different regimens, and the timing of ART will allow the clinical cascade to focus on those who are newly entering care, which will better demonstrate program performance, particularly in countries that have already provided TB preventive therapy for many of their PLHIV in care.'
+        group: 'treatment',
 
+
+
+        changes: [
+          'Age disaggregations updated.',
+          'Age disaggregations added to the “HIV Status and Outcome” disaggregate in order for VMMC results to auto-populate into HTS_TST.'
+        ],
+        description: 'Number of males circumcised as part of the voluntary medical male circumcision (VMMC) for HIV prevention program within the reporting period',
+        howtoCalculate:'Sum results across quarters',
+        
+        numerators:{
+           name: 'Number of males circumcised',
+           description: 'The numerator can be generated by counting the number of males circumcised.',
+           
+        },
+        disaggregate: {
+          'Age (Required)': ['0-60 days, 2 months - 4 years, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'],
+          'HIV Status and Outcome by Age (Required)': [
+            'Underlined portions auto-populate into the VMMC HTS_TST modality.', 
+            'Number of HIV-positive clients (tested HIV positive at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of HIV-negative clients (tested HIV negative at VMMC site) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age',
+            'Number of clients with indeterminate HIV status or not tested for HIV at site (regardless of previous documentation) by: <1 1-4, 5-9, 10-14, 15-19, 20-24, 25- 29, 30-34, 35-39, 40-44, 45-49, 50+, Unknown Age'
+           ],
+          'Circumcision Technique (Required)': ['Surgical VMMC', 'Device-based VMMC'],
+          'Circumcision Technique/Follow-up Status (Sub-disaggregation of the VMMC circumcision technique disaggregation) (Required)': [
+            'Surgical VMMC: Followed-up within 14 days of surgery',
+            'Surgical VMMC: Did not follow-up within 14 days of surgery or did not follow-up within the reporting period',
+            'Device-based VMMC: Followed-up within 14 days of device placement.',
+            'Device-based VMMC: Did not follow-up within 14 days of device placement or did not follow-up within the reporting period'
+          ]
+        },
+
+        denominator:{
+          name: 'N/A',
+          description: 'N/A',
+          groups: 'N/A',
+          disaggregates: 'N/A'
+        },
+        disaggregateDefination:'N/A',
+        pepfarDef:{
+          'Provision of key staff or commodities for VMMC include:':[
+            'medical instruments, supplies',
+            'medicines needed for the VMMC procedure',
+            'funding for salaries for HCW who deliver VMMC services'
+          ],
+          'Ongoing support for VMMC service delivery improvement includes:':[
+            'training of VMMC service providers',
+            'clinical mentoring and supportive supervision of HCW at VMMC sites',
+            'infrastructure/facility renovation',
+            'support of VMMC service-related data collection, reporting, and data quality assessments (DQA)',
+            'CQI/EQA of VMMC services at point of service delivery',
+            'commodities consumption forecasting and supply chain management support'
+          ]
+        },
+        howToUse: [
+          'This indicator tracks the number of male circumcisions conducted during the reporting period and assists in potentially determining coverage of circumcision in the population over time. The total number of males circumcised indicates a change in the supply of and/or demand for VMMC services.',
+          'Additionally, disaggregations are required and are used to evaluate whether prioritized services have been successful at reaching the intended population (by age, HIV status, and circumcision technique), targets have been achieved, and whether modeling inputs should be adjusted. An additional level of disaggregation below the circumcision technique level is required for follow-up status, since post-operative clinical assessments are part of good clinical care and low follow-up rates may indicate a problem in program quality.'
+        ],
+        howToCollect:[
+          'The numerator can be generated by counting the number of males circumcised as part of the VMMC for HIV prevention program. This information can generally be found in VMMC Register, or client medical records maintained by each program/site/service provider.'
+        ],
+        howToReview:[
+          'Disaggregations for HIV status and outcome and circumcision technique should be equal to (but not exceed) the numerator.',
+          'The circumcision technique by follow-up status disaggregate should be less or equal to the circumcision technique disaggregate.'
+        ],
+        questions:{
+          'Is the age distribution of males 60% or more 15+ years of age?':[
+            'Is this age distribution getting older as compared to previous quarters?'
+          ],
+          'If OU is using compression collar type device for VMMC':[
+            'Are they adhering to WHO Guidelines for tetanus immunization?',
+            'Were there any tetanus AEs reported?'
+          ],
+          'What proportion of clients are returning for follow-up (should be at least 80%)?':[],
+          'What barriers are there to further scaling up VMMC services?':[]
+        }
       }
         
     ]

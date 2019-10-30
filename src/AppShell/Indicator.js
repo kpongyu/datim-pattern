@@ -8,11 +8,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Breadcrumb from '../Components/Breadcrumb';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -28,10 +23,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
+import List from '@material-ui/core/';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,7 +73,7 @@ function ListItemLink(props) {
 
 export default function Indicator() {
 
-    const [indicatorName, setIndicatorName] = React.useState('CXCA_SCRN');
+    const [indicatorName, setIndicatorName] = React.useState('');
 
     const [values, setValues] = React.useState({
       frequency: "",
@@ -90,14 +87,14 @@ export default function Indicator() {
     const [currentIndicator, setCurrentIndicator]= React.useState([]);
     const [matchDataElements, setMatchDataElements]= React.useState([]);
 
-    const [value, setValue] = React.useState(0);
+    const [activeTab, setActiveTab]= React.useState(0);
 
     
 
     const classes = useStyles();
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
+    const handleChange = (event, newActiveTab) => {
+      setActiveTab(newActiveTab);
     };
 
 
@@ -108,6 +105,7 @@ export default function Indicator() {
     const [viralIndicator, setViralIndicator] = React.useState([]);
     const [healthSystemIndicator, setHealthSystemIndicator] = React.useState([]);
     const [hostCountryIndicator, setHostCountryIndicator] = React.useState([]);
+   
 
 
 
@@ -153,16 +151,7 @@ export default function Indicator() {
     setHealthSystemIndicator(healthSystemIndicatorCounter);
     setHostCountryIndicator(hostCountryIndicatorCounter);
    
-    
-    const match = [];
-
-    data_Elements.map(data_Element => {
-      if((data_Element.name).includes(indicatorName)){
-        match.push(data_Element);
-      }
-    });
-
-    setMatchDataElements(match);
+   
 
   },[]);
 
@@ -181,48 +170,83 @@ export default function Indicator() {
      });
 
      //match data element of this indicator
-     const match = [];
-     data_Elements.map(data_Element => {
-     if((data_Element.name).includes(indicator_name)){
-       match.push(data_Element);
-     }
-   });
-   setMatchDataElements(match);
+  //    const match = [];
+  //    data_Elements.map(data_Element => {
+  //    if((data_Element.name).includes(indicator_name)){
+  //      match.push(data_Element);
+  //    }
+  //  });
+  //  setMatchDataElements(match);
+  }
+
+  function thirdLevelNav(indicatorName){
+    return(
+    <ExpansionPanel button >
+     <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panell"
+                id="panell"
+                className={classes.sidebarExpansionSummary}
+               
+              >
+       <ListItemText primary={indicatorName}  onClick={() => {
+         updateIndicator(indicatorName);
+         setActiveTab(0);
+         
+       }}/>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.panelDetails}>
+       
+        {
+            data_Elements.map(
+               data_Element => {
+                if((data_Element.name).includes(indicatorName)){
+                 return (
+                 
+                   <div className={classes.dataElementRow} 
+                 onClick={()=> {
+                  event.stopPropagation();
+                   setActiveTab(1);
+                   setIndicatorName(indicatorName);
+                   indicators.map(indicator => {  
+                      if(indicator.name===indicatorName){
+                      setCurrentIndicator(indicator);
+                    }})
+                    setMatchDataElements(data_Element);
+                   }}>{data_Element.name}</div>
+                  
+                   
+                   )
+                }
+               }
+                 
+             )
+            }
+           
+              </ExpansionPanelDetails>
+    </ExpansionPanel>)
   }
 
 
 
    
   
-  const RowPrevention = ({ index, style }) => (
-    <ListItem button  onClick={() => updateIndicator(preventionIndicator[index][0])}>
-        <ListItemText primary={preventionIndicator[index][0]} />
-    </ListItem>
-  );
+  
   const RowTesting = ({ index, style }) => (
-    <ListItem button  onClick={() => updateIndicator(testingIndicator[index][0])}>
-    <ListItemText primary={testingIndicator[index][0]} />
-    </ListItem>
+    <div>{thirdLevelNav(testingIndicator[index][0])}</div>
+
   );
   const RowTreatment = ({ index, style }) => (
-    <ListItem button  onClick={() => updateIndicator(treatmentIndicator[index][0])}>
-    <ListItemText primary={treatmentIndicator[index][0]} />
-    </ListItem>
+    <div>{thirdLevelNav(treatmentIndicator[index][0])}</div>
   );
   const RowViral = ({ index, style }) => (
-    <ListItem button  onClick={() => updateIndicator(viralIndicator[index][0])}>
-    <ListItemText primary={viralIndicator[index][0]} />
-    </ListItem>
+    <div>{thirdLevelNav(viralIndicator[index][0])}</div>
   );
   const RowHealthSystem = ({ index, style }) => (
-    <ListItem button  onClick={() => updateIndicator(healthSystemIndicator[index][0])}>
-    <ListItemText primary={healthSystemIndicator[index][0]} />
-    </ListItem>
+    <div>{thirdLevelNav(healthSystemIndicator[index][0])}</div>
   );
   const RowHostCountry= ({ index, style }) => (
-    <ListItem button  onClick={() => updateIndicator(hostCountryIndicator[index][0])}>
-    <ListItemText primary={hostCountryIndicator[index][0]} />
-    </ListItem>
+    <div>{thirdLevelNav(hostCountryIndicator[index][0])}</div>
   );
 
 
@@ -306,9 +330,10 @@ inputProps={{
  }
 }}
 >
-<MenuItem value={'monthly'}>Monthly</MenuItem>
-<MenuItem value={'semiAnnually'}>Semi-Annually</MenuItem>
-<MenuItem value={'annually'}>Annually</MenuItem>
+<MenuItem value={'Monthly'}>Monthly</MenuItem>
+<MenuItem value={'Quarterly'}>Quarterly</MenuItem>
+<MenuItem value={'Semi-Annually'}>Semi-Annually</MenuItem>
+<MenuItem value={'Annually'}>Annually</MenuItem>
 </Select>
 </FormControl>
 </Grid>
@@ -334,9 +359,9 @@ inputProps={{
 }}
 
 >
-<MenuItem value={'level1'}>Level1</MenuItem>
-<MenuItem value={'level2'}>Level2</MenuItem>
-<MenuItem value={'level3'}>Level3</MenuItem>
+<MenuItem value={'Facility'}>Facility</MenuItem>
+<MenuItem value={'Community'}>Community</MenuItem>
+<MenuItem value={'Facility & Community'}>Facility & Community</MenuItem>
 </Select>
 </FormControl>
 </Grid>
@@ -390,11 +415,12 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Prevention and support indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={preventionIndicator.length}
-    itemSize={35}>
-                 {RowPrevention}
-              </FixedSizeList>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              {preventionIndicator.map((value, index) => {
+                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
+              })}
+                 
+            
               </ExpansionPanelDetails>
 </ExpansionPanel>
 <ExpansionPanel>
@@ -406,11 +432,12 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Testing Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={testingIndicator.length}
-    itemSize={35}>
-                {RowTesting}
-              </FixedSizeList>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+             
+              {testingIndicator.map((value, index) => {
+                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
+              })}
+             
               </ExpansionPanelDetails>
 </ExpansionPanel>
 <ExpansionPanel>
@@ -422,11 +449,10 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Treatment Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={treatmentIndicator.length}
-    itemSize={35}>
-                {RowTreatment}
-              </FixedSizeList>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              {treatmentIndicator.map((value, index) => {
+                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
+              })}
               </ExpansionPanelDetails>
 </ExpansionPanel>
 <ExpansionPanel>
@@ -438,11 +464,10 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Viral Suppressions Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={viralIndicator.length}
-    itemSize={35}>
-                {RowViral}
-              </FixedSizeList>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              {viralIndicator.map((value, index) => {
+                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
+              })}
               </ExpansionPanelDetails>
 </ExpansionPanel>
 <ExpansionPanel>
@@ -454,11 +479,10 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Health Systems Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={healthSystemIndicator.length}
-    itemSize={35}>
-                {RowHealthSystem}
-              </FixedSizeList>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              {healthSystemIndicator.map((value, index) => {
+                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
+              })}
               </ExpansionPanelDetails>
 </ExpansionPanel>
 <ExpansionPanel>
@@ -470,11 +494,10 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Host Country Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <FixedSizeList height={200} width={'100%'} itemCount={hostCountryIndicator.length}
-    itemSize={35}>
-                {RowHostCountry}
-              </FixedSizeList>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              {hostCountryIndicator.map((value, index) => {
+                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
+              })}
               </ExpansionPanelDetails>
 </ExpansionPanel>
 </div>
@@ -484,17 +507,91 @@ inputProps={{
 
 
         <Grid item xs={12} md={9}>
-        <headings.H1>{indicatorName}</headings.H1>
 
 
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+      {
+        indicatorName===''? 
+        <div>
+        <headings.H1>Indicators</headings.H1>
+        <p>Rutrum ac exercitationem! Lobortis ultricies, adipisicing, lacus quas, tincidunt, taciti? 
+        Nostrum mi, explicabo doloremque, provident fermentum laborum aliquid placerat culpa accumsan platea 
+        fuga magnis anim recusandae elit error dolorem minus soluta purus. Convallis cum mollis suspendisse, 
+        ridiculus praesent vestibulum delectus mollitia beatae necessitatibus phasellus id suspendisse pede 
+        accusamus recusandae pariatur, earum dolorum molestie, quasi deleniti suspendisse cras non? 
+        Arcu quo officia sed quam atque ullamcorper quia nonummy excepteur, harum aptent nostrum quod animi rerum, 
+        iusto commodi quae! Anim? Sapiente, excepteur, lacus distinctio varius quae. Nostra fugiat saepe! Venenatis nisl 
+        quaerat atque ullam, debitis illo semper integer, dui iusto consequat. Hic.</p>
+
+        <p>Ridiculus repellendus nisi maiores minus, eros, asperiores cillum litora ac tempus in. Aliqua ante, 
+        quaerat ultricies? Sem etiam, adipisicing ac! Eligendi iure? Dolorum tortor beatae proident senectus, proin? 
+        Accusantium nibh pellentesque fugiat tempore egestas vulputate, doloremque? Pulvinar beatae nascetur, sapien, 
+        illum repudiandae curabitur enim laboris ea lacinia incidunt, interdum blanditiis necessitatibus omnis 
+        porro esse laudantium quisquam. Ab. Eius sollicitudin facere. Ullamcorper pretium! Aliquam! Quisque, 
+        quia, aute fames? Curae iure maiores cumque enim, etiam nemo ex nemo, voluptas class primis animi, 
+        sint ratione distinctio aperiam pulvinar molestie, sapien recusandae optio blandit dapibus vulputate? 
+        Tempor pede voluptatibus fuga adipisicing semper consequatur possimus.</p>
+
+        <Button variant="contained" color="primary" className={classes.button}>
+      Download MER Guidance
+      </Button>
+
+
+        </div>
+
+       
+        
+        
+        
+        
+        : 
+        <div>
+        
+
+
+
+
+        {/* <Tabs value={activeTab} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="INDICATOR DETAILS" {...a11yProps(0)} />
-          <Tab label="DATA ELEMENTS" {...a11yProps(1)} />
-        </Tabs>
+          {matchDataElements.length===0 ? '': <Tab label="DATA ELEMENTS" {...a11yProps(1)}/>
+          
+          }
+        </Tabs> */}
 
 
 
-        <TabPanel value={value} index={0} className={classes.tabPanel}>
+        <TabPanel value={activeTab} index={0} className={classes.tabPanel}>
+        <headings.H1>{indicatorName}</headings.H1>
+    
+        <ExpansionPanel
+             defaultExpanded="true"
+        >
+ 
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+               
+              >
+                <ExpandTitle>Indicator changes</ExpandTitle>
+                <ExpandSubTitle>(MER 2.0 v2.2 to v2.3)</ExpandSubTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <p className={classes.childContent}>
+               <ChildList>
+               {
+             Object.keys(Object(currentIndicator.changes)).map(
+               key => <li>{Object(currentIndicator.changes)[key]}</li>
+             )
+            }
+               </ChildList>
+                </p>
+       </ExpansionPanelDetails>
+       </ExpansionPanel>
+
+
+
+
+
        
         <ExpansionPanel
              defaultExpanded="true"
@@ -516,6 +613,57 @@ inputProps={{
        </ExpansionPanel>
 
 
+
+       <ExpansionPanel>
+       <ExpansionPanelSummary
+               
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+               
+              >
+                <ExpandTitle>Reporting level</ExpandTitle>
+                <ExpandSubTitle> {currentIndicator.level}</ExpandSubTitle>
+        </ExpansionPanelSummary>
+        </ExpansionPanel>
+
+
+        <ExpansionPanel>
+       <ExpansionPanelSummary
+               
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+               
+              >
+                <ExpandTitle>Reporting frequency</ExpandTitle>
+                <ExpandSubTitle>{currentIndicator.frequency}</ExpandSubTitle>
+        </ExpansionPanelSummary>
+        </ExpansionPanel>
+
+
+
+
+        <ExpansionPanel
+             defaultExpanded="true"
+        >
+ 
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+               
+              >
+                <ExpandTitle>How to calculate annual total</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <p className={classes.childContent}>
+               {currentIndicator.howtoCalculate}
+                </p>
+       </ExpansionPanelDetails>
+       </ExpansionPanel>
+
+
+
+
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -525,18 +673,21 @@ inputProps={{
               >
                 <ExpandTitle>Numerator</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-               
-            <ul>
-            {
-             Object.keys(Object(currentIndicator.numerators)).map(
-               key => <li>{Object(currentIndicator.numerators)[key]}</li>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              <p className={classes.childContent}><strong>Numerator Name</strong>: {Object(currentIndicator.numerators).name}</p>
+              <p className={classes.childContent}><strong>Numerator Description</strong>: {Object(currentIndicator.numerators).description}</p>
+              <p className={classes.childContent}><strong>Disaggregate Groups</strong>
+
+              <ChildList>
+               {
+             Object.keys(Object(currentIndicator.disaggregate)).map(
+               key => <li><strong>{key}</strong>:<ChildList> {Object.keys(Object(currentIndicator.disaggregate)[key]).map(
+                 i => <li>{Object(currentIndicator.disaggregate)[key][i]}</li>
+               )}</ChildList></li>
              )
             }
-            
-            
-           </ul>     
-         
+               </ChildList>
+                </p>
                
        </ExpansionPanelDetails>
        </ExpansionPanel>
@@ -551,74 +702,64 @@ inputProps={{
               >
                 <ExpandTitle>Denominator</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <FlexGrid>
-                    <FlexGridHalfCol>
-                    Number of ART patients who are expected to complete a course of TB preventive 
-                    therapy during the reporting period (for programs using continuous IPT, this 
-                    includes only the patients who are scheduled to complete the first 6 months of 
-                    therapy)
-                    </FlexGridHalfCol>
-                    <FlexGridHalfCol>
-                    The denominator can be generated by counting the total number of patients who are scheduled 
-                    to complete a course of TB preventive therapy (or at least 6 months of IPT for those who 
-                    are on a prolonged or continuous regimen) in the semiannual reporting period.
-                    </FlexGridHalfCol>
-                </FlexGrid>
-       </ExpansionPanelDetails>
+              <ExpansionPanelDetails className={classes.panelDetails}>
+              <p className={classes.childContent}><strong>Denominator Name</strong>: {Object(currentIndicator.denominator).name}</p>
+              <p className={classes.childContent}><strong>Denominator Description</strong>: {Object(currentIndicator.denominator).description}</p>
+              <p className={classes.childContent}><strong>Disaggregate Groups</strong>: {Object(currentIndicator.denominator).groups}</p>
+              <p className={classes.childContent}><strong>Disaggregate Disaggregates</strong>: {Object(currentIndicator.denominator).disaggregates}</p>
+             </ExpansionPanelDetails>
        </ExpansionPanel>
 
 
 
-       <ExpansionPanel
-             defaultExpanded="true"
-        >
- 
+       <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                
               >
-                <ExpandTitle>Indicator changes</ExpandTitle>
-                <ExpandSubTitle>(MER 2.0 v2.2 to v2.3)</ExpandSubTitle>
+                <ExpandTitle>Disaggregate descriptions & definitions</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              <p className={classes.childContent}>
+             {currentIndicator.disaggregateDefination}
+                </p>
+       </ExpansionPanelDetails>
+       </ExpansionPanel>
+
+
+
+       <ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+               
+              >
+                <ExpandTitle>PEPFAR-support definition</ExpandTitle>
+                <ExpandSubTitle>Standard definition of DSD and TA-SDI used.</ExpandSubTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
               <p className={classes.childContent}>
                <ChildList>
-                   <li>Numerator disaggregates have been changed to capture Age/Sex by Type 
-                   of TB preventive therapy (TPT) by ART Start.</li>
-                   <li>Denominator disaggregates have been changed to capture Age/Sex by 
-                   Type of TB preventive therapy (TPT) by ART Start.</li>
+               {
+             Object.keys(Object(currentIndicator.pepfarDef)).map(
+               key => <li><strong>{key}</strong>:<ChildList> {Object.keys(Object(currentIndicator.pepfarDef)[key]).map(
+                 i => <li>{Object(currentIndicator.pepfarDef)[key][i]}</li>
+               )}</ChildList></li>
+             )
+            }
                </ChildList>
                 </p>
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
 
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-               
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>Reporting level</ExpandTitle>
-                <ExpandSubTitle>Facility</ExpandSubTitle>
-        </ExpansionPanelSummary>
-        </ExpansionPanel>
 
-        <ExpansionPanel>
-       <ExpansionPanelSummary
-               
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>Reporting frequency</ExpandTitle>
-                <ExpandSubTitle>Semi-Annually</ExpandSubTitle>
-        </ExpansionPanelSummary>
-        </ExpansionPanel>
+
+
+
 
 
         <ExpansionPanel>
@@ -631,17 +772,14 @@ inputProps={{
                 <ExpandTitle>How to use</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <p className={classes.childContent}>
-              This indicator measures the performance of HIV programs in scaling up TB preventive therapy, 
-              with the goal of preventing progression to active TB disease among PLHIV and decreasing ongoing 
-              TB transmission in this population. As part of a cascade from TX_CURR to TB screening (captured 
-              in TX_TB), this indicator will inform programs on the pace of scale-up, and the proportion will 
-              allow for monitoring of cohorts through completion of therapy. Disaggregates on type of therapy 
-              will inform programs on their relative use of different regimens, and the timing of ART will allow 
-              the clinical cascade to focus on those who are newly entering care, which will better demonstrate 
-              program performance, particularly in countries that have already provided TB preventive therapy for 
-              many of their PLHIV in care.
-                </p>
+              <ChildList>
+               {
+             Object.keys(Object(currentIndicator.howToUse)).map(
+               key => <p className={classes.childContent}>{Object(currentIndicator.howToUse)[key]}</p>
+             )
+            }
+               </ChildList>
+            
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
@@ -657,249 +795,44 @@ inputProps={{
                 <ExpandTitle>How to collect</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-             
-              <p className={classes.childContent}>The numerator can be generated by counting the number of PLHIV on ART who are documented as 
-              having received at least six months of IPT or have completed another standard course of TB 
-              preventive therapy. This should include the patients who completed a shorter alternative course, 
-              such as 3 months of isoniazid and rifapentine (3HP), as well as those who are on prolonged or 
-              continuous IPT who have completed their first 6 months of therapy during the semiannual reporting 
-              period. <strong>Importantly, programs should ensure that patients on continuous therapy are counted only 
-              once, and not repeated in future calculations.</strong></p>
-              <p className={classes.childContent}>
-              The denominator can be generated by counting the total number of patients who are scheduled to 
-              complete a course of TB preventive therapy (or at least 6 months of IPT for those who are on a 
-              prolonged or continuous regimen) in the semiannual reporting period.
-              </p>
-
-              <strong>For IPT:</strong>
               <ChildList>
-                   <li>Patients who are taking a standard 6-month course of IPT would be expected to complete therapy 
-                   if they started IPT in the previous reporting period; therefore, all patients who started IPT at 
-                   any time in the previous 6-month reporting period (i.e., the 6 months before the start of the 
-                   current reporting period) should be included in the denominator. The few patients who start and 
-                   complete IPT in the same reporting would also be included.</li>
-                   <li>Patients who are taking prolonged (9- or 12-month) or continuous IPT would also be expected 
-                   to complete the first 6 months of IPT if they started IPT in the previous reporting period; therefore, 
-                   all patients who started prolonged or continuous IPT in the previous 6-month reporting period should 
-                   be included. The few patients who start and complete 6 months of IPT in the same reporting would also 
-                   be included.</li>
-               </ChildList>
+              {
+             Object.keys(Object(currentIndicator.howToCollect)).map(
+               key => <p className={classes.childContent}>{Object(currentIndicator.howToCollect)[key]}</p>
+             )
+            }
+            </ChildList>
+       </ExpansionPanelDetails>
+       </ExpansionPanel>
 
 
-               <strong>For alternative regimens:</strong>
+
+      
+
+
+       <ExpansionPanel>
+       <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+               
+              >
+                <ExpandTitle>How to review data quality</ExpandTitle>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
               <ChildList>
-                   <li>Patients who are taking a 3-month regimen of isoniazid and rifapentine would be expected to 
-                   complete therapy in this reporting period if they started on therapy at any time starting 3 months 
-                   prior to the start of the current reporting period to 3 months prior to the end of the current 
-                   reporting period; all such persons should be included in the denominator.</li>
-                   <li>Patients who are taking a 4-month course of rifampicin would be expected to complete therapy 
-                   in this reporting period if they were started on therapy at any time starting 4 months prior to 
-                   the start of the current reporting period to 4 months prior to the end of the current reporting 
-                   period; all such persons should be included in the denominator.</li>
-               </ChildList>
-
-               <p className={classes.childContent}>
-               These data elements can be collected from the ART register or from separate TB screening (presumptive TB) 
-               or IPT registers.
-              </p>
-
-
-               
-       </ExpansionPanelDetails>
-       </ExpansionPanel>
-
-
-
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>How to review for data quality</ExpandTitle>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <p className={classes.childContent}>
-              Only one disaggregation type is used for age (coarse disaggregations).
-              Data Element ≥ subtotal of each of the disaggregations.
-                </p>
-       </ExpansionPanelDetails>
-       </ExpansionPanel>
-
-
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>How to calculate annual total</ExpandTitle>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <p className={classes.childContent}>
-              When analyzing this data in conjunction with data on TB screening for ART patients (TX_TB), 
-              it is preferred to analyze it as a snapshot indicator and use the result reported at Q4. 
-              However, one could analyze the TB_PREV numerator independently of other data and sum the 
-              results across Q2 and Q4 to calculate the total number of ART patients who completed a 
-              course of TB preventive therapy during the fiscal year.
-                </p>
-       </ExpansionPanelDetails>
-       </ExpansionPanel>
-
-
-       <ExpansionPanel
-             defaultExpanded="true"
-        >
- 
-       <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>Disaggregations</ExpandTitle>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <p className={classes.childContent}>
-               <ChildList>
-
-
-               <TableTitle>Numerator Disaggregations:</TableTitle>
-
-               <Table >
-        <TableHead>
-          <TableRow>
-            <TableCell>Disaggregate Groups</TableCell>
-            <TableCell>Disaggregates</TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-        <TableRow>
-            <TableCell>
-            Age/Sex by Type of TB Preventive Therapy (TPT) by ART Start:[Required]</TableCell>
-            <TableCell>
-            <ChildList>
-                   <li>IPT by newly enrolled on ART: &lt; 15 F/M, 15+ F/M, Unknown Age F/M</li>
-                   <li>IPT by previously enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
-                   <li>Alternative TPT regimen by newly enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
-                   <li>Alternative TPT regimen by previously enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
+              {
+             Object.keys(Object(currentIndicator.howToReview)).map(
+               key => <p className={classes.childContent}>{Object(currentIndicator.howToReview)[key]}</p>
+             )
+            }
             </ChildList>
-
-
-
-            </TableCell>
-          </TableRow>
-        </TableBody>
-        </Table>
-
-
-        <TableTitle>Denominator Disaggregations:</TableTitle>
-        <Table >
-        <TableHead>
-          <TableRow>
-            <TableCell>Disaggregate Groups</TableCell>
-            <TableCell>Disaggregates</TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-        <TableRow>
-            <TableCell>
-           Age/Sex by Type of TB Preventive Therapy (TPT) by ART Start:[Required]</TableCell>
-            <TableCell>
-            <ChildList>
-                   <li>IPT by newly enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
-                   <li>IPT by previously enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
-                   <li>Alternative TPT regimen by newly enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
-                   <li>Alternative TPT regiment by previously enrolled on ART: &lt;15 F/M, 15+ F/M, Unknown Age F/M</li>
-            </ChildList>
-
-
-
-            </TableCell>
-          </TableRow>
-        </TableBody>
-        </Table>
-
-
-
-               </ChildList>
-                </p>
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
 
+      
 
-
-
-
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>Disaggregate descriptions & definitions</ExpandTitle>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-              <p className={classes.childContent}>
-             <strong>Type of TB Preventive Therapy (TPT) by ART Start Descriptions:</strong>
-             <ChildList>
-                   <li>IPT/Newly enrolled on ART: Among those who completed 6 months of IPT, the patients 
-                   who started IPT and ART in the previous reporting period.</li>
-                   <li>IPT/Previously enrolled on ART: Among those who completed 6 months of IPT, the patients 
-                   who started IPT in the previous reporting period, but who started ART prior to the previous 
-                   reporting period (i.e., patients who were on ART prior to the reporting period when they 
-                   started IPT).</li>
-                   <li>Alternative TPT regimen/Newly enrolled on ART: Among those who completed an alternative regimen 
-                   (e.g., 3-month INH and rifapentine), the patients who started the regimen and ART in the current or 
-                   the previous reporting period</li>
-                   <li>Alternative TPT/Previously enrolled on ART: Among those who completed an alternative regimen 
-                   (e.g., 3-month INH and rifapentine), the patients who started the regimen in the current or the 
-                   previous reporting period, but started ART prior to previous reporting period</li>
-            </ChildList>
-                </p>
-       </ExpansionPanelDetails>
-       </ExpansionPanel>
-
-
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>PEPFAR-support definition</ExpandTitle>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-             
-             <strong>Standard definition of DSD and TA-SDI used.</strong>
-             <p className={classes.childContent}>
-             <strong>Provision of key staff or commodities for routine HIV-related services includes: </strong>
-             ongoing provision of critical re-occurring costs or commodities (such as ARVs, 
-             TB preventive therapy and diagnostic/screening tests) or funding of salaries or provision 
-             of Health Care Workers for HIV clinic services. Staff responsible for maintaining patient 
-             records in both HIV and TB clinics are included in this category however staff responsible 
-             for fulfilling reporting and routine M&E requirements are not included.
-                </p>
-
-                <p className={classes.childContent}>
-            <strong>Ongoing support for patients receiving routine HIV-related services includes:</strong> 
-            training of HIV service providers, clinical mentoring and supportive supervision of staff at 
-            HIV sites, infrastructure/renovation of facilities, support of HIV service data collection, 
-            reporting, data quality, QI/QA of HIV services support, ARV and IPT consumption forecasting 
-            and supply management, support of lab clinical.
-                </p>
-
-
-               
-       </ExpansionPanelDetails>
-       </ExpansionPanel>
 
        <ExpansionPanel>
        <ExpansionPanelSummary
@@ -911,22 +844,21 @@ inputProps={{
                 <ExpandTitle>Guiding narrative questions</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-              <p className={classes.childContent}>
-            
-             <ChildList>
-                   <li>Roughly what proportion of all PLHIV on treatment have already completed TB preventive 
-                   therapy prior to this reporting period?</li>
-                   <li>If TB preventive therapy was not provided to all PLHIV in care (and for who active TB 
-                   disease was ruled out), what are the main reasons for limited scale-up?</li>
-                   <li>Roughly what proportion of patients who received TB preventive therapy were treated with 
-                   the 6-month (or longer) isoniazid regimen?</li>
-                   <li>If completion rates were less than 85%, what are the main reasons why?</li>
-                   <li>If less than 80% of newly enrolled PLHIV who screened negative for TB disease were 
-                   started on TPT, what are the main reasons why?</li>
-            </ChildList>
-                </p>
+              <ChildList>
+               {
+             Object.keys(Object(currentIndicator.questions)).map(
+               key => <li><strong>{key}</strong>:<ChildList> {Object.keys(Object(currentIndicator.questions)[key]).map(
+                 i => <li>{Object(currentIndicator.questions)[key][i]}</li>
+               )}</ChildList></li>
+             )
+            }
+               </ChildList>
        </ExpansionPanelDetails>
        </ExpansionPanel>
+
+
+
+
 
 
 
@@ -936,15 +868,15 @@ inputProps={{
 
 
 
-      <TabPanel value={value} index={1} className={classes.tabPanel}>
+      <TabPanel value={activeTab} index={1} className={classes.tabPanel}>
         
 
 
+      <headings.H1 className={classes.heading1}>{matchDataElements.name}</headings.H1>
 
 
 
-      {matchDataElements.map(dataElement => (
-      <ExpansionPanel className={classes.expansionPanel}>
+      <ExpansionPanel className={classes.expansionPanel} defaultExpanded="true">
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -955,13 +887,13 @@ inputProps={{
          <Grid container>
           <Grid Item  xs={12} md={9}>
           <Typography className={classes.heading}> 
-           <strong>{dataElement.name}</strong>: {dataElement.category}
+           <strong>{matchDataElements.name}</strong>: {matchDataElements.category}
            </Typography>
           </Grid>
 
           <Grid Item xs={12} md={3}>
           <Typography className={classes.heading}> 
-           <strong>Data Element UID</strong>: {dataElement.uid}
+           <strong>Data Element UID</strong>: {matchDataElements.uid}
           </Typography></Grid>
           </Grid>
          
@@ -973,14 +905,14 @@ inputProps={{
         <Grid Item  xs={12} md={8} className={classes.expansionPanelLeft}>
           <Typography>
           <strong>Indicator Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
-          {dataElement.indicatorCode}
+          {matchDataElements.indicatorCode}
           </NavLink>
 
           <br/>
-          <strong>Description</strong>: {dataElement.description}<br/>
-          <strong>Short Name</strong>: {dataElement.shortName}<br/>
-          <strong>Code</strong>: {dataElement.code}<br/>
-          <strong>Source</strong>: {dataElement.source}
+          <strong>Description</strong>: {matchDataElements.description}<br/>
+          <strong>Short Name</strong>: {matchDataElements.shortName}<br/>
+          <strong>Code</strong>: {matchDataElements.code}<br/>
+          <strong>Source</strong>: {matchDataElements.source}
           </Typography>
         </Grid>
         <Grid Item  xs={12} md={4}>
@@ -988,9 +920,9 @@ inputProps={{
         <Typography className={classes.changeBoxTitle}>
         Indicator changes/Alerts:
         </Typography>
-    <p><strong>Indicator Changes</strong>: {dataElement.indicatorChanges} <br/>
-       <strong>Reporting Frequency</strong>: {dataElement.frequency} <br/>
-       <strong>Reporting Level</strong>: {dataElement.reportingLevel} 
+    <p><strong>Indicator Changes</strong>: {matchDataElements.indicatorChanges} <br/>
+       <strong>Reporting Frequency</strong>: {matchDataElements.frequency} <br/>
+       <strong>Reporting Level</strong>: {matchDataElements.reportingLevel} 
     </p>
       </Paper>
         </Grid>
@@ -1014,7 +946,7 @@ inputProps={{
           lookup: { 'positive': 'Positive', 'negative': 'Negative', "suspected": 'Suspected'}
           },
         ]}
-        data={dataElement.combos}        
+        data={matchDataElements.combos}        
         options={{
           filtering: true,
           cellStyle: {
@@ -1039,7 +971,7 @@ inputProps={{
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
-      ))}
+    
 
 
 
@@ -1047,6 +979,9 @@ inputProps={{
 
 
       </TabPanel>
+      
+      </div>}
+      
       </Grid>
 
 
@@ -1123,7 +1058,7 @@ const useStyles = makeStyles(theme => ({
   heroContainer:{
     margin: '0 auto',
     backgroundColor: '#eeeeee',
-    paddingBottom: '20px'
+    paddingBottom: '20px',
   },
   root: {
     width: '100%',
@@ -1296,6 +1231,41 @@ const useStyles = makeStyles(theme => ({
     }
    
   },
+  titleNote:{
+    color: "rgba(0, 0, 0, 0.87) !important",
+    fontSize: '0.8rem',
+    fontWeight: 'normal'
+  },
+  indicatorChanges:{
+    padding: '1em',
+    marginBottom:'2em'
+  },
+  panelDetails:{
+    flexDirection: 'column'
+  },
+  dataElementRow:{
+    wordBreak: 'break-word',
+    cursor: 'pointer',
+    fontSize: '0.8em',
+    marginBottom: '10px'
+  },
+  button:{
+    backgroundColor: '#C1A783',
+    color: '#000000',
+
+    '&:hover, &:focus':{
+      color: '#ffffff'
+    }
+  },
+  hide:{
+    display: 'none'
+  },
+  heading1:{
+    wordBreak:'bread-word'
+  },
+  thirdLevelContainer:{
+    marginBottom: '5px'
+  }
 
   
   
