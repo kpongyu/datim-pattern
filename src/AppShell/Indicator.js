@@ -93,9 +93,9 @@ export default function Indicator() {
 
     const classes = useStyles();
 
-    const handleChange = (event, newActiveTab) => {
-      setActiveTab(newActiveTab);
-    };
+    // const handleChange = (event, newActiveTab) => {
+    //   setActiveTab(newActiveTab);
+    // };
 
 
     const [allIndicators, setAllIndicators] = React.useState([]);
@@ -226,28 +226,6 @@ export default function Indicator() {
               </ExpansionPanelDetails>
     </ExpansionPanel>)
   }
-
-
-
-   
-  
-  
-  const RowTesting = ({ index, style }) => (
-    <div>{thirdLevelNav(testingIndicator[index][0])}</div>
-
-  );
-  const RowTreatment = ({ index, style }) => (
-    <div>{thirdLevelNav(treatmentIndicator[index][0])}</div>
-  );
-  const RowViral = ({ index, style }) => (
-    <div>{thirdLevelNav(viralIndicator[index][0])}</div>
-  );
-  const RowHealthSystem = ({ index, style }) => (
-    <div>{thirdLevelNav(healthSystemIndicator[index][0])}</div>
-  );
-  const RowHostCountry= ({ index, style }) => (
-    <div>{thirdLevelNav(hostCountryIndicator[index][0])}</div>
-  );
 
 
   const handleFilterChange = event => {
@@ -723,7 +701,14 @@ inputProps={{
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
               <p className={classes.childContent}>
-             {currentIndicator.disaggregateDefination}
+              {
+             Object.keys(Object(currentIndicator.disaggregateDefination)).map(
+               key => <li><strong>{key}</strong>:<ChildList> {Object.keys(Object(currentIndicator.disaggregateDefination)[key]).map(
+                 i => <li>{Object(currentIndicator.disaggregateDefination)[key][i]}</li>
+               )}</ChildList></li>
+             )
+            }
+             
                 </p>
        </ExpansionPanelDetails>
        </ExpansionPanel>
