@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {useEffect, Component } from 'react';
 import * as color_palette from '../Styles/Colors';
 import * as headings from '../Styles/Text';
 
@@ -9,7 +9,11 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
@@ -34,19 +38,28 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CloseIcon from '@material-ui/icons/Close';
 
 export default function Codelist() {
-  const [{ data_Elements }, dispatch] = useStateValue();
 
   const classes = useStyles();
+
+  //get data-elements from context
+  const [{ data_Elements }, dispatch] = useStateValue();
+
+
+  //initial filter state
   const [values, setValues] = React.useState({
     fiscal: [],
-    source: [],
     type: [], 
     dataSet: [],
+    source: [],
     frequency: []
   });
+  const [init, setInit] = React.useState(false);
 
+  //clear all filter values
   const clearValues = event => {
     setValues(()=>({
       fiscal: [],
@@ -59,6 +72,14 @@ export default function Codelist() {
     setDataElements(data_Elements);
   }
 
+  //advanced search filters
+  const [advanced, setAdvanced]= React.useState(false);
+  const displayAdvanced = event => {
+    setAdvanced(!advanced);
+  }
+
+
+  //handling change filters
   const handleChangeSource = event => {
     setValues(oldValues => ({
       ...oldValues,
@@ -72,8 +93,6 @@ export default function Codelist() {
       
 
       data_Elements.map(data_Element => {
-
-
         if(
 
           (Object.keys(values).map(function(keyName){
@@ -108,6 +127,7 @@ export default function Codelist() {
     
     
     setDataElements(filteredDataElements);
+
   }
 
   const handleChangeType = event => {
@@ -159,6 +179,8 @@ export default function Codelist() {
     
     
     setDataElements(filteredDataElements);
+
+  
   }
 
   const handleChangeFiscal = event => {
@@ -210,6 +232,7 @@ export default function Codelist() {
     
     
     setDataElements(filteredDataElements);
+  
   }
 
   const handleChangeDataSet = event => {
@@ -261,8 +284,8 @@ export default function Codelist() {
     
     
     setDataElements(filteredDataElements);
+   
   }
-
 
   const handleChangeFrequency = event => {
     setValues(oldValues => ({
@@ -313,17 +336,25 @@ export default function Codelist() {
     
     
     setDataElements(filteredDataElements);
+   
   }
 
 
   
-
+//set initial values
   const [dataElements, setDataElements] = React.useState(data_Elements);
-  
   const [search, setSearch] = React.useState("");
-
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [comparePanel, setComparePanel] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
 
+
+
+//set download data popup
   const downloadData = event => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
@@ -343,15 +374,28 @@ export default function Codelist() {
   };
   const { HTML, JSON, CSV } = download;
 
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setComparePanel({ ...comparePanel, [side]: open });
+  };
+
+
+
+
 
 
     
     return (
       <div>
-    <div className={classes.heroContainer}>
-    <div className={classes.container}>
+
+<div className={classes.heroContainer}>
+<div className={classes.container}>
      <Breadcrumb></Breadcrumb>
 
+     {/* hero section */}
      <Grid container alignItems="center" >
      <Grid item xs={12} md={7} >
       <headings.H1>Code lists</headings.H1>
@@ -359,6 +403,8 @@ export default function Codelist() {
 
 
       <Grid item xs={12} md={5} justifyContent="flex-end" >
+
+       {/* search bar */}
       <form 
        className={classes.searchForm}
        onSubmit={e => {
@@ -417,51 +463,39 @@ export default function Codelist() {
 
 
       </div>
-    </div>
-     <div className={classes.container}>
+      </div>
+
+
+
+
+
+
+
+
+   
+      <div className={classes.container}>
+    <Grid container>
+
+
+{/* filters */}
+<Grid item xs={12} md={3}>
+<Paper className={classes.sidebar}>
+<div className={`${classes.container} ${classes.sidebarContainer}`}>
      
      
-    
-
-     <form className={classes.filterContainer} autoComplete="off">
+<h4 className={classes.sidebarTitle}>Data Element Filters</h4>
 
 
-     <Grid item xs={12} md={4} className={classes.filter} >
-<FormControl className={classes.formControl}>
-  <InputLabel htmlFor="source">Source</InputLabel>
-  <Select
-   multiple
-    value={values.source}
-    onChange={handleChangeSource}
-    className = {classes.select}
-    inputProps={{
-      name: 'source',
-      id: 'source',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
-  >
-    <MenuItem value={'DATIM'}>DATIM</MenuItem>
-    <MenuItem value={'PDH'}>PDH</MenuItem>
-    <MenuItem value={'MOH'}>MOH</MenuItem>
-  </Select>
-</FormControl>
-</Grid>
+     <form  autoComplete="off">
 
 
 
 
 
 
-     <Grid item xs={12} md={4} className={classes.filter} >
+
+{/* fiscal year filter */}
+     <Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="fiscal">Fiscal Year</InputLabel>
   <Select
@@ -493,8 +527,8 @@ export default function Codelist() {
 
 
 
-
-<Grid item xs={12} md={4} className={classes.filter} >
+{/* type filter */}
+<Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="type">Type</InputLabel>
   <Select
@@ -527,8 +561,8 @@ export default function Codelist() {
 
 
 
-
-<Grid item xs={12} md={4} className={classes.filter} >
+{/* data set filter */}
+<Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="dataSet">Data Set</InputLabel>
   <Select
@@ -558,8 +592,43 @@ export default function Codelist() {
 </Grid>
 
 
+{/* source filter */}
 
-<Grid item xs={12} md={4} className={classes.filter} >
+
+  <Grid item xs={12} className={advanced ? classes.filter : classes.hide} >
+<FormControl className={classes.formControl}>
+
+
+  <InputLabel htmlFor="source">Source</InputLabel>
+  <Select
+   multiple
+    value={values.source}
+    onChange={handleChangeSource}
+    className = {classes.select}
+    inputProps={{
+      name: 'source',
+      id: 'source',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
+  >
+    <MenuItem value={'DATIM'}>DATIM</MenuItem>
+    <MenuItem value={'PDH'}>PDH</MenuItem>
+    <MenuItem value={'MOH'}>MOH</MenuItem>
+  </Select>
+</FormControl>
+</Grid>
+
+{/* frequency filter */}
+<Grid item xs={12} className={advanced ? classes.filter : classes.hide}  >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="frequency">Frequency</InputLabel>
   <Select
@@ -591,9 +660,14 @@ export default function Codelist() {
 
 
 
+
+
 </form>
 
-
+{/* filter functions */}
+<Button variant="outlined" onClick={displayAdvanced} className={classes.filterButton}>
+       Advanced Search
+</Button>
 <Button variant="outlined" onClick={clearValues} className={classes.filterButton}>
        Clear Filters
 </Button>
@@ -643,8 +717,25 @@ export default function Codelist() {
       </Popover>
 
 
-    {dataElements.map(dataElement => (
-      <ExpansionPanel>
+   
+
+
+
+
+      </div>
+    
+</Paper>
+</Grid>
+
+<Grid item xs={12} md={9} className={classes.dataElementContent}>
+
+
+ {/* data elements */}
+{dataElements.map(dataElement => (
+  <div >
+      <ExpansionPanel className={classes.dataElementContainer}>
+
+      {/* data elements summery */}
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -666,11 +757,15 @@ export default function Codelist() {
           </Grid>
          
         </ExpansionPanelSummary>
+
+
+
+         {/* data elements details */}
         <ExpansionPanelDetails 
          className={classes.expansionPanelDetails}
         >
         <Grid container>
-        <Grid Item  xs={12} md={8} className={classes.expansionPanelLeft}>
+        <Grid Item  xs={12} className={classes.expansionPanelLeft}>
           <Typography>
           <strong>Indicator Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
           {dataElement.indicatorCode}
@@ -680,51 +775,44 @@ export default function Codelist() {
           <strong>Description</strong>: {dataElement.description}<br/>
           <strong>Short Name</strong>: {dataElement.shortName}<br/>
           <strong>Code</strong>: {dataElement.code}<br/>
-          <strong>Source</strong>: {dataElement.source}
+          <strong>Source</strong>: {dataElement.source}<br/>
+
+            {/* open the comparison panel */}
+          <Button variant="contained" color="primary" className={classes.button} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
           </Typography>
         </Grid>
-        <Grid Item  xs={12} md={4}>
-        <Paper className={classes.changeBox}>
-        <Typography className={classes.changeBoxTitle}>
-        Indicator changes/Alerts:
-        </Typography>
-    <p><strong>Indicator Changes</strong>: {dataElement.indicatorChanges} <br/>
-       <strong>Reporting Frequency</strong>: {dataElement.reportFrequency} <br/>
-       <strong>Reporting Level</strong>: {dataElement.reportingLevel} 
-    </p>
-      </Paper>
-        </Grid>
+      
 
         <Grid Item  xs={12} className={classes.comboTable}>
        
         <Route render={({ history}) => (
            <div className={classes.tableContainer}>
-    <MaterialTable
-        title="Disaggregations"
-        columns={[
-          { title: 'Name', field: 'name', defaultFilter: '',  filtering: false },
-          { title: 'UID', field: 'uid',  filtering: false  },
-          { title: 'Code', field: 'code',  filtering: false },
-          { title: 'Age Group', field: 'ageGroup',  
-          lookup: { '15-19': '15-19', '20-24': '20-24', "25-29": '25-29', '30-34': '30-34', '35-39':'35-39', '40-44':'40-44', "45-49":'45-49', "50+":'50+', "unknown": "Unknown Age" }},
-          { title: 'Visit Type', field: 'visitType', 
-          lookup: { 'firstTime': 'First Time', 'followUp': 'Follow Up', "rescreened": 'Rescreened'}
-          },
-          { title: 'Visit Result', field: 'visitResult',
-          lookup: { 'positive': 'Positive', 'negative': 'Negative', "suspected": 'Suspected'}
-          },
-        ]}
-        data={dataElement.combos}        
-        options={{
-          filtering: true,
-          cellStyle: {
-            maxWidth: '200px'
-          }
-        }}
-     
+            {/* data element Disaggregations */}
+      <strong>Disaggregations</strong>:<br/>
        
-        onRowClick={()=>{history.push('/indicator')}}
-      />
+       <Table className={classes.table} aria-label="simple table">
+     <TableHead>
+       <TableRow>
+         <TableCell>Disaggregations Name</TableCell>
+         <TableCell>Disaggregations Code</TableCell>
+       </TableRow>
+     </TableHead>
+     <TableBody>
+       {
+          Object.keys(Object(dataElement.combos)).map(
+            key => <TableRow>
+           <TableCell component="th" scope="row">
+           {Object(dataElement.combos)[key].name}
+           </TableCell> 
+           <TableCell component="th" scope="row">
+           {Object(dataElement.combos)[key].code}
+           </TableCell> 
+           </TableRow>
+           
+          )
+         }
+     </TableBody>
+     </Table>
        </div>
       )} />
      
@@ -739,6 +827,20 @@ export default function Codelist() {
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
+
+  {/* data element comparison panel */}
+      <Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
+      <Grid container className={classes.comparePanelContainer}>
+      <Grid item xs={12}>
+      <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
+      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
+      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
+      </Grid>
+      </Grid>
+      </Drawer>
+
+      </div>
+
       ))}
       <TablePagination
         component="ExpansionPanel"
@@ -751,8 +853,21 @@ export default function Codelist() {
 
 
 
-      </div>
-     </div>
+
+
+
+
+
+</Grid>
+</Grid>
+
+</div>
+
+
+</div>
+
+   
+    
     );
   
 }
@@ -786,10 +901,6 @@ const useStyles = makeStyles(theme => ({
   filterContainer: {
     display: 'flex',
     paddingBottom: '20px'
-  },
-  filter: {
-   
-    paddingRight: '20px'
   },
   searchForm:{
     display: 'flex',
@@ -862,7 +973,6 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     border: 'none',
     maxWidth: '100%',
-    paddingTop: '30px',
   },
   expansionPanelLeft:{
     paddingBottom: '30px'
@@ -871,8 +981,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: '5px'
   },
   filterButton:{
-    marginBottom: '20px',
-    marginRight: '20px',
+   marginTop: '20px',
+   marginBottom: '0px',
+   width: '100%',
 
     '&:hover, &:focus':{
       backgroundColor: '#C1A783',
@@ -891,6 +1002,62 @@ const useStyles = makeStyles(theme => ({
     color: 'rgba(0, 0, 0, 0.87)',
     fontSize: '1.2em',
     marginBottom: '10px'
+  },
+  sidebar:{
+    margin: '0em',
+    marginRight: '2em',
+    paddingBottom: '2em'
+
+  },
+  sidebarTitle:{
+    textAlign: 'center',
+    padding: '1em',
+    marginBottom: '0 !important'
+  },
+  sidebarContainer:{
+    paddingTop: 0
+  },
+  sidebarExpandTitle:{
+    fontSize: '1em',
+    lineHeight:'1.4em',
+    fontWeight: 'normal',
+    color: '#000000',
+    margin: 0
+  },
+  sidebarGroup:{
+    
+   },
+   sidebarSubtitle:{
+    textAlign: 'center'
+   },
+   dataElementContent:{
+     paddingLeft: '1em'
+
+   },
+   closeComparePanel:{
+    float:'right',
+    margin: '1em',
+    cursor:'pointer'
+  },
+  button:{
+    backgroundColor: '#C1A783',
+    color: '#000000',
+    marginBottom: '1em',
+    marginTop: '1em',
+
+    '&:hover, &:focus':{
+      color: '#ffffff'
+    }
+  },
+  panelDetails:{
+    flexDirection: 'column'
+  },
+  comparePanelContainer:{
+    maxWidth: '1200px',
+    margin:'0 auto',
+    height:'80vh'
+  },
+  dataElementContainer:{
   },
   
   [theme.breakpoints.down('sm')]: {
@@ -911,7 +1078,16 @@ const useStyles = makeStyles(theme => ({
    
       paddingRight: '0px'
     },
-  },
+    sidebar:{
+      marginRight: 0
+    },
+    dataElementContent:{
+      paddingLeft: '0em',
+      paddingTop: '1em'
+ 
+    }
+  }
+    
   
   
  

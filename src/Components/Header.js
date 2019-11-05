@@ -17,6 +17,7 @@ import {Toolbar} from '@material-ui/core/';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
 import logo from '../../public/assets/logo.png';
+import CloseIcon from '@material-ui/icons/Close';
 
 const drawerWidth = 240;
 
