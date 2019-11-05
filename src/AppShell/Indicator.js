@@ -8,6 +8,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Breadcrumb from '../Components/Breadcrumb';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -23,13 +28,20 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
-import List from '@material-ui/core/';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import {WhatIsNew} from './WhatIsNew';
 
+
+
+
+//tab panel function
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -53,8 +65,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -63,18 +73,12 @@ function a11yProps(index) {
 }
 
 
-
-function ListItemLink(props) {
-  return  <ListItem button >
-  <ListItemText primary={`Item`} />
-</ListItem>
-}
-
-
 export default function Indicator() {
 
-    const [indicatorName, setIndicatorName] = React.useState('');
+    const classes = useStyles();
 
+   
+    //initial filter state
     const [values, setValues] = React.useState({
       frequency: "",
       level: "", 
@@ -82,22 +86,42 @@ export default function Indicator() {
     });
 
 
+    //get indicator and data-elements from context
     const [{ indicators, data_Elements }, dispatch] = useStateValue();
-    
+
+    //set initial panel state and panel handle change function
+    const [panel, setPanel] = React.useState(0);
+    const handleChange = (event, newPanel) => {
+      setPanel(newPanel);
+    };
+
+    //for comparison panel
+    const [comparePanel, setComparePanel] = React.useState({
+          top: false,
+          left: false,
+          bottom: false,
+          right: false,
+    });
+
+    const toggleDrawer = (side, open) => event => {
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+  
+      setComparePanel({ ...comparePanel, [side]: open });
+    };
+
+
+    //set initial selected indicator name, indicator, and data elements
+    const [indicatorName, setIndicatorName] = React.useState('');
     const [currentIndicator, setCurrentIndicator]= React.useState([]);
     const [matchDataElements, setMatchDataElements]= React.useState([]);
 
-    const [activeTab, setActiveTab]= React.useState(0);
-
-    
-
-    const classes = useStyles();
-
-    // const handleChange = (event, newActiveTab) => {
-    //   setActiveTab(newActiveTab);
-    // };
+    //indicator that the app has mounted
+    const [init, setInit]= React.useState(false);
 
 
+    //set states for different indicators
     const [allIndicators, setAllIndicators] = React.useState([]);
     const [preventionIndicator, setPreventionIndicator] = React.useState([]);
     const [testingIndicator, setTestingIndicator] = React.useState([]);
@@ -105,11 +129,13 @@ export default function Indicator() {
     const [viralIndicator, setViralIndicator] = React.useState([]);
     const [healthSystemIndicator, setHealthSystemIndicator] = React.useState([]);
     const [hostCountryIndicator, setHostCountryIndicator] = React.useState([]);
-   
 
 
 
+    //before page load
     useEffect(() => {
+
+     //temp indicator hosts
     const allIndicatorCounter = [];
     const preventionIndicatorCounter = [];
     const testingIndicatorCounter = [];
@@ -118,12 +144,12 @@ export default function Indicator() {
     const healthSystemIndicatorCounter = [];
     const hostCountryIndicatorCounter = [];
 
+
+    //get indicator from context, get the filtering elements from the indicator, and divide the indicator based on grouping
+
     indicators.map(indicator => {
       allIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
 
-      if(indicator.name===indicatorName){
-        setCurrentIndicator(indicator);
-      }
       if(indicator.group === "prevention"){
         preventionIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
       }
@@ -150,13 +176,14 @@ export default function Indicator() {
     setViralIndicator(viralIndicatorCounter);
     setHealthSystemIndicator(healthSystemIndicatorCounter);
     setHostCountryIndicator(hostCountryIndicatorCounter);
-   
-   
+
+    //indicator that the app has mounted
+    setInit(true);
 
   },[]);
 
 
-
+  //update the indicator details and matched data-element when select indicator
   function updateIndicator(indicator_name){
      //match indicator name
      setIndicatorName(indicator_name);
@@ -170,69 +197,35 @@ export default function Indicator() {
      });
 
      //match data element of this indicator
-  //    const match = [];
-  //    data_Elements.map(data_Element => {
-  //    if((data_Element.name).includes(indicator_name)){
-  //      match.push(data_Element);
-  //    }
-  //  });
-  //  setMatchDataElements(match);
-  }
-
-  function thirdLevelNav(indicatorName){
-    return(
-    <ExpansionPanel button >
-     <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panell"
-                id="panell"
-                className={classes.sidebarExpansionSummary}
-               
-              >
-       <ListItemText primary={indicatorName}  onClick={() => {
-         updateIndicator(indicatorName);
-         setActiveTab(0);
-         
-       }}/>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.panelDetails}>
-       
-        {
-            data_Elements.map(
-               data_Element => {
-                if((data_Element.name).includes(indicatorName)){
-                 return (
-                 
-                   <div className={classes.dataElementRow} 
-                 onClick={()=> {
-                  event.stopPropagation();
-                   setActiveTab(1);
-                   setIndicatorName(indicatorName);
-                   indicators.map(indicator => {  
-                      if(indicator.name===indicatorName){
-                      setCurrentIndicator(indicator);
-                    }})
-                    setMatchDataElements(data_Element);
-                   }}>{data_Element.name}</div>
-                  
-                   
-                   )
-                }
-               }
-                 
-             )
-            }
-           
-              </ExpansionPanelDetails>
-    </ExpansionPanel>)
+     const match = [];
+     data_Elements.map(data_Element => {
+     if((data_Element.name).includes(indicator_name)){
+       match.push(data_Element);
+     }
+   });
+   setMatchDataElements(match);
   }
 
 
+
+
+//implement filtering function by set Values first
   const handleFilterChange = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
+   
+      setValues(oldValues => ({
+        ...oldValues,
+        [event.target.name]: event.target.value,
+      }));
+
+  
+  };
+
+
+//when value has changed, call useEffect function
+  useEffect(() => {
+
+//if it's not the first time the app mounted
+    if(init){
 
     const tempPreventionIndicator = [];
     const tempTestingIndicator = [];
@@ -241,30 +234,32 @@ export default function Indicator() {
     const tempHealthSystemIndicator = [];
     const tempHostCountryIndicator = [];
 
+
     allIndicators.map(indicator => {
       if((values.frequency ==='' ? true : indicator[1] === values.frequency) &&
          (values.level ===''? true : indicator[2] === values.level) &&
-         (values.target ==='' ? true: indicator[3] === values.target) 
+         (values.target ==='' ? true: indicator[3] === values.target)
         ){
-          if(indicator[4]==='prevention'){
-            tempPreventionIndicator.push(indicator);
-          }
-          if(indicator[4]==='testing'){
-            tempTestingIndicator.push(indicator);
-          }
-          if(indicator[4]==='treatment'){
-            tempTreatmentIndicator.push(indicator);
-          }
-          if(indicator[4]==='viral'){
-            tempViralIndicator.push(indicator);
-          }
-          if(indicator[4]==='health-system'){
-            tempHealthSystemIndicator.push(indicator);
-          }
-          if(indicator[4]==='host-country'){
-            tempHostCountryIndicator.push(indicator);
-          }
-        }
+
+            if(indicator[4]==='prevention'){
+              tempPreventionIndicator.push(indicator);
+            }
+            if(indicator[4]==='testing'){
+              tempTestingIndicator.push(indicator);
+            }
+            if(indicator[4]==='treatment'){
+              tempTreatmentIndicator.push(indicator);
+            }
+            if(indicator[4]==='viral'){
+              tempViralIndicator.push(indicator);
+            }
+            if(indicator[4]==='health-system'){
+              tempHealthSystemIndicator.push(indicator);
+            }
+            if(indicator[4]==='host-country'){
+              tempHostCountryIndicator.push(indicator);
+            }
+          }       
     });
     setPreventionIndicator(tempPreventionIndicator);
     setTestingIndicator(tempTestingIndicator);
@@ -272,31 +267,37 @@ export default function Indicator() {
     setViralIndicator(tempViralIndicator);
     setHealthSystemIndicator(tempHealthSystemIndicator);
     setHostCountryIndicator(tempHostCountryIndicator);
+  }
   
-
-  };
-
-
+  }, [values]);
 
 
     return (
 
         
-        <div className={classes.container}>
-        <Breadcrumb></Breadcrumb>
+ <div className={classes.container}>
+<Breadcrumb></Breadcrumb>
 
-        <Grid container>
+<Grid container>
 
-        <Grid item xs={12} md={3}>
-        <Paper className={classes.sidebar}>
+
+{/* sidebar */}
+<Grid item xs={12} md={3}>
+  <Paper className={classes.sidebar}>
        <h4 className={classes.sidebarTitle}>INDICATOR NAVIGATION</h4>
-       <form className={classes.filterContainer} autoComplete="off">
 
 
+
+{/* filters */}
+<form className={classes.filterContainer} autoComplete="off">
+
+
+{/* frequency filter */}
 <Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
 <InputLabel htmlFor="frequency">Reporting Frequency</InputLabel>
 <Select
+native
 value={values.frequency}
 onChange={handleFilterChange}
 className = {classes.select}
@@ -308,10 +309,10 @@ inputProps={{
  }
 }}
 >
-<MenuItem value={'Monthly'}>Monthly</MenuItem>
-<MenuItem value={'Quarterly'}>Quarterly</MenuItem>
-<MenuItem value={'Semi-Annually'}>Semi-Annually</MenuItem>
-<MenuItem value={'Annually'}>Annually</MenuItem>
+<option value={""} />
+<option value={'Quarterly'}>Quarterly</option>
+<option value={'Semi-Annually'}>Semi-Annually</option>
+<option value={'Annually'}>Annually</option>
 </Select>
 </FormControl>
 </Grid>
@@ -319,12 +320,12 @@ inputProps={{
 
 
 
-
-
+{/* level filter */}
 <Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
 <InputLabel htmlFor="level">Reporting Level</InputLabel>
 <Select
+native
 value={values.level}
 onChange={handleFilterChange}
 className = {classes.select}
@@ -337,20 +338,21 @@ inputProps={{
 }}
 
 >
-<MenuItem value={'Facility'}>Facility</MenuItem>
-<MenuItem value={'Community'}>Community</MenuItem>
-<MenuItem value={'Facility & Community'}>Facility & Community</MenuItem>
+<option value={""} />
+<option value={'Facility'}>Facility</option>
+<option value={'Community'}>Community</option>
 </Select>
 </FormControl>
 </Grid>
 
 
 
-
+{/* target filter */}
 <Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
 <InputLabel htmlFor="target">Target</InputLabel>
 <Select
+native
 value={values.target}
 onChange={handleFilterChange}
 className = {classes.select}
@@ -363,27 +365,25 @@ inputProps={{
 }}
 
 >
-<MenuItem value={'target1'}>Target1</MenuItem>
-<MenuItem value={'target2'}>Target2</MenuItem>
-<MenuItem value={'target3'}>Target3</MenuItem>
+<option value={""} />
+<option value={'target1'}>Target1</option>
+<option value={'target2'}>Target2</option>
+<option value={'target3'}>Target3</option>
 </Select>
 </FormControl>
 </Grid>
 
-
-
-
-
-
-
-
-
-
-
 </form>
+
+
+
+{/* indicator groups */}
 
 <div className={classes.sidebarGroup}>
 <p className={classes.sidebarSubtitle}>INDICATOR GROUPS</p>
+
+
+{/* Prevention and support indicators */}
 <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -393,14 +393,25 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Prevention and support indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.panelDetails}>
-              {preventionIndicator.map((value, index) => {
-                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
-              })}
+              <ExpansionPanelDetails className={classes.indicatorList}>
+              {
+                preventionIndicator.map(indicator =>{
+                  return(
+                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem}>
+                    {indicator[0]}
+                    </div>
+                  )
                  
-            
+                  
+                 
+                })
+              }
+             
               </ExpansionPanelDetails>
 </ExpansionPanel>
+
+
+{/* Testing indicators */}
 <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -410,14 +421,26 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Testing Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.panelDetails}>
-             
-              {testingIndicator.map((value, index) => {
-                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
-              })}
-             
+              <ExpansionPanelDetails className={classes.indicatorList}>
+              {
+                testingIndicator.map(indicator =>{
+                  return(
+                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem}>
+                    {indicator[0]}
+                    </div>
+                  )
+                 
+                  
+                 
+                })
+              }
               </ExpansionPanelDetails>
 </ExpansionPanel>
+
+
+
+
+{/* Treatment indicators */}
 <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -427,12 +450,24 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Treatment Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.panelDetails}>
-              {treatmentIndicator.map((value, index) => {
-                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
-              })}
+              <ExpansionPanelDetails className={classes.indicatorList}>
+              {
+                treatmentIndicator.map(indicator =>{
+                  return(
+                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem}>
+                    {indicator[0]}
+                    </div>
+                  )
+                 
+                  
+                 
+                })
+              }
               </ExpansionPanelDetails>
 </ExpansionPanel>
+
+
+{/* Viral Suppression indicators */}
 <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -442,12 +477,24 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Viral Suppressions Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.panelDetails}>
-              {viralIndicator.map((value, index) => {
-                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
-              })}
+              <ExpansionPanelDetails className={classes.indicatorList}>
+              {
+                viralIndicator.map(indicator =>{
+                  return(
+                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem}>
+                    {indicator[0]}
+                    </div>
+                  )
+                 
+                  
+                 
+                })
+              }
               </ExpansionPanelDetails>
 </ExpansionPanel>
+
+
+{/* Health Systems indicators */}
 <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -457,12 +504,25 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Health Systems Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.panelDetails}>
-              {healthSystemIndicator.map((value, index) => {
-                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
-              })}
+              <ExpansionPanelDetails className={classes.indicatorList}>
+              {
+                healthSystemIndicator.map(indicator =>{
+                  return(
+                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem}>
+                    {indicator[0]}
+                    </div>
+                  )
+                 
+                  
+                 
+                })
+              }
               </ExpansionPanelDetails>
 </ExpansionPanel>
+
+
+
+{/* Host Country indicators */}
 <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -472,10 +532,19 @@ inputProps={{
               >
                 <ExpandTitle className={classes.sidebarExpandTitle}>Host Country Indicators</ExpandTitle>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.panelDetails}>
-              {hostCountryIndicator.map((value, index) => {
-                  return <span key={index} className={classes.thirdLevelContainer}>{thirdLevelNav(value[0])}</span>
-              })}
+              <ExpansionPanelDetails className={classes.indicatorList}>
+              {
+               hostCountryIndicator.map(indicator =>{
+                  return(
+                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem}>
+                    {indicator[0]}
+                    </div>
+                  )
+                 
+                  
+                 
+                })
+              }
               </ExpansionPanelDetails>
 </ExpansionPanel>
 </div>
@@ -483,63 +552,33 @@ inputProps={{
         </Paper>
         </Grid>
 
+{/* main content */}
+<Grid item xs={12} md={9}>
 
-        <Grid item xs={12} md={9}>
 
 
-      {
-        indicatorName===''? 
+{/* if there is no indicator selected display default what's new, 
+otherwise display the indicator details and data elements related*/}
+        {
+        indicatorName===''? <WhatIsNew/> : 
         <div>
-        <headings.H1>Indicators</headings.H1>
-        <p>Rutrum ac exercitationem! Lobortis ultricies, adipisicing, lacus quas, tincidunt, taciti? 
-        Nostrum mi, explicabo doloremque, provident fermentum laborum aliquid placerat culpa accumsan platea 
-        fuga magnis anim recusandae elit error dolorem minus soluta purus. Convallis cum mollis suspendisse, 
-        ridiculus praesent vestibulum delectus mollitia beatae necessitatibus phasellus id suspendisse pede 
-        accusamus recusandae pariatur, earum dolorum molestie, quasi deleniti suspendisse cras non? 
-        Arcu quo officia sed quam atque ullamcorper quia nonummy excepteur, harum aptent nostrum quod animi rerum, 
-        iusto commodi quae! Anim? Sapiente, excepteur, lacus distinctio varius quae. Nostra fugiat saepe! Venenatis nisl 
-        quaerat atque ullam, debitis illo semper integer, dui iusto consequat. Hic.</p>
-
-        <p>Ridiculus repellendus nisi maiores minus, eros, asperiores cillum litora ac tempus in. Aliqua ante, 
-        quaerat ultricies? Sem etiam, adipisicing ac! Eligendi iure? Dolorum tortor beatae proident senectus, proin? 
-        Accusantium nibh pellentesque fugiat tempore egestas vulputate, doloremque? Pulvinar beatae nascetur, sapien, 
-        illum repudiandae curabitur enim laboris ea lacinia incidunt, interdum blanditiis necessitatibus omnis 
-        porro esse laudantium quisquam. Ab. Eius sollicitudin facere. Ullamcorper pretium! Aliquam! Quisque, 
-        quia, aute fames? Curae iure maiores cumque enim, etiam nemo ex nemo, voluptas class primis animi, 
-        sint ratione distinctio aperiam pulvinar molestie, sapien recusandae optio blandit dapibus vulputate? 
-        Tempor pede voluptatibus fuga adipisicing semper consequatur possimus.</p>
-
-        <Button variant="contained" color="primary" className={classes.button}>
-      Download MER Guidance
-      </Button>
-
-
-        </div>
-
-       
-        
-        
-        
-        
-        : 
-        <div>
-        
-
-
-
-
-        {/* <Tabs value={activeTab} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="INDICATOR DETAILS" {...a11yProps(0)} />
-          {matchDataElements.length===0 ? '': <Tab label="DATA ELEMENTS" {...a11yProps(1)}/>
-          
-          }
-        </Tabs> */}
-
-
-
-        <TabPanel value={activeTab} index={0} className={classes.tabPanel}>
         <headings.H1>{indicatorName}</headings.H1>
-    
+
+
+
+      {/* indicator tabs */}
+        <Tabs value={panel} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="INDICATOR DETAILS" {...a11yProps(0)} />
+          <Tab label="DATA ELEMENTS" {...a11yProps(1)} />
+        </Tabs>
+
+
+      {/* indicator details */}
+        <TabPanel value={panel} index={0} className={classes.tabPanel}>
+      
+
+
+     {/* Indicator changes */}
         <ExpansionPanel
              defaultExpanded="true"
         >
@@ -570,7 +609,7 @@ inputProps={{
 
 
 
-       
+        {/* Indicator description */}
         <ExpansionPanel
              defaultExpanded="true"
         >
@@ -591,7 +630,7 @@ inputProps={{
        </ExpansionPanel>
 
 
-
+      {/* Indicator reporting level */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                
@@ -619,7 +658,7 @@ inputProps={{
 
 
 
-
+   {/* Indicator calculate */}
         <ExpansionPanel
              defaultExpanded="true"
         >
@@ -641,7 +680,7 @@ inputProps={{
 
 
 
-
+   {/* Indicator numerator */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -671,6 +710,8 @@ inputProps={{
        </ExpansionPanel>
 
 
+
+  {/* Indicator denominator */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -689,7 +730,7 @@ inputProps={{
        </ExpansionPanel>
 
 
-
+  {/* Indicator disaggregate */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -714,7 +755,7 @@ inputProps={{
        </ExpansionPanel>
 
 
-
+  {/* Indicator pepfar definition */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -740,13 +781,7 @@ inputProps={{
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
-
-
-
-
-
-
-
+  {/* Indicator how to use */}
         <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -769,7 +804,7 @@ inputProps={{
        </ExpansionPanel>
 
 
-
+  {/* Indicator how to collect */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -794,7 +829,7 @@ inputProps={{
 
       
 
-
+  {/* Indicator how to review quality */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -818,7 +853,7 @@ inputProps={{
 
       
 
-
+  {/* Indicator guiding narrative questions */}
        <ExpansionPanel>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -842,26 +877,17 @@ inputProps={{
        </ExpansionPanel>
 
 
-
-
-
-
-
-     
-
     </TabPanel>
 
 
-
-      <TabPanel value={activeTab} index={1} className={classes.tabPanel}>
+      {/* data elements */}
+      <TabPanel value={panel} index={1} className={classes.tabPanel}>
         
+      {matchDataElements.map(dataElement => (
+      <div >
+      <ExpansionPanel className={classes.expansionPanel}>
 
-
-      <headings.H1 className={classes.heading1}>{matchDataElements.name}</headings.H1>
-
-
-
-      <ExpansionPanel className={classes.expansionPanel} defaultExpanded="true">
+      {/* data elements summery */}
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -870,51 +896,77 @@ inputProps={{
 
         >
          <Grid container>
-          <Grid Item  xs={12} md={9}>
+          <Grid Item  xs={12} md={8}>
           <Typography className={classes.heading}> 
-           <strong>{matchDataElements.name}</strong>: {matchDataElements.category}
+           <strong>{dataElement.name}</strong>: {dataElement.category}
            </Typography>
           </Grid>
 
           <Grid Item xs={12} md={3}>
           <Typography className={classes.heading}> 
-           <strong>Data Element UID</strong>: {matchDataElements.uid}
+           <strong>Data Element UID</strong>: {dataElement.uid}
           </Typography></Grid>
           </Grid>
          
         </ExpansionPanelSummary>
+
+
+
+         {/* data elements details */}
         <ExpansionPanelDetails 
          className={classes.expansionPanelDetails}
         >
         <Grid container>
-        <Grid Item  xs={12} md={8} className={classes.expansionPanelLeft}>
+        <Grid Item  xs={12} className={classes.expansionPanelLeft}>
           <Typography>
           <strong>Indicator Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
-          {matchDataElements.indicatorCode}
+          {dataElement.indicatorCode}
           </NavLink>
 
           <br/>
-          <strong>Description</strong>: {matchDataElements.description}<br/>
-          <strong>Short Name</strong>: {matchDataElements.shortName}<br/>
-          <strong>Code</strong>: {matchDataElements.code}<br/>
-          <strong>Source</strong>: {matchDataElements.source}
+          <strong>Description</strong>: {dataElement.description}<br/>
+          <strong>Short Name</strong>: {dataElement.shortName}<br/>
+          <strong>Code</strong>: {dataElement.code}<br/>
+          <strong>Source</strong>: {dataElement.source}<br/>
+
+           {/* open the comparison panel */}
+          <Button variant="contained" color="primary" className={classes.button} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
+
+
           </Typography>
         </Grid>
-        <Grid Item  xs={12} md={4}>
-        <Paper className={classes.changeBox}>
-        <Typography className={classes.changeBoxTitle}>
-        Indicator changes/Alerts:
-        </Typography>
-    <p><strong>Indicator Changes</strong>: {matchDataElements.indicatorChanges} <br/>
-       <strong>Reporting Frequency</strong>: {matchDataElements.frequency} <br/>
-       <strong>Reporting Level</strong>: {matchDataElements.reportingLevel} 
-    </p>
-      </Paper>
-        </Grid>
-
-        <Grid Item  xs={12} className={classes.comboTable}>
        
-        <Route render={({ history}) => (
+        {/* data element Disaggregations */}
+        <Grid Item  xs={12} className={classes.comboTable}>
+        <strong>Disaggregations</strong>:<br/>
+       
+          <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Disaggregations Name</TableCell>
+            <TableCell>Disaggregations Code</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {
+             Object.keys(Object(dataElement.combos)).map(
+               key => <TableRow>
+              <TableCell component="th" scope="row">
+              {Object(dataElement.combos)[key].name}
+              </TableCell> 
+              <TableCell component="th" scope="row">
+              {Object(dataElement.combos)[key].code}
+              </TableCell> 
+              </TableRow>
+              
+             )
+            }
+        </TableBody>
+        </Table>
+
+
+       
+        {/* <Route render={({ history}) => (
            <div className={classes.tableContainer}>
     <MaterialTable
         title="Disaggregations"
@@ -931,7 +983,7 @@ inputProps={{
           lookup: { 'positive': 'Positive', 'negative': 'Negative', "suspected": 'Suspected'}
           },
         ]}
-        data={matchDataElements.combos}        
+        data={dataElement.combos}        
         options={{
           filtering: true,
           cellStyle: {
@@ -941,9 +993,12 @@ inputProps={{
      
        
         onRowClick={()=>{history.push('/indicator')}}
-      />
-       </div>
-      )} />
+      /> */
+      
+      
+      }
+      
+     
      
 
         </Grid>
@@ -956,7 +1011,20 @@ inputProps={{
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
-    
+      {/* data element comparison panel */}
+      <Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
+      <Grid container className={classes.comparePanelContainer}>
+      <Grid item xs={12}>
+      <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
+      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
+      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
+      </Grid>
+      </Grid>
+      </Drawer>
+
+      </div>
+
+      ))}
 
 
 
@@ -965,7 +1033,8 @@ inputProps={{
 
       </TabPanel>
       
-      </div>}
+      </div>
+        }
       
       </Grid>
 
@@ -995,27 +1064,11 @@ const ExpandSubTitle = styled.span`
     padding-top: 5px;
     font-weight: 300;
 `;
-const FlexGrid = styled.div`
-    display: flex;
-    justify-content: left;
-    flex-wrap: wrap;
-`;
-const FlexGridHalfCol = styled.p`
-    width: 45%;
-    padding-right: 1em;
 
-    @media (max-width: 768px){
-        width: 100%;
-    }
-`;
 
 const ChildList =styled.ul`
     margin-top:0;
     padding-top:0;
-`;
-
-const TableTitle = styled.h4`
-
 `;
 
 
@@ -1043,7 +1096,7 @@ const useStyles = makeStyles(theme => ({
   heroContainer:{
     margin: '0 auto',
     backgroundColor: '#eeeeee',
-    paddingBottom: '20px',
+    paddingBottom: '20px'
   },
   root: {
     width: '100%',
@@ -1190,6 +1243,49 @@ const useStyles = makeStyles(theme => ({
    sidebarSubtitle:{
     textAlign: 'center'
    },
+   indicatorList:{
+    display: 'flex',
+    flexDirection: 'column'
+   },
+   indicatorListItem:{
+     paddingBottom: '1em',
+     cursor: 'pointer'
+   },
+   button:{
+    backgroundColor: '#C1A783',
+    color: '#000000',
+    marginBottom: '1em',
+    marginTop: '1em',
+
+    '&:hover, &:focus':{
+      color: '#ffffff'
+    }
+  },
+  titleNote:{
+    color: "rgba(0, 0, 0, 0.87) !important",
+    fontSize: '0.8rem',
+    fontWeight: 'normal'
+  },
+  indicatorChanges:{
+    padding: '1em',
+    marginBottom:'2em'
+  },
+  panelDetails:{
+    flexDirection: 'column'
+  },
+  comparePanelContainer:{
+    maxWidth: '1200px',
+    margin:'0 auto',
+    height:'80vh'
+  },
+  closeComparePanel:{
+    float:'right',
+    margin: '1em',
+    cursor:'pointer'
+  },
+  dataElementContainer:{
+    marginBottom: '1em'
+  },
   [theme.breakpoints.down('sm')]: {
     // styles
     filterContainer: {
@@ -1216,42 +1312,7 @@ const useStyles = makeStyles(theme => ({
     }
    
   },
-  titleNote:{
-    color: "rgba(0, 0, 0, 0.87) !important",
-    fontSize: '0.8rem',
-    fontWeight: 'normal'
-  },
-  indicatorChanges:{
-    padding: '1em',
-    marginBottom:'2em'
-  },
-  panelDetails:{
-    flexDirection: 'column'
-  },
-  dataElementRow:{
-    wordBreak: 'break-word',
-    cursor: 'pointer',
-    fontSize: '0.8em',
-    marginBottom: '10px'
-  },
-  button:{
-    backgroundColor: '#C1A783',
-    color: '#000000',
-
-    '&:hover, &:focus':{
-      color: '#ffffff'
-    }
-  },
-  hide:{
-    display: 'none'
-  },
-  heading1:{
-    wordBreak:'bread-word'
-  },
-  thirdLevelContainer:{
-    marginBottom: '5px'
-  }
-
+  
   
   
  

@@ -701,7 +701,7 @@ export const initialState = {
       },
       {
         name: 'HTS_SELF',
-        frequency: 'Monthly',
+        frequency: 'Quarterly',
         level: 'Community',
         target: 'target1',
         group: 'treatment',
@@ -785,7 +785,7 @@ export const initialState = {
       {
         name: 'HTS_TST',
         frequency: 'Quarterly',
-        level: 'Facility & Community',
+        level: 'Facility',
         target: 'target1',
         group: 'viral',
 
@@ -1036,7 +1036,7 @@ export const initialState = {
       {
         name: 'PMTCT_FO',
         frequency: 'Monthly',
-        level: 'Facility & Community',
+        level: 'Facility',
         target: 'target1',
         group: 'health-system',
 
@@ -1372,5 +1372,4 @@ export const initialState = {
       }
         
     ]
-
   };

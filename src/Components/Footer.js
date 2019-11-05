@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
     footer:{
         width: '100%',
         minHeight: '50px',
+        marginTop: '3em',
         backgroundColor:'#002134',
         borderBottom:'#C1A783 5px solid',
         marginTop: '30px'

@@ -28,3 +28,6 @@ li.breadcrumb-item:last-child::after{
 .MuiExpansionPanelSummary-content.Mui-expanded{
   margin:0;
 }
+.MuiCollapse-entered {
+  margin-bottom: 1em;
+}
