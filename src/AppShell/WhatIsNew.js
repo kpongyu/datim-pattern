@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1em',
     
         '&:hover, &:focus':{
-          color: '#ffffff'
+          color: '#000000',
         }
       }
     
@@ -42,7 +42,7 @@ export const WhatIsNew =() =>{
         sint ratione distinctio aperiam pulvinar molestie, sapien recusandae optio blandit dapibus vulputate? 
         Tempor pede voluptatibus fuga adipisicing semper consequatur possimus.</p>
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button variant="outlined" color="primary" className={classes.button}>
       Download MER Guidance
       </Button>
       </div>

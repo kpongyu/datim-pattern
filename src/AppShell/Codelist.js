@@ -339,6 +339,12 @@ export default function Codelist() {
    
   }
 
+//implement comparison checkbox
+const handleCompareCheckbox = name => event => {
+  event.stopPropagation();
+  console.log([name]);
+
+};
 
   
 //set initial values
@@ -490,6 +496,74 @@ export default function Codelist() {
 
 
 
+{/* source filter */}
+
+
+<Grid item xs={12} className={classes.filter} >
+<FormControl className={classes.formControl}>
+
+
+  <InputLabel htmlFor="source">Source</InputLabel>
+  <Select
+   multiple
+    value={values.source}
+    onChange={handleChangeSource}
+    className = {classes.select}
+    inputProps={{
+      name: 'source',
+      id: 'source',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
+  >
+    <MenuItem value={'DATIM'}>DATIM</MenuItem>
+    <MenuItem value={'PDH'}>PDH</MenuItem>
+    <MenuItem value={'MOH'}>MOH</MenuItem>
+  </Select>
+</FormControl>
+</Grid>
+
+{/* frequency filter */}
+<Grid item xs={12} cclassName={classes.filter}  >
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="frequency">Frequency</InputLabel>
+  <Select
+   multiple
+    value={values.frequency}
+    onChange={handleChangeFrequency}
+    className = {classes.select}
+    inputProps={{
+      name: 'frequency',
+      id: 'frequency',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+    renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+    )}
+  >
+    <MenuItem value={'quarterly'}>Quarterly</MenuItem>
+    <MenuItem value={'semiAnnual'}>Semi-Annual</MenuItem>
+    <MenuItem value={'annual'}>Annual</MenuItem>
+  </Select>
+</FormControl>
+</Grid>
+
+
+
 
 
 
@@ -528,7 +602,7 @@ export default function Codelist() {
 
 
 {/* type filter */}
-<Grid item xs={12} className={classes.filter} >
+<Grid item xs={12} className={advanced ? classes.filter : classes.hide} >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="type">Type</InputLabel>
   <Select
@@ -562,7 +636,7 @@ export default function Codelist() {
 
 
 {/* data set filter */}
-<Grid item xs={12} className={classes.filter} >
+<Grid item xs={12} className={advanced ? classes.filter : classes.hide}>
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="dataSet">Data Set</InputLabel>
   <Select
@@ -592,86 +666,32 @@ export default function Codelist() {
 </Grid>
 
 
-{/* source filter */}
-
-
-  <Grid item xs={12} className={advanced ? classes.filter : classes.hide} >
-<FormControl className={classes.formControl}>
-
-
-  <InputLabel htmlFor="source">Source</InputLabel>
-  <Select
-   multiple
-    value={values.source}
-    onChange={handleChangeSource}
-    className = {classes.select}
-    inputProps={{
-      name: 'source',
-      id: 'source',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
-  >
-    <MenuItem value={'DATIM'}>DATIM</MenuItem>
-    <MenuItem value={'PDH'}>PDH</MenuItem>
-    <MenuItem value={'MOH'}>MOH</MenuItem>
-  </Select>
-</FormControl>
-</Grid>
-
-{/* frequency filter */}
-<Grid item xs={12} className={advanced ? classes.filter : classes.hide}  >
-<FormControl className={classes.formControl}>
-  <InputLabel htmlFor="frequency">Frequency</InputLabel>
-  <Select
-   multiple
-    value={values.frequency}
-    onChange={handleChangeFrequency}
-    className = {classes.select}
-    inputProps={{
-      name: 'frequency',
-      id: 'frequency',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
-  >
-    <MenuItem value={'quarterly'}>Quarterly</MenuItem>
-    <MenuItem value={'semiAnnual'}>Semi-Annual</MenuItem>
-    <MenuItem value={'annual'}>Annual</MenuItem>
-  </Select>
-</FormControl>
-</Grid>
-
-
-
 
 
 </form>
 
 {/* filter functions */}
-<Button variant="outlined" onClick={displayAdvanced} className={classes.filterButton}>
-       Advanced Search
+<Button onClick={displayAdvanced} className={classes.toggleFilters}>
+      {advanced ? 'Less Filters' : 'More Filters'}
 </Button>
 <Button variant="outlined" onClick={clearValues} className={classes.filterButton}>
        Clear Filters
 </Button>
-<Button variant="outlined" className={classes.filterButton} onClick={downloadData}>
+
+
+   
+
+
+
+
+      </div>
+    
+</Paper>
+</Grid>
+
+<Grid item xs={12} md={9} className={classes.dataElementContent}>
+<div className={classes.tabDashboard}>
+<Button variant="outlined" className={classes.actionButton} onClick={downloadData}>
       Download Data
 </Button>
  <Popover
@@ -717,18 +737,8 @@ export default function Codelist() {
       </Popover>
 
 
-   
-
-
-
-
-      </div>
-    
-</Paper>
-</Grid>
-
-<Grid item xs={12} md={9} className={classes.dataElementContent}>
-
+<Button variant="outlined" className={classes.actionButton} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
+</div>
 
  {/* data elements */}
 {dataElements.map(dataElement => (
@@ -743,16 +753,28 @@ export default function Codelist() {
           className={classes.expansionPanelSummary}
 
         >
-         <Grid container>
-          <Grid Item  xs={12} md={9}>
+         <FormControlLabel
+            aria-label="Acknowledge"
+            onClick={handleCompareCheckbox(dataElement.name)}
+            onFocus={event => event.stopPropagation()}
+            control={<Checkbox />}
+            // label="I acknowledge that I should stop the click event propagation"
+          />
+         <Grid container alignItems="center">
+
+
+        
+
+
+          <Grid Item  xs={12} md={10}>
           <Typography className={classes.heading}> 
            <strong>{dataElement.name}</strong>: {dataElement.category}
            </Typography>
           </Grid>
 
-          <Grid Item xs={12} md={3}>
+          <Grid Item xs={12} md={2}>
           <Typography className={classes.heading}> 
-           <strong>Data Element UID</strong>: {dataElement.uid}
+           <strong>Version</strong>: {dataElement.version}
           </Typography></Grid>
           </Grid>
          
@@ -773,12 +795,11 @@ export default function Codelist() {
 
           <br/>
           <strong>Description</strong>: {dataElement.description}<br/>
-          <strong>Short Name</strong>: {dataElement.shortName}<br/>
-          <strong>Code</strong>: {dataElement.code}<br/>
+          {/* <strong>Short Name</strong>: {dataElement.shortName}<br/>
+          <strong>Code</strong>: {dataElement.code}<br/> */}
           <strong>Source</strong>: {dataElement.source}<br/>
-
-            {/* open the comparison panel */}
-          <Button variant="contained" color="primary" className={classes.button} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
+          <strong>Data Element UID</strong>: {dataElement.uid}
+        
           </Typography>
         </Grid>
       
@@ -813,6 +834,9 @@ export default function Codelist() {
          }
      </TableBody>
      </Table>
+
+      {/* open the comparison panel */}
+      <Button variant="outlined" color="primary" className={classes.historyButton}>Previous Versions</Button>
        </div>
       )} />
      
@@ -828,16 +852,7 @@ export default function Codelist() {
       </ExpansionPanel>
 
 
-  {/* data element comparison panel */}
-      <Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
-      <Grid container className={classes.comparePanelContainer}>
-      <Grid item xs={12}>
-      <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
-      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
-      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
-      </Grid>
-      </Grid>
-      </Drawer>
+  
 
       </div>
 
@@ -850,7 +865,16 @@ export default function Codelist() {
         onChangePage={() => {}}
       />
 
-
+{/* data element comparison panel */}
+<Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
+      <Grid container className={classes.comparePanelContainer}>
+      <Grid item xs={12}>
+      <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
+      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
+      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
+      </Grid>
+      </Grid>
+</Drawer>
 
 
 
@@ -1039,14 +1063,13 @@ const useStyles = makeStyles(theme => ({
     margin: '1em',
     cursor:'pointer'
   },
-  button:{
-    backgroundColor: '#C1A783',
-    color: '#000000',
-    marginBottom: '1em',
-    marginTop: '1em',
-
+  actionButton:{
+    marginLeft: '20px',
+    marginTop: '10px',
+    marginBottom: '20px',
     '&:hover, &:focus':{
-      color: '#ffffff'
+      backgroundColor: '#C1A783',
+      color: '#000000'
     }
   },
   panelDetails:{
@@ -1058,6 +1081,30 @@ const useStyles = makeStyles(theme => ({
     height:'80vh'
   },
   dataElementContainer:{
+  },
+  tabDashboard:{
+    width: '100%',
+    display:'flex',
+    justifyContent: 'flex-end'
+  },
+  toggleFilters:{
+    marginTop: '15px',
+    color: "#1d5893 !important",
+    padding: 0,
+
+    '&:hover, &:focus':{
+      background: 'transparent'
+    }
+  },
+  historyButton:{
+    backgroundColor: '#C1A783',
+    color: '#000000',
+    marginBottom: '1em',
+    marginTop: '1em',
+
+    '&:hover, &:focus':{
+      color: '#000000'
+    }
   },
   
   [theme.breakpoints.down('sm')]: {

@@ -37,6 +37,7 @@ import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import {WhatIsNew} from './WhatIsNew';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 
@@ -220,6 +221,13 @@ export default function Indicator() {
   
   };
 
+//implement comparison checkbox
+const handleCompareCheckbox = name => event => {
+   console.log([name]);
+
+};
+
+
 
 //when value has changed, call useEffect function
   useEffect(() => {
@@ -272,7 +280,7 @@ export default function Indicator() {
   }, [values]);
 
 
-    return (
+return (
 
         
  <div className={classes.container}>
@@ -882,6 +890,9 @@ otherwise display the indicator details and data elements related*/}
 
       {/* data elements */}
       <TabPanel value={panel} index={1} className={classes.tabPanel}>
+      {/* <div className={classes.tabDashboard}>
+      <Button variant="contained" color="primary" className={classes.button} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
+      </div> */}
         
       {matchDataElements.map(dataElement => (
       <div >
@@ -895,16 +906,18 @@ otherwise display the indicator details and data elements related*/}
           className={classes.expansionPanelSummary}
 
         >
-         <Grid container>
-          <Grid Item  xs={12} md={8}>
+         <Grid container alignItems="center">
+       
+          <Grid Item  xs={11} md={10}>
+         
           <Typography className={classes.heading}> 
            <strong>{dataElement.name}</strong>: {dataElement.category}
            </Typography>
           </Grid>
 
-          <Grid Item xs={12} md={3}>
+          <Grid Item xs={12} md={2}>
           <Typography className={classes.heading}> 
-           <strong>Data Element UID</strong>: {dataElement.uid}
+          <strong>Version</strong>: {dataElement.version}
           </Typography></Grid>
           </Grid>
          
@@ -925,13 +938,11 @@ otherwise display the indicator details and data elements related*/}
 
           <br/>
           <strong>Description</strong>: {dataElement.description}<br/>
-          <strong>Short Name</strong>: {dataElement.shortName}<br/>
-          <strong>Code</strong>: {dataElement.code}<br/>
+          {/* <strong>Short Name</strong>: {dataElement.shortName}<br/>
+          <strong>Code</strong>: {dataElement.code}<br/> */}
           <strong>Source</strong>: {dataElement.source}<br/>
-
-           {/* open the comparison panel */}
-          <Button variant="contained" color="primary" className={classes.button} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
-
+          <strong>Data Element UID</strong>: {dataElement.uid}
+        
 
           </Typography>
         </Grid>
@@ -963,6 +974,10 @@ otherwise display the indicator details and data elements related*/}
             }
         </TableBody>
         </Table>
+
+
+         {/* open the comparison panel */}
+          <Button variant="outlined" color="primary" className={classes.historyButton}>Previous Versions</Button>
 
 
        
@@ -1011,16 +1026,7 @@ otherwise display the indicator details and data elements related*/}
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
-      {/* data element comparison panel */}
-      <Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
-      <Grid container className={classes.comparePanelContainer}>
-      <Grid item xs={12}>
-      <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
-      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
-      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
-      </Grid>
-      </Grid>
-      </Drawer>
+     
 
       </div>
 
@@ -1035,6 +1041,17 @@ otherwise display the indicator details and data elements related*/}
       
       </div>
         }
+
+       {/* data element comparison panel */}
+       <Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
+      <Grid container className={classes.comparePanelContainer}>
+      <Grid item xs={12}>
+      <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
+      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
+      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
+      </Grid>
+      </Grid>
+      </Drawer>
       
       </Grid>
 
@@ -1190,7 +1207,6 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     border: 'none',
     maxWidth: '100%',
-    paddingTop: '30px',
   },
   expansionPanelLeft:{
     paddingBottom: '30px'
@@ -1285,6 +1301,21 @@ const useStyles = makeStyles(theme => ({
   },
   dataElementContainer:{
     marginBottom: '1em'
+  },
+  tabDashboard:{
+    width: '100%',
+    display:'flex',
+    justifyContent: 'flex-end'
+  },
+  historyButton:{
+    backgroundColor: '#C1A783',
+    color: '#000000',
+    marginBottom: '1em',
+    marginTop: '1em',
+
+    '&:hover, &:focus':{
+      color: '#000000'
+    }
   },
   [theme.breakpoints.down('sm')]: {
     // styles
