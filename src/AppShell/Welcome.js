@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     flexDirection: 'column',
     position: 'relative',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    height: '86vh'
   },
   heading:{
     width: '100%',
@@ -129,7 +130,6 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '1em'
   },
   cardSection:{
-    backgroundColor: '#F7F7F7'
   },
   cardTitle:{
     marginTop: 0,
@@ -203,7 +203,7 @@ export default function Welcome(){
      </Grid>
      </div>
      </div>
-     <div className={classes.cardSection}>
+     {/* <div className={classes.cardSection}>
      <h2 className={classes.cardTitle}>RESOURCES</h2>
      <div className={classes.dividerCardTitle}/>
       <div className={classes.container}>
@@ -345,7 +345,7 @@ export default function Welcome(){
      </div>
 
 
-    </div>
+    </div> */}
 
      </div>
     );

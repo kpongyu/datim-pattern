@@ -88,7 +88,7 @@ export default function Indicator() {
 
 
     //get indicator and data-elements from context
-    const [{ indicators, data_Elements }, dispatch] = useStateValue();
+    const [{ indicators, data_Elements, indicatorName, currentIndicator, matchDataElements }, dispatch] = useStateValue();
 
     //set initial panel state and panel handle change function
     const [panel, setPanel] = React.useState(0);
@@ -114,9 +114,9 @@ export default function Indicator() {
 
 
     //set initial selected indicator name, indicator, and data elements
-    const [indicatorName, setIndicatorName] = React.useState('');
-    const [currentIndicator, setCurrentIndicator]= React.useState([]);
-    const [matchDataElements, setMatchDataElements]= React.useState([]);
+    // const [indicatorName, setIndicatorName] = React.useState('');
+    // const [currentIndicator, setCurrentIndicator]= React.useState([]);
+    // const [matchDataElements, setMatchDataElements]= React.useState([]);
 
     //indicator that the app has mounted
     const [init, setInit]= React.useState(false);
@@ -187,13 +187,19 @@ export default function Indicator() {
   //update the indicator details and matched data-element when select indicator
   function updateIndicator(indicator_name){
      //match indicator name
-     setIndicatorName(indicator_name);
+     dispatch({
+       type:'changeIndicatorName',
+       newIndicatorName: indicator_name
 
+     })
      //match indicator details
 
      indicators.map(indicator => {
        if(indicator.name===indicator_name){
-       setCurrentIndicator(indicator);
+      dispatch({
+        type: 'changeCurrentIndicator',
+        newCurrentIndicator: indicator
+      })
        }
      });
 
@@ -204,8 +210,21 @@ export default function Indicator() {
        match.push(data_Element);
      }
    });
-   setMatchDataElements(match);
+   dispatch({
+    type: 'changeMatchDataElements',
+    newMatchDataElements: match
+  })
   }
+
+ 
+
+
+
+
+
+
+
+
 
 
 
@@ -555,6 +574,10 @@ inputProps={{
               }
               </ExpansionPanelDetails>
 </ExpansionPanel>
+
+
+
+
 </div>
 
         </Paper>
@@ -568,8 +591,9 @@ inputProps={{
 {/* if there is no indicator selected display default what's new, 
 otherwise display the indicator details and data elements related*/}
         {
-        indicatorName===''? <WhatIsNew/> : 
+        indicatorName==='new'? <WhatIsNew/> : 
         <div>
+        <Button onClick={() => updateIndicator("new")}>&lt; Key updates</Button>
         <headings.H1>{indicatorName}</headings.H1>
 
 
@@ -1199,6 +1223,7 @@ const useStyles = makeStyles(theme => ({
   },
   expansionPanelSummary:{
     borderBottom: '1px solid #C1A783',
+    wordBreak:'break-word'
   },
   expansionPanelDetails:{
     paddingTop: '30px'

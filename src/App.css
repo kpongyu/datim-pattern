@@ -1,6 +1,9 @@
 a{
   text-decoration: none !important;
 }
+#root{
+  position: relative;
+}
 
 .contentContainer{
   padding: 20px;

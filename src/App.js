@@ -46,6 +46,7 @@ export default function App() {
  
     return (
       <StateProvider initialState={initialState} reducer={reducer}>
+       <Router history={history}>
       <div className={classes.root}>
 
       
@@ -74,7 +75,7 @@ export default function App() {
         </Toolbar></AppBar>
 
 
-      <Router history={history}>
+     
 
       <Drawer
         className={classes.drawer}
@@ -119,9 +120,10 @@ export default function App() {
          
        
 
-        </Router>
+        
       </div>
       <Footer></Footer>
+      </Router>
        </StateProvider>
     );
   
@@ -133,7 +135,16 @@ const drawerWidth = 300;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    minHeight: '93vh'
+    minHeight: '90vh',
+    overflow: 'hidden',
+    position: 'relative',
+    paddingBottom: '50px'
+  },
+  rootHome: {
+    display: 'flex',
+    minHeight: '100vh',
+    overflow: 'hidden',
+    position: 'relative',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {

@@ -988,7 +988,8 @@ const useStyles = makeStyles(theme => ({
     color: '#920E0E'
   },
   expansionPanelSummary:{
-    borderBottom: '1px solid #C1A783'
+    borderBottom: '1px solid #C1A783',
+    wordBreak: 'break-word'
   },
   expansionPanelDetails:{
     paddingTop: '30px'
