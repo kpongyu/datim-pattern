@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     margin: '0 auto',
     paddingTop: '50px',
     paddingLeft: '15px',
-    paddingRight: '15px'
+    paddingRight: '15px',
+    paddingBottom:'50px'
   }
  
 }));

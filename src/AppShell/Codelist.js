@@ -46,7 +46,8 @@ export default function Codelist() {
   const classes = useStyles();
 
   //get data-elements from context
-  const [{ data_Elements }, dispatch] = useStateValue();
+  const [{ data_Elements, pdhDataElements, mohDataElements }, dispatch] = useStateValue();
+
 
 
   //initial filter state
@@ -96,7 +97,7 @@ export default function Codelist() {
         if(
 
           (Object.keys(values).map(function(keyName){
-            console.log(keyName);
+       
             if(keyName!==event.target.name){
               return(
                 (values[keyName].length==0 ? true :
@@ -115,7 +116,7 @@ export default function Codelist() {
         
   
   
-          console.log(data_Element);
+         
           filteredDataElements.push(data_Element);
         }
   
@@ -167,7 +168,7 @@ export default function Codelist() {
         
   
   
-          console.log(data_Element);
+         
           filteredDataElements.push(data_Element);
         }
   
@@ -220,7 +221,7 @@ export default function Codelist() {
         
   
   
-          console.log(data_Element);
+       
           filteredDataElements.push(data_Element);
         }
   
@@ -272,7 +273,7 @@ export default function Codelist() {
         
   
   
-          console.log(data_Element);
+         
           filteredDataElements.push(data_Element);
         }
   
@@ -324,7 +325,7 @@ export default function Codelist() {
         
   
   
-          console.log(data_Element);
+        
           filteredDataElements.push(data_Element);
         }
   
@@ -339,12 +340,26 @@ export default function Codelist() {
    
   }
 
+
+const [selectedDataElement, setSelectedDataElement]=React.useState([]);   
 //implement comparison checkbox
-const handleCompareCheckbox = name => event => {
+const handleCompareCheckbox = dataElement => event => {
   event.stopPropagation();
-  console.log([name]);
+  if(selectedDataElement.includes(dataElement.name)){
+    const newSelectedDataElement = selectedDataElement.filter(data =>{
+    return data !== dataElement.name;
+    });
+    setSelectedDataElement(newSelectedDataElement);
+    }else{
+    const newSelectedDataElement = [...selectedDataElement, dataElement.name];
+    setSelectedDataElement(newSelectedDataElement);
+    }
+
 
 };
+
+
+
 
   
 //set initial values
@@ -407,7 +422,7 @@ const handleCompareCheckbox = name => event => {
 
 
 
-
+  const [selectedDatim, setSelectedDatim]= React.useState([]);
 
 
   const toggleDrawer = (side, open) => event => {
@@ -416,7 +431,20 @@ const handleCompareCheckbox = name => event => {
     }
 
     setComparePanel({ ...comparePanel, [side]: open });
+
+    const selectDataTemp=[];
+    dataElements.map(dataElement => {
+     if(selectedDataElement.includes(dataElement.name)){
+     selectDataTemp.push(dataElement)
+   }
+ 
+   })
+   setSelectedDatim(selectDataTemp);
+
+
   };
+
+
 
 
 
@@ -665,6 +693,7 @@ const handleCompareCheckbox = name => event => {
 
 
 
+
 {/* data set filter */}
 <Grid item xs={12} className={advanced ? classes.filter : classes.hide}>
 <FormControl className={classes.formControl}>
@@ -721,13 +750,19 @@ const handleCompareCheckbox = name => event => {
 
 <Grid item xs={12} md={9} className={classes.dataElementContent}>
 <div className={classes.tabDashboard}>
+  <div>
 <Button variant="outlined" className={classes.actionButton} onClick={dropDownMenu("download")} id="downloadButton">
 Download selected data elements
 </Button>
 <Button variant="outlined" className={classes.actionButton} onClick={dropDownMenu("compare")} id="comparisonButton">
 Compare selected data elements
-  
 </Button>
+</div>
+
+<Button variant="outlined" className={classes.actionButton}  id="downloadButton">
+Select All
+</Button>
+
  <Popover
         id={popId}
         open={popOpen}
@@ -786,7 +821,7 @@ Compare selected data elements
            }
            label="MOH"
          />
-         <Button type="submit" variant="outlined" className={classes.downloadButton} onClick={()=> console.log(download, dataElements)}>
+         <Button type="submit" variant="outlined" className={classes.downloadButton} onClick={toggleDrawer('bottom', true)} >
           COMPARE SOURCES
          </Button>
        </FormGroup>
@@ -818,9 +853,10 @@ Compare selected data elements
         >
          <FormControlLabel
             aria-label="Acknowledge"
-            onClick={handleCompareCheckbox(dataElement.name)}
+            onClick={handleCompareCheckbox(dataElement)}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox />}
+            // checked={selectedDataElement.includes(dataElement.name)}
             // label="I acknowledge that I should stop the click event propagation"
           />
          <Grid container alignItems="center">
@@ -932,10 +968,209 @@ Compare selected data elements
 <Drawer anchor="bottom" open={comparePanel.bottom} onClose={toggleDrawer('bottom', false)}>
       <Grid container className={classes.comparePanelContainer}>
       <Grid item xs={12}>
+     
+      <div className={classes.fixedTop}>
       <CloseIcon onClick={toggleDrawer('bottom', false)} className={classes.closeComparePanel}>add_circle</CloseIcon>
-      <p>Quam, tempora minus error doloremque? Turpis impedit aliquet, dolorem facere, quod quas! Illo taciti netus excepturi! Sociis faucibus, ipsum quasi, auctor, enim! Rerum nostrud? Rutrum elit, ornare? Proident fringilla urna, perferendis sint? Harum risus aliquet inceptos eveniet luctus? Sed? Explicabo tempor quae, quo porttitor nunc quaerat. Suspendisse hic, necessitatibus commodi etiam excepturi debitis morbi officia laudantium, minus feugiat irure accumsan? Dis purus ad iaculis, cupidatat? Reiciendis convallis justo tenetur! Varius eleifend quibusdam, sunt maecenas modi praesent! Quam urna reiciendis litora. Repellat reprehenderit impedit quidem laudantium, nulla harum adipisicing sequi eros? In, praesentium delectus risus corrupti netus. Hic! Facere, libero lectus.</p>
-      <p>Molestie veritatis aspernatur, repudiandae litora ullamcorper torquent autem accusamus deserunt laborum congue dolore tincidunt, tincidunt irure minim inceptos expedita nulla magnam praesentium maecenas diamlorem, nam sagittis, nascetur? Saepe, laborum aliquam aute maxime? Ea, officia molestie reprehenderit, assumenda luctus explicabo. Tempora cillum metus varius, fermentum, ac rhoncus quisque cumque elementum blandit exercitationem lacus eum semper? Hendrerit varius odio hendrerit phasellus excepteur illo accusantium quod, pharetra nemo, consequat. Lacinia incididunt, cursus lacinia placerat ex, tincidunt risus primis curabitur morbi optio. Anim a expedita voluptate scelerisque soluta enim per nostrum facilis. Maecenas dolores quam mollitia in auctor consequatur natoque, ut mollitia commodi unde.</p>
+      <h2 className={classes.comparisonPanelTitle}>DATA ELEMENT COMPARISON</h2>
+
+      <div className={classes.compareTitle}>
+        {DATIM ? <div className={classes.compareTitleColumn}>DATIM</div> :''}
+        {PDH ? <div className={classes.compareTitleColumn}>PDH</div> :''}
+        {MOH ? <div className={classes.compareTitleColumn}>MOH</div> :''}
+      </div>
+      </div>
+
+      {
+        selectedDatim.map(datim =>{
+          return(
+            <div className={classes.compareRow}>
+              <div className={classes.compareRowColumn}>
+              
+              <ExpansionPanel defaultExpanded className={classes.expandPanel}>
+            <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel3b-content"
+                id="panel3b-header"
+                
+              >
+              <div className={classes.compareCardSummary}>
+              <div className={classes.compareCardText}>DATIM Data Element: </div>
+              <div className={classes.compareCardName}>{datim.name}</div>
+              <div className={classes.compareCardText}>DATIM UID: <strong>{datim.uid}</strong></div>
+              </div>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails className={classes.panelDetail}>
+
+
+              <Route render={({ history}) => (
+           <div className={classes.tableContainer}>
+            {/* data element Disaggregations */}
+      <strong>Disaggregations</strong>:<br/>
+       
+       <Table className={classes.table} aria-label="simple table">
+     <TableHead>
+       <TableRow>
+         <TableCell>Disaggregations Name</TableCell>
+         <TableCell>Disaggregations Code</TableCell>
+       </TableRow>
+     </TableHead>
+     <TableBody>
+       {
+          Object.keys(Object(datim.combos)).map(
+            key => <TableRow>
+           <TableCell component="th" scope="row">
+           {Object(datim.combos)[key].name}
+           </TableCell> 
+           <TableCell component="th" scope="row">
+           {Object(datim.combos)[key].code}
+           </TableCell> 
+           </TableRow>
+           
+          )
+         }
+     </TableBody>
+     </Table>
+     </div>)}></Route>
+              </ExpansionPanelDetails>
+              </ExpansionPanel>
+              </div>
+
+              <div className={PDH ? classes.compareRowColumn : classes.hide}>
+
+                
+                { datim.pdh.length===0? 'No matching PDH data element': pdhDataElements.map(pdhDataElement => {
+                    if((datim.pdh).includes(pdhDataElement.uid)){
+                      return(
+                        <ExpansionPanel  className={classes.expandPanel}>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel3b-content"
+                            id="panel3b-header"
+                            
+                          >
+                          <div className={classes.compareCardSummary}>
+                          <div className={classes.compareCardText}>PDH Data Element: </div>
+                          <div className={classes.compareCardName}>{pdhDataElement.name}</div>
+                          <div className={classes.compareCardText}>PDH Data Element UID: <strong>{pdhDataElement.uid}</strong></div>
+                          <div className={classes.compareCardText}>Derived Data Element? <strong>{pdhDataElement.derived}</strong></div>
+                          </div>
+                          </ExpansionPanelSummary>
+                          <ExpansionPanelDetails className={classes.panelDetail}>
+            
+            
+                          <Route render={({ history}) => (
+                       <div className={classes.tableContainer}>
+                        {/* data element Disaggregations */}
+                  <strong>PDH Disaggregations</strong>:<br/>
+                   
+                   <Table className={classes.table} aria-label="simple table">
+                 <TableHead>
+                   <TableRow>
+                     <TableCell>Disaggregations Name</TableCell>
+                     <TableCell>Disaggregations Code</TableCell>
+                   </TableRow>
+                 </TableHead>
+                 <TableBody>
+                   {
+                      Object.keys(Object(pdhDataElement.combos)).map(
+                        key => <TableRow>
+                       <TableCell component="th" scope="row">
+                       {Object(pdhDataElement.combos)[key].name}
+                       </TableCell> 
+                       <TableCell component="th" scope="row">
+                       {Object(pdhDataElement.combos)[key].code}
+                       </TableCell> 
+                       </TableRow>
+                       
+                      )
+                     }
+                 </TableBody>
+                 </Table>
+                 </div>)}></Route>
+                          </ExpansionPanelDetails>
+                          </ExpansionPanel>
+                      )
+                    }
+                  })
+                }
+                </div>
+
+                <div className={MOH ? classes.compareRowColumn : classes.hide}>
+
+                { datim.moh.length===0? 'No matching MOH data element': mohDataElements.map(mohDataElement => {
+                    if((datim.moh).includes(mohDataElement.uid)){
+                      return(
+                        <ExpansionPanel  className={classes.expandPanel}>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel3b-content"
+                            id="panel3b-header"
+                            
+                          >
+                          <div className={classes.compareCardSummary}>
+                          <div className={classes.compareCardText}>MOH Data Element: </div>
+                          <div className={classes.compareCardName}>{mohDataElement.name}</div>
+                          <div className={classes.compareCardText}>MOH Data Element UID: <strong>{mohDataElement.uid}</strong></div>
+                          <div className={classes.compareCardText}>Derived Data Element? <strong>{mohDataElement.derived}</strong></div>
+                          </div>
+                          </ExpansionPanelSummary>
+                          <ExpansionPanelDetails className={classes.panelDetail}>
+            
+            
+                          <Route render={({ history}) => (
+                       <div className={classes.tableContainer}>
+                        {/* data element Disaggregations */}
+                  <strong>MOH Disaggregations</strong>:<br/>
+                   
+                   <Table className={classes.table} aria-label="simple table">
+                 <TableHead>
+                   <TableRow>
+                     <TableCell>Disaggregations Name</TableCell>
+                     <TableCell>Disaggregations Code</TableCell>
+                   </TableRow>
+                 </TableHead>
+                 <TableBody>
+                   {
+                      Object.keys(Object(mohDataElement.combos)).map(
+                        key => <TableRow>
+                       <TableCell component="th" scope="row">
+                       {Object(mohDataElement.combos)[key].name}
+                       </TableCell> 
+                       <TableCell component="th" scope="row">
+                       {Object(mohDataElement.combos)[key].code}
+                       </TableCell> 
+                       </TableRow>
+                       
+                      )
+                     }
+                 </TableBody>
+                 </Table>
+                 </div>)}></Route>
+                          </ExpansionPanelDetails>
+                          </ExpansionPanel>
+                      )
+                    }
+                  })
+                }
+                </div>
+            </div>
+
+          )
+        })
+
+      }
+      
+     
+
+
+
+
+
+      
+      
       </Grid>
+
+      
       </Grid>
 </Drawer>
 
@@ -1118,13 +1353,18 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center'
    },
    dataElementContent:{
-     paddingLeft: '1em'
+     paddingLeft: '1em',
+     paddingBottom:'50px'
 
    },
    closeComparePanel:{
     float:'right',
     margin: '1em',
-    cursor:'pointer'
+    cursor:'pointer',
+    padding:'10px',
+    border:'1px solid #111111',
+    borderRadius:'50%',
+    marginTop: 0
   },
   actionButton:{
     marginLeft: '20px',
@@ -1141,14 +1381,15 @@ const useStyles = makeStyles(theme => ({
   comparePanelContainer:{
     maxWidth: '1200px',
     margin:'0 auto',
-    height:'80vh'
+    height:'100vh'
   },
   dataElementContainer:{
   },
   tabDashboard:{
     width: '100%',
     display:'flex',
-    justifyContent: 'flex-end'
+    flexDirection:'row-reverse',
+    justifyContent: 'space-between'
   },
   toggleFilters:{
     marginTop: '15px',
@@ -1167,6 +1408,77 @@ const useStyles = makeStyles(theme => ({
 
     '&:hover, &:focus':{
       color: '#000000'
+    }
+  },
+  heading:{
+    wordBreak:'break-all'
+  },
+  comparisonPanelTitle:{
+    color: '#303030',
+  fontSize: '30px',
+  textAlign: 'center',
+  fontFamily: 'EB Garamond !important', 
+  fontWeight: 400,
+  paddingLeft: '30px',
+  paddingRight: '30px',
+  textTransform: 'uppercase'
+  },
+  fixedTop:{
+    top: 0,
+    width: '100%',
+    zIndex: 99,
+    position: 'sticky',
+    backgroundColor: '#ffffff'
+  },
+  compareTitle:{
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  compareTitleColumn:{
+    flex: 1,
+    color: '#ffffff',
+    border: '1px solid #ffffff',
+    padding: '1em',
+    textAlign: 'center',
+    alignItems: 'center',
+    borderBottom: 0,
+    justifyContent: 'center',
+    backgroundColor: '#062133'
+  },
+  compareRow:{
+    width: '100%',
+    display: 'flex',
+    paddingTop: '1em',
+    borderBottom: '1px solid #062133',
+    flexDirection: 'row',
+    backgroundColor: '#f8f8f8',
+
+    '&:nth-child(even)': {
+      backgroundColor:'#eeeeee'
+    }
+  },
+  compareRowColumn:{
+    flex: 1,
+    margin: '1em'
+  },
+  compareCardSummary:{
+    flexDirection:'column'
+  },
+  compareCardName:{
+    fontWeight: 'bold',
+    wordBreak:'break-all'
+  },
+  compareCardText:{
+    fontWeight:300,
+    paddingBottom:'5px',
+    paddingTop: '5px'
+  },
+
+
+  [theme.breakpoints.down('md')]: {
+    actionButton:{
+      fontSize:'0.7em'
     }
   },
   
@@ -1195,7 +1507,26 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: '0em',
       paddingTop: '1em'
  
+    },
+    tabDashboard:{
+      flexDirection:'column'
+    },
+    actionButton:{
+      width: '90vw',
+      fontSize:'1em'
+    },
+    compareRow:{
+      flexDirection:'column'
+    },
+    comparisonPanelTitle:{
+      margin:0,
+      padding:'30px',
+      borderBottom:'2px solid #061233'
+    },
+    compareTitle:{
+      display: 'none'
     }
+    
   }
     
   

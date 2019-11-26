@@ -1140,7 +1140,8 @@ const useStyles = makeStyles(theme => ({
     margin: '0 auto',
     paddingTop: '30px',
     paddingLeft: '15px',
-    paddingRight: '15px'
+    paddingRight: '15px',
+    paddingBottom:'50px'
   },
   heroContainer:{
     margin: '0 auto',

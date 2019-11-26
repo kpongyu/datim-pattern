@@ -25,12 +25,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   heroContainer:{
-    backgroundImage: `url('https://www.icfcreative.com/2019/datim/images/shutterstock_516560485.jpg')`,
+    height: '90vh',
     display: 'flex',
+    position: 'relative',
     alignItems: 'flex-start',
     flexDirection: 'column',
-    position: 'relative',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    backgroundImage: 'url(https://www.icfcreative.com/2019/datim/images/GettyImages-904833344.png)'
   },
   heading:{
     width: '100%',
@@ -203,7 +204,7 @@ export default function Welcome(){
      </Grid>
      </div>
      </div>
-     <div className={classes.cardSection}>
+     {/* <div className={classes.cardSection}>
      <h2 className={classes.cardTitle}>RESOURCES</h2>
      <div className={classes.dividerCardTitle}/>
       <div className={classes.container}>
@@ -345,7 +346,7 @@ export default function Welcome(){
      </div>
 
 
-    </div>
+    </div> */}
 
      </div>
     );

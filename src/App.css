@@ -31,3 +31,7 @@ li.breadcrumb-item:last-child::after{
 .MuiCollapse-entered {
   margin-bottom: 1em;
 }
+#root {
+  position: relative;
+  min-height: 100vh;
+}

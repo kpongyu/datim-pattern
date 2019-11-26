@@ -51,7 +51,9 @@ export const initialState = {
             visitResult: 'suspected',
 
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose', 'a9FUCU6f7WU'],
+      moh:['gPKbuvvpose', 'a9FUCU6f7WU']
       },
       { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/)', 
       source: 'DATIM',
@@ -95,7 +97,9 @@ export const initialState = {
           visitResult: 'suspected',
 
         }
-    ]
+    ],
+    pdh:['gPKbuvvpose'],
+      moh:[]
       },
       { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/fs)', 
     source: 'DATIM',
@@ -139,7 +143,9 @@ export const initialState = {
         visitResult: 'suspected',
 
       }
-  ]
+  ],
+      pdh:['a9FUCU6f7WU'],
+      moh:[]
       },
       { name: 'VMMC_CIRC (N, DSD, Age/Sex/HIVStatus/ScreenResult/dfas)', 
         source: 'DATIM',
@@ -183,7 +189,9 @@ export const initialState = {
             visitResult: 'suspected',
 
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose', 'a9FUCU6f7WU'],
+      moh:['a9FUCU6f7WU']
       },
 
       { name: 'CXCA_SCRN (N, TA, Age/Sex/HIVStatus/ScreenResult/ScreenVisitType)', 
@@ -208,7 +216,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose', 'a9FUCU6f7WU'],
+      moh:[]
       },
 
 
@@ -234,7 +244,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose'],
+      moh:[]
       },
 
       { name: 'CXCA_TX (N, TA, Age/Sex/HIVStatus/TreatmentType/ScreenVisitType)', 
@@ -259,7 +271,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['a9FUCU6f7WU'],
+      moh:['a9FUCU6f7WU']
       },
 
       { name: 'EMR_SITE (N, NoApp, Service Delivery Area)', 
@@ -284,7 +298,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose', 'a9FUCU6f7WU'],
+      moh:['gPKbuvvpose']
       },
 
       { name: 'FPINT_SITE (N, NoApp, Serv Del Point)', 
@@ -309,7 +325,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose', 'a9FUCU6f7WU'],
+      moh:[]
       },
 
       { name: 'GEND_GBV (N, DSD, Age/Sex/PEP)', 
@@ -334,7 +352,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['a9FUCU6f7WU'],
+      moh:['gPKbuvvpose', 'a9FUCU6f7WU']
       },
 
       { name: 'GEND_GBV (N, TA, Age/Sex/PEP)', 
@@ -359,7 +379,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['a9FUCU6f7WU'],
+      moh:[]
       },
 
       { name: 'GEND_GBV (N, TA, Age/Sex/ViolenceType) v2', 
@@ -384,7 +406,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['a9FUCU6f7WU'],
+      moh:[]
       },
 
       { name: 'HRH_CURR (N, DSD, CadreCategory/FinancialSupport/Expenditure)', 
@@ -409,7 +433,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose'],
+      moh:['gPKbuvvpose']
       },
 
       { name: 'HTS_INDEX_FAC (N, DSD, Age Aggregated/Sex/Contacts)', 
@@ -434,7 +460,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['gPKbuvvpose', 'a9FUCU6f7WU'],
+      moh:[]
       },
 
       { name: 'HTS_RECENT (D, DSD, Age/Sex/HIVIndication)', 
@@ -459,7 +487,9 @@ export const initialState = {
             visitType: 'firstTime',
             visitResult: 'negative',
           }
-      ]
+      ],
+      pdh:['a9FUCU6f7WU'],
+      moh:[]
       },
     ],
     indicators: [
@@ -1519,6 +1549,262 @@ export const initialState = {
       {
         name:'TX_NEW',
         content:['The “confirmed diagnosis of TB” disaggregate was removed as TB_ART results have moved to quarterly reporting.']
+      }
+    ],
+    pdhDataElements:[
+      {
+        name:'PMTCT_STAT_POS(N, DSD): Known Results Positive',
+        uid:'gPKbuvvpose',
+        derived:'Yes',
+        combos:[
+          {
+            name:'10-14, Known at Entry Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'<10, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'15-19, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'25-49, Known at Entry Positive',
+            code:'jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'unknown age, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'50+, known at entry positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'unknown age, newly identified positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Known at entry positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'10-14, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'25-49, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'15-19, Known at Entry Positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'<10, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          }
+        ]
+      },
+      {
+        name:'PMTCT_STAT_POS(N, DSD, Age/Sex/KnownNewResult) TARGET: Known Results Positive',
+        uid:'a9FUCU6f7WU',
+        derived:'Yes',
+        combo:[
+          {
+            name:'10-14, Known at Entry Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'<10, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'15-19, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'25-49, Known at Entry Positive',
+            code:'jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'unknown age, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'50+, known at entry positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'unknown age, newly identified positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Known at entry positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'10-14, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'25-49, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'15-19, Known at Entry Positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'<10, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          }
+        ]
+      }
+    ],
+    mohDataElements:[
+      {
+        name:'PMTCT_STAT_POS(N, DSD): Known Results Positive',
+        uid:'gPKbuvvpose',
+        derived:'Yes',
+        combos:[
+          {
+            name:'10-14, Known at Entry Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'<10, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'15-19, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'25-49, Known at Entry Positive',
+            code:'jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'unknown age, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'50+, known at entry positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'unknown age, newly identified positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Known at entry positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'10-14, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'25-49, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'15-19, Known at Entry Positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'<10, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          }
+        ]
+      },
+      {
+        name:'PMTCT_STAT_POS(N, DSD, Age/Sex/KnownNewResult) TARGET: Known Results Positive',
+        uid:'a9FUCU6f7WU',
+        derived:'Yes',
+        combo:[
+          {
+            name:'10-14, Known at Entry Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'<10, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'15-19, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'25-49, Known at Entry Positive',
+            code:'jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'20-24, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'unknown age, Known at Entry Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'50+, known at entry positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'unknown age, newly identified positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'20-24, Known at entry positive',
+            code:'INzvF9tuFrB'
+          },
+          {
+            name:'10-14, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          },
+          {
+            name:'25-49, Newly Identified Positive',
+            code:'ixhvyKCAZWz'
+          },
+          {
+            name:'15-19, Known at Entry Positive',
+            code:'Jgc1Z16F7yq'
+          },
+          {
+            name:'<10, Newly Identified Positive',
+            code:'M2MLpBcykcG'
+          }
+        ]
       }
     ]
   };
