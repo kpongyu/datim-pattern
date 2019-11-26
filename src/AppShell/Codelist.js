@@ -357,18 +357,25 @@ const handleCompareCheckbox = name => event => {
     bottom: false,
     right: false,
   });
+  const [dropDownName, setDropDownName] = React.useState("");
 
 
 
 //set download data popup
-  const downloadData = event => {
+  const dropDownMenu = buttonName => event => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+    setDropDownName(buttonName);
+    
+   
   };
   const popOpen = Boolean(anchorEl);
   const popId = popOpen ? 'popover' : undefined;
   const popHandleClose = () => {
     setAnchorEl(null);
   };
+
+
+
 
   const [download, setDownload] = React.useState({
     HTML: true,
@@ -378,7 +385,30 @@ const handleCompareCheckbox = name => event => {
   const handleDownloadChange = name => event => {
     setDownload({ ...download, [name]: event.target.checked });
   };
+
+  const [compare, setCompare] = React.useState({
+    DATIM: true,
+    PDH: false,
+    MOH: false,
+  });
+  const handleCompareChange = name => event => {
+    setCompare({ ...compare, [name]: event.target.checked });
+  };
+
+
+
+
+
+
   const { HTML, JSON, CSV } = download;
+  const { DATIM, PDH, MOH } = compare;
+
+
+
+
+
+
+
 
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -691,8 +721,12 @@ const handleCompareCheckbox = name => event => {
 
 <Grid item xs={12} md={9} className={classes.dataElementContent}>
 <div className={classes.tabDashboard}>
-<Button variant="outlined" className={classes.actionButton} onClick={downloadData}>
-      Download Data
+<Button variant="outlined" className={classes.actionButton} onClick={dropDownMenu("download")} id="downloadButton">
+Download selected data elements
+</Button>
+<Button variant="outlined" className={classes.actionButton} onClick={dropDownMenu("compare")} id="comparisonButton">
+Compare selected data elements
+  
 </Button>
  <Popover
         id={popId}
@@ -709,7 +743,9 @@ const handleCompareCheckbox = name => event => {
         }}
         
       >
-       <FormControl component="fieldset" className={classes.formControl} className = {classes.popOver}>
+      {
+       dropDownName==="download" ? 
+        <FormControl component="fieldset" className={classes.formControl} className = {classes.popOver}>
         
         <FormGroup>
         <FormLabel component="legend" className={classes.formLegend}>Data Format</FormLabel>
@@ -728,16 +764,43 @@ const handleCompareCheckbox = name => event => {
             label="JSON"
           />
           <Button type="submit" variant="outlined" className={classes.downloadButton} onClick={()=> console.log(download, dataElements)}>
-            Download Data
+            Download DATA
           </Button>
         </FormGroup>
-      </FormControl>
+      </FormControl>: 
+       <FormControl component="fieldset" className={classes.formControl} className = {classes.popOver}>
+        
+       <FormGroup>
+       <FormLabel component="legend" className={classes.formLegend}>Data Sources</FormLabel>
+         <FormControlLabel
+           control={<Checkbox checked={DATIM} style={{color: '#D55804'}} onChange={handleCompareChange('DATIM')} value="DATIM" />}
+           label="DATIM" disabled
+         />
+         <FormControlLabel
+           control={<Checkbox checked={PDH} style={{color: '#D55804'}} onChange={handleCompareChange('PDH')} value="PDH" />}
+           label="PDH"
+         />
+         <FormControlLabel
+           control={
+             <Checkbox checked={MOH} style={{color: '#D55804'}} onChange={handleCompareChange('MOH')} value="MOH" />
+           }
+           label="MOH"
+         />
+         <Button type="submit" variant="outlined" className={classes.downloadButton} onClick={()=> console.log(download, dataElements)}>
+          COMPARE SOURCES
+         </Button>
+       </FormGroup>
+     </FormControl>
 
+      }
+        
+       
+        
 
       </Popover>
 
 
-<Button variant="outlined" className={classes.actionButton} onClick={toggleDrawer('bottom', true)}>Comparison</Button>
+
 </div>
 
  {/* data elements */}

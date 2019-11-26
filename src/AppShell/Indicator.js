@@ -88,7 +88,7 @@ export default function Indicator() {
 
 
     //get indicator and data-elements from context
-    const [{ indicators, data_Elements }, dispatch] = useStateValue();
+    const [{ indicators, data_Elements, indicatorName, currentIndicator, matchDataElements }, dispatch] = useStateValue();
 
     //set initial panel state and panel handle change function
     const [panel, setPanel] = React.useState(0);
@@ -114,9 +114,9 @@ export default function Indicator() {
 
 
     //set initial selected indicator name, indicator, and data elements
-    const [indicatorName, setIndicatorName] = React.useState('');
-    const [currentIndicator, setCurrentIndicator]= React.useState([]);
-    const [matchDataElements, setMatchDataElements]= React.useState([]);
+    // const [indicatorName, setIndicatorName] = React.useState('');
+    // const [currentIndicator, setCurrentIndicator]= React.useState([]);
+    // const [matchDataElements, setMatchDataElements]= React.useState([]);
 
     //indicator that the app has mounted
     const [init, setInit]= React.useState(false);
@@ -187,13 +187,20 @@ export default function Indicator() {
   //update the indicator details and matched data-element when select indicator
   function updateIndicator(indicator_name){
      //match indicator name
-     setIndicatorName(indicator_name);
-
+    //  setIndicatorName(indicator_name);
+    dispatch({
+      type: 'changeIndicatorName',
+      indicatorName: indicator_name
+    })
      //match indicator details
 
      indicators.map(indicator => {
        if(indicator.name===indicator_name){
-       setCurrentIndicator(indicator);
+      //  setCurrentIndicator(indicator);
+      dispatch({
+        type: 'changeCurrentIndicator',
+        currentIndicator: indicator
+      })
        }
      });
 
@@ -204,7 +211,27 @@ export default function Indicator() {
        match.push(data_Element);
      }
    });
-   setMatchDataElements(match);
+  //  setMatchDataElements(match);
+  dispatch({
+    type: 'changeMatchDataElements',
+    matchDataElements: match
+  })
+  }
+
+  function backtoDefault(){
+     //match indicator name
+    dispatch({
+      type: 'changeIndicatorName',
+      indicatorName: ''
+    })
+    dispatch({
+      type: 'changeCurrentIndicator',
+      currentIndicator: []
+    })
+    dispatch({
+      type: 'changeMatchDataElements',
+      matchDataElements: []
+    })
   }
 
 
@@ -570,12 +597,17 @@ otherwise display the indicator details and data elements related*/}
         {
         indicatorName===''? <WhatIsNew/> : 
         <div>
+
+
+      
+
+
+        
+
+        <Button onClick={backtoDefault}>&lt; KEY UPDATES</Button>
         <headings.H1>{indicatorName}</headings.H1>
-
-
-
       {/* indicator tabs */}
-        <Tabs value={panel} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs value={panel} onChange={handleChange} className={classes.tabContainer}  classes={{ indicator: classes.bigIndicator }}>
           <Tab label="INDICATOR DETAILS" {...a11yProps(0)} />
           <Tab label="DATA ELEMENTS" {...a11yProps(1)} />
         </Tabs>
@@ -1157,6 +1189,13 @@ const useStyles = makeStyles(theme => ({
   },
 
   cssFocused: {},
+  tabContainer:{
+    borderBottom: '1px solid #C1A783',
+    width: '100%'
+  },
+  bigIndicator:{
+    backgroundColor:'#C1A783'
+  },
 
   notchedOutline: {
     borderWidth: '2px',
