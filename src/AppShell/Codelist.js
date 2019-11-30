@@ -358,6 +358,20 @@ const handleCompareCheckbox = dataElement => event => {
 
 };
 
+const selectAll = event =>{
+  if(selectedDataElement.length<data_Elements.length){
+    const tempDataElement = [];
+    data_Elements.map(dataElement =>{
+      tempDataElement.push(dataElement.name);
+    })
+
+    setSelectedDataElement(tempDataElement);
+  }else{
+    setSelectedDataElement([]);
+    console.log(selectedDataElement);
+  }
+}
+
 
 
 
@@ -759,7 +773,7 @@ Compare selected data elements
 </Button>
 </div>
 
-<Button variant="outlined" className={classes.actionButton}  id="downloadButton">
+<Button variant="outlined" className={classes.actionButton} onClick={selectAll}   id="downloadButton">
 Select All
 </Button>
 
@@ -856,7 +870,7 @@ Select All
             onClick={handleCompareCheckbox(dataElement)}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox />}
-            // checked={selectedDataElement.includes(dataElement.name)}
+            checked={selectedDataElement.includes(dataElement.name) ? true : false}
             // label="I acknowledge that I should stop the click event propagation"
           />
          <Grid container alignItems="center">
