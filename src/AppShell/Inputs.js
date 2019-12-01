@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import * as color_palette from '../Styles/Colors';
+
 import * as headings from '../Styles/Text';
 import * as buttons from '../Styles/Buttons';
 import {TextField, InputAdornment} from '@material-ui/core';
-import styled from 'styled-components';
 import Breadcrumb from '../Components/Breadcrumb';
 import Select from 'react-select';
 import Grid from '@material-ui/core/Grid';
@@ -19,6 +18,10 @@ const options2 = [
   { value: 'item3', label: 'item3' },
 ];
 
+
+const selectContainer = {
+  maxWidth: '300px'
+}
 
 
  
@@ -148,41 +151,6 @@ class Inputs extends Component {
     );
   }
 }
-
-const selectContainer = {
-  maxWidth: '300px'
-}
-
-
-const ColorContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-
-const ColorCube= styled.div`
-    width: 100px;
-    height: 70px;
-    background-color: ${props => props.background};
-    color: ${props => props.color}
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 2em;
-`;
-
-const FlexGrid = styled.div`
-    display: flex;
-    justify-content: left;
-    flex-wrap: wrap;
-`;
-const FlexGridFourthCol = styled.p`
-    width: 25%;
-`;
-const ContentRow = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
 
 
 export default Inputs;

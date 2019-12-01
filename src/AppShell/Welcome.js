@@ -1,20 +1,16 @@
-import React, { Component } from 'react';
-import * as color_palette from '../Styles/Colors';
+/* eslint-disable no-unused-vars */
+import React from 'react';
 import * as headings from '../Styles/Text';
-import styled from 'styled-components';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Grid, Container} from '@material-ui/core';
+
+import { makeStyles} from '@material-ui/core/styles';
+import { Grid} from '@material-ui/core';
 
 import {useStateValue} from '../ContextSetup';
-import { mergeClasses } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import { flexbox } from '@material-ui/system';
-import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
-import {Typography,Card, CardActionArea, CardActions, CardContent, CardMedia} from '@material-ui/core';
 
-import Hero from '../../public/assets/shutterstock_516560485.jpg';
-import CardImage1 from '../../public/assets/cardImage1.png';
-import CardImage2 from '../../public/assets/cardImage2.png';
+import Button from '@material-ui/core/Button';
+
+import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
+
 
 
 
@@ -177,34 +173,44 @@ export default function Welcome(){
       <div className={classes.heroContainer}>
       <div className={classes.heroContentContainer}>
       <div className={classes.darken}></div>
-      <Grid container xs={12} md={7} maxWidth="sm" justifyContent="center" alignItems="center" className={classes.heroContent}>
+      <Grid container  alignItems="center" className={classes.heroContent}>
    
-        <headings.H1 className={classes.heading}>Welcome to OCL Metadata Browser {user == '' ? '' : ", "+ user}</headings.H1>
+      <Grid item xs={12} md={7}>
+
+        <headings.H1 className={classes.heading}>Welcome to OCL Metadata Browser {user === '' ? '' : ", "+ user}</headings.H1>
         <div className={classes.divider}/>
         <p className={classes.headPara}>
         Nisi orci lacinia voluptate molestias etiam massa odit iste! Temporibus quidem eveniet, 
         turpis veritatis quia neque? Consectetuer lorem duis imperdiet? Class aliquip, lacus lectus, 
         montes voluptatibus, sociosqu exercitationem! Ducimus? Ligula? Facilis.
         </p>
-        <Grid item xs={12} md={6} justifyContent="center" alignItems="center" className={classes.buttonContainer}>
+
+        <Grid container>
+        <Grid item xs={12} md={6}  className={classes.buttonContainer}>
         <NavLink to="/codelist" activeClassName="sidebarActive" className={classes.buttonNav}>
         <Button variant="contained" color="primary" className={classes.button} >
         CODE LISTS
       </Button>
       </NavLink>
       </Grid>
-      <Grid item xs={12} md={6} justifyContent="center" alignItems="center" className={classes.buttonContainer}>
+      <Grid item xs={12} md={6}  className={classes.buttonContainer}>
       <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
       <Button variant="contained" color="primary" className={classes.button}>
       INDICATORS
       </Button>
       </NavLink>
       </Grid>
+      </Grid>
+
+      </Grid>
+
 
      </Grid>
      </div>
      </div>
-     {/* <div className={classes.cardSection}>
+     {/* BELOW ARE THE CARDS THAT WE MIGHT USE LATER
+     
+     <div className={classes.cardSection}>
      <h2 className={classes.cardTitle}>RESOURCES</h2>
      <div className={classes.dividerCardTitle}/>
       <div className={classes.container}>

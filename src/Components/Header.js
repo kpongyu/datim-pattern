@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
-import * as color_palette from '../Styles/Colors';
+import React from 'react';
+
 import styled from 'styled-components';
 import { Grid, Container} from '@material-ui/core';
 import {useStateValue} from '../ContextSetup';
-import IconButton from '@material-ui/core/IconButton';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import MenuIcon from '@material-ui/icons/Menu';
+
+import { makeStyles} from '@material-ui/core/styles';
+
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
-import {TextField, InputAdornment} from '@material-ui/core';
-import {browserHistory} from 'react-router';
-import {Toolbar} from '@material-ui/core/';
-import AccountIcon from '@material-ui/icons/AccountCircle';
-import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
-import logo from '../../public/assets/logo.png';
-import CloseIcon from '@material-ui/icons/Close';
+import {TextField} from '@material-ui/core';
 
-const drawerWidth = 240;
+import AccountIcon from '@material-ui/icons/AccountCircle';
+
 
 
 
@@ -88,7 +82,7 @@ export default function Header() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const [{ user, password }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   const [form, setValues] = React.useState({
     username: '',
@@ -127,31 +121,31 @@ export default function Header() {
     setOpen(false);
   };
 
-  const onClick = () => this.props.history.push("/");
+  // const onClick = () => this.props.history.push("/");
  
     return (
       <HeaderContainer>
       
       <Container maxWidth="lg">
       
-      <Grid container maxWidth="sm" alignItems="center" >
+      <Grid container alignItems="center" >
       
      
           <Grid item xs={10}>
          
             <Title className={classes.title} > 
            <a href="/">
-            <img src='https://www.icfcreative.com/2019/datim/images/logo.png' className={classes.logo} />
+            <img src='https://www.icfcreative.com/2019/datim/images/logo.png' className={classes.logo} alt="DATIM logo"/>
             </a>  
             </Title>
          
          
           </Grid>
      
-          <Grid item xs={2} alignItems="flex-end">
+          <Grid item xs={2}>
           <Button type="button" className={classes.button} onClick={handleOpen}>
           <AccountIcon className={classes.accountIcon}/>
-         {user=='' ? 'Login': user}
+         {user==='' ? 'Login': user}
         </Button>
 
           <Modal

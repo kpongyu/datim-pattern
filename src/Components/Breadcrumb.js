@@ -50,8 +50,8 @@ const BreadcrumbsItem = ({ ...rest, match }) => {
 const Breadcrumbs = ({ ...rest, location : { pathname }, match }) => {
   const paths = getPaths(pathname);
   return (
-    <Breadcrumb style={BreadcrumbStyle}>
-      {paths.map(p => <Route path={p} component={BreadcrumbsItem} />)}
+    <Breadcrumb >
+      {paths.map(p => <Route path={p} component={BreadcrumbsItem} key={p}/>)}
     </Breadcrumb>
   );
 };
@@ -62,6 +62,3 @@ export default props => (
   </div>
 );
 
-const BreadcrumbStyle = {
-   
-};

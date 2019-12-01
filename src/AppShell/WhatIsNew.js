@@ -1,6 +1,6 @@
 
-import React, { Component } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import * as headings from '../Styles/Text';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -108,12 +108,12 @@ function a11yProps(index) {
 
 
 
-
+//get global variables from context
 export const WhatIsNew =() =>{
     const classes = useStyles();
-    const [{ indicators, data_Elements, indicatorName, currentIndicator, matchDataElements, newIndicators, newDisaggregations, reportFrequencyChanges,  modifyExistIndicators, modifyExistDisaggregations, retiredIndicators, retiredDisaggregations }, dispatch] = useStateValue();
+    const [{ indicators, data_Elements, newIndicators, newDisaggregations, reportFrequencyChanges,  modifyExistIndicators, modifyExistDisaggregations, retiredIndicators, retiredDisaggregations }, dispatch] = useStateValue();
 
-    //update the indicator details and matched data-element when select indicator
+//update the indicator details and matched data-element when select indicator
 const updateIndicator = indicator_name =>event =>{
   //match indicator name
  //  setIndicatorName(indicator_name);
@@ -131,6 +131,7 @@ const updateIndicator = indicator_name =>event =>{
      currentIndicator: indicator
    })
     }
+  return true;
   });
 
   //match data element of this indicator
@@ -139,6 +140,7 @@ const updateIndicator = indicator_name =>event =>{
   if((data_Element.name).includes(indicator_name)){
     match.push(data_Element);
   }
+  return true;
 });
 //  setMatchDataElements(match);
 dispatch({
@@ -183,6 +185,8 @@ dispatch({
 
          {/* NEW ADDITIONS TO MER 2.3 */}
       <TabPanel value={panel} index={0} className={classes.tabPanel}>
+
+         {/* NEW INIDCATORS */}
       <ExpansionPanel defaultExpanded className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -196,10 +200,10 @@ dispatch({
 
                 {newIndicators.map(newIndicator =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer}  key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{newIndicator.name}</Button>
                 {Object.keys(Object(newIndicator.content)).map(
-                  key => <p className={classes.itemContent}>{Object(newIndicator.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(newIndicator.content)[key]}</p>
                 )}
                 </div>
                   )
@@ -211,6 +215,7 @@ dispatch({
        </ExpansionPanel>
 
 
+        {/* NEW DISAGGREGATIONS */}
        <ExpansionPanel className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -224,10 +229,10 @@ dispatch({
 
                 {newDisaggregations.map(newDisaggregation =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer} key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{newDisaggregation.name}</Button>
                 {Object.keys(Object(newDisaggregation.content)).map(
-                  key => <p className={classes.itemContent}>{Object(newDisaggregation.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(newDisaggregation.content)[key]}</p>
                 )}
                 </div>
                   )
@@ -243,6 +248,7 @@ dispatch({
         {/* ADJUSTMENTS FROM MER 2.2 */}
         <TabPanel value={panel} index={1} className={classes.tabPanel}>
 
+        {/* CHANGES IN REPORTING FREQUENCY */}
         <ExpansionPanel defaultExpanded className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -256,10 +262,10 @@ dispatch({
 
                 {reportFrequencyChanges.map(reportFrequencyChange =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer} key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{reportFrequencyChange.name}</Button>
                 {Object.keys(Object(reportFrequencyChange.content)).map(
-                  key => <p className={classes.itemContent}>{Object(reportFrequencyChange.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(reportFrequencyChange.content)[key]}</p>
                 )}
                 </div>
                   )
@@ -270,7 +276,7 @@ dispatch({
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
-
+        {/* MODIFICATIONS TO EXISTING INDICATORS */}
        <ExpansionPanel defaultExpanded className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -284,10 +290,10 @@ dispatch({
 
                 {modifyExistIndicators.map(modifyExistIndicator =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer} key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{modifyExistIndicator.name}</Button>
                 {Object.keys(Object(modifyExistIndicator.content)).map(
-                  key => <p className={classes.itemContent}>{Object(modifyExistIndicator.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(modifyExistIndicator.content)[key]}</p>
                 )}
                 </div>
                   )
@@ -298,7 +304,7 @@ dispatch({
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
-
+        {/* MODIFICATIONS TO EXISTING DISAGGREGATIONS */}
        <ExpansionPanel defaultExpanded className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -312,10 +318,10 @@ dispatch({
 
                 {modifyExistDisaggregations.map(modifyExistDisaggregation =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer} key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{modifyExistDisaggregation.name}</Button>
                 {Object.keys(Object(modifyExistDisaggregation.content)).map(
-                  key => <p className={classes.itemContent}>{Object(modifyExistDisaggregation.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(modifyExistDisaggregation.content)[key]}</p>
                 )}
                 </div>
                   )
@@ -330,6 +336,8 @@ dispatch({
 
         {/* REMOVALS FROM MER 2.2 */}
         <TabPanel value={panel} index={2} className={classes.tabPanel}>
+
+         {/* RETIRED INDICATORS */}  
         <ExpansionPanel defaultExpanded className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -343,10 +351,10 @@ dispatch({
 
                 {retiredIndicators.map(retiredIndicator =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer} key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{retiredIndicator.name}</Button>
                 {Object.keys(Object(retiredIndicator.content)).map(
-                  key => <p className={classes.itemContent}>{Object(retiredIndicator.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(retiredIndicator.content)[key]}</p>
                 )}
                 </div>
                   )
@@ -358,7 +366,7 @@ dispatch({
        </ExpansionPanel>
 
 
-
+        {/* RETIRED DISAGGREGATIONS */}
        <ExpansionPanel defaultExpanded className={classes.expandPanel}>
        <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -372,10 +380,10 @@ dispatch({
 
                 {retiredDisaggregations.map(retiredDisaggregation =>{
                   return(
-                <div className={classes.itemContainer}>
+                <div className={classes.itemContainer} key={Math.random()}>
                 <Button onClick={updateIndicator("VMMC_CIRC")} className={classes.itemTitle}>{retiredDisaggregation.name}</Button>
                 {Object.keys(Object(retiredDisaggregation.content)).map(
-                  key => <p className={classes.itemContent}>{Object(retiredDisaggregation.content)[key]}</p>
+                  key => <p className={classes.itemContent} key={Math.random()}>{Object(retiredDisaggregation.content)[key]}</p>
                 )}
                 </div>
                   )
