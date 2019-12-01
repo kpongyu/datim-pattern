@@ -96,6 +96,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    height: '50vh'
   },
   darken:{
     position: "absolute",

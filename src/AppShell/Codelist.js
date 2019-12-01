@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect }  from 'react';
 
 import * as headings from '../Styles/Text';
 
@@ -8,7 +8,6 @@ import Breadcrumb from '../Components/Breadcrumb';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,7 +15,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
 
 import {useStateValue} from '../ContextSetup';
 import TextField from '@material-ui/core/TextField';
@@ -256,9 +254,7 @@ const useStyles = makeStyles(theme => ({
       color: '#000000'
     }
   },
-  heading:{
-    wordBreak:'break-all'
-  },
+  
   comparisonPanelTitle:{
     color: '#303030',
   fontSize: '30px',
@@ -346,6 +342,9 @@ const useStyles = makeStyles(theme => ({
    
       paddingRight: '0px'
     },
+    heading:{
+      wordBreak:'break-all'
+    },
     sidebar:{
       marginRight: 0
     },
@@ -406,21 +405,21 @@ const [dropDownName, setDropDownName] = React.useState("");
 
   //initial filter state
   const [values, setValues] = React.useState({
-    fiscal: [],
-    type: [], 
-    dataSet: [],
-    source: [],
-    frequency: []
+    fiscal: "",
+    type: "", 
+    dataSet: "",
+    source: "",
+    frequency: ""
   });
 
   //clear all filter values
   const clearValues = event => {
     setValues(()=>({
-      fiscal: [],
-      source: [],
-      type: [], 
-      dataSet: [],
-      frequency: []
+      fiscal: "",
+      source: "",
+      type: "", 
+      dataSet: "",
+      frequency: ""
     }));
 
     setDataElements(data_Elements);
@@ -433,272 +432,53 @@ const [dropDownName, setDropDownName] = React.useState("");
   }
 
 
-  //handling change filters
-  const handleChangeSource = event => {
+  //implement filtering function by set Values first
+  const handleFilterChange = event => {
+
+    event.persist();
+   
     setValues(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
 
-    const filteredDataElements = [];
-
-
-    if(!values[event.target.name]===[]){
-      
-
-      data_Elements.map(data_Element => {
-        if(
-
-          (Object.keys(values).map(function(keyName){
-       
-            if(keyName!==event.target.name){
-              return(
-                (values[keyName].length === 0 ? true :
-                  values[keyName].some( item => item === data_Element.keyName))
-              )
-            }else{
-              return false;
-            }
-
-          }))
-          &&
-          (
-          event.target.value.length === 0 ? true :
-          event.target.value.some( item => item === data_Element.source))
-
-          ){
-  
-        
-  
-  
-         
-          filteredDataElements.push(data_Element);
-        }
-
-        return true;
-  
-  
-        }
-        );
-    }
-    
-    
-    
-    setDataElements(filteredDataElements);
-
-  }
-
-  const handleChangeType = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-
-    const filteredDataElements = [];
-
-
-    if(!values[event.target.name]===[]){
-      
-
-      data_Elements.map(data_Element => {
-
-
-        if(
-          (values.fiscal.length===0 ? true :
-          values.fiscal.some( item => item === data_Element.fiscal))
-          &&
-          (values.source.length===0 ? true :
-          values.source.some( item => item === data_Element.source))
-          &&
-          (values.dataSet.length===0 ? true :
-            values.dataSet.some( item => item === data_Element.dataSet))
-          &&
-          (values.frequency.length===0 ? true :
-          values.frequency.some( item => item === data_Element.frequency))
-          &&
-          (
-          event.target.value.length===0 ? true :
-          event.target.value.some( item => item === data_Element.type))
-
-          ){
-  
-        
-  
-  
-         
-          filteredDataElements.push(data_Element);
-        }
-
-        return true;
-  
-  
-        }
-        );
-    }
-    
-    
-    
-    setDataElements(filteredDataElements);
-
-  
-  }
-
-  const handleChangeFiscal = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-
-    const filteredDataElements = [];
-
-
-    if(!values[event.target.name]===[]){
-      
-
-      data_Elements.map(data_Element => {
 
    
-        if(
-          (values.type.length===0 ? true :
-          values.type.some( item => item === data_Element.type))
-          &&
-          (values.source.length===0 ? true :
-          values.source.some( item => item === data_Element.source))
-          &&
-          (values.dataSet.length===0 ? true :
-            values.dataSet.some( item => item === data_Element.dataSet))
-          &&
-          (values.frequency.length===0 ? true :
-          values.frequency.some( item => item === data_Element.frequency))
-          &&
-          (
-            event.target.value.length===0 ? true :
-          event.target.value.some( item => item === data_Element.fiscal))
 
+
+};
+
+
+//when value has changed, call useEffect function
+useEffect(() => {
+
+  
+    const tempDataElement = [];
+  
+     data_Elements.map(data_Element => {
+        if((values.fiscal ==='' ? true : data_Element.fiscal === values.fiscal) &&
+           (values.source ===''? true : data_Element.source === values.source) &&
+           (values.type ==='' ? true: data_Element.type === values.type)&&
+           (values.dataSet ===''? true : data_Element.dataSet === values.dataSet) &&
+           (values.frequency ==='' ? true: data_Element.frequency=== values.frequency)
           ){
-  
-        
-  
-  
-       
-          filteredDataElements.push(data_Element);
-        }
+            tempDataElement.push(data_Element);
+            return true;
+          } 
+          
         return true;
-  
-        }
-        );
-    }
+      });
+
+    setDataElements(tempDataElement);
     
-    
-    
-    setDataElements(filteredDataElements);
-  
-  }
-
-  const handleChangeDataSet = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-
-    const filteredDataElements = [];
-
-
-    if(!values[event.target.name]===[]){
       
-
-      data_Elements.map(data_Element => {
-
-   
-        if(
-          (values.type.length===0 ? true :
-          values.type.some( item => item === data_Element.type))
-          &&
-          (values.source.length===0 ? true :
-          values.source.some( item => item === data_Element.source))
-          &&
-          (values.fiscal.length===0 ? true :
-            values.fiscal.some( item => item === data_Element.fiscal))
-          &&
-          (values.frequency.length===0 ? true :
-          values.frequency.some( item => item === data_Element.frequency))
-          &&
-          (
-            event.target.value.length===0 ? true :
-          event.target.value.some( item => item === data_Element.dataSet))
-
-          ){
-  
-        
+    }, [values]);
   
   
-         
-          filteredDataElements.push(data_Element);
-        }
-        return true;
+
+
+
   
-        }
-        );
-    }
-    
-    
-    
-    setDataElements(filteredDataElements);
-   
-  }
-
-  const handleChangeFrequency = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-
-    const filteredDataElements = [];
-
-
-    if(!values[event.target.name]===[]){
-      
-
-      data_Elements.map(data_Element => {
-
-   
-        if(
-          (values.type.length===0 ? true :
-          values.type.some( item => item === data_Element.type))
-          &&
-          (values.source.length===0 ? true :
-          values.source.some( item => item === data_Element.source))
-          &&
-          (values.fiscal.length===0 ? true :
-            values.fiscal.some( item => item === data_Element.fiscal))
-          &&
-          (values.dataSet.length===0 ? true :
-          values.dataSet.some( item => item === data_Element.dataSet))
-          &&
-          (
-            event.target.value.length===0 ? true :
-          event.target.value.some( item => item === data_Element.frequency))
-
-          ){
-  
-        
-  
-  
-        
-          filteredDataElements.push(data_Element);
-        }
-  
-        return true;
-        }
-        );
-    }
-    
-    
-    
-    setDataElements(filteredDataElements);
-   
-  }
-
 
 const [selectedDataElement, setSelectedDataElement]=React.useState([]);   
 //implement comparison checkbox
@@ -730,8 +510,9 @@ const selectAll = event =>{
     setSelectedDataElement(tempDataElement);
   }else{
     setSelectedDataElement([]);
-    console.log(selectedDataElement);
   }
+
+  return true;
 }
 
 
@@ -929,9 +710,9 @@ const selectAll = event =>{
 
   <InputLabel htmlFor="source">Source</InputLabel>
   <Select
-   multiple
+    native
     value={values.source}
-    onChange={handleChangeSource}
+    onChange={handleFilterChange}
     className={classes.select}
     inputProps={{
       name: 'source',
@@ -940,17 +721,12 @@ const selectAll = event =>{
         icon: classes.selectIcon
       }
     }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
+  
   >
-    <MenuItem value={'DATIM'}>DATIM</MenuItem>
-    <MenuItem value={'PDH'}>PDH</MenuItem>
-    <MenuItem value={'MOH'}>MOH</MenuItem>
+    <option value={""} />
+    <option value={'DATIM'}>DATIM</option>
+    <option value={'PDH'}>PDH</option>
+    <option value={'MOH'}>MOH</option>
   </Select>
 </FormControl>
 </Grid>
@@ -960,9 +736,9 @@ const selectAll = event =>{
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="frequency">Frequency</InputLabel>
   <Select
-   multiple
+    native
     value={values.frequency}
-    onChange={handleChangeFrequency}
+    onChange={handleFilterChange}
     className={classes.select}
     inputProps={{
       name: 'frequency',
@@ -971,17 +747,12 @@ const selectAll = event =>{
         icon: classes.selectIcon
       }
     }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
+   
   >
-    <MenuItem value={'quarterly'}>Quarterly</MenuItem>
-    <MenuItem value={'semiAnnual'}>Semi-Annual</MenuItem>
-    <MenuItem value={'annual'}>Annual</MenuItem>
+    <option value={""} />
+    <option value={'quarterly'}>quarterly</option>
+    <option value={'semiAnnual'}>semiAnnual</option>
+    <option value={'annual'}>annual</option>
   </Select>
 </FormControl>
 </Grid>
@@ -997,9 +768,9 @@ const selectAll = event =>{
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="fiscal">Fiscal Year</InputLabel>
   <Select
-    multiple
+    native
     value={values.fiscal}
-    onChange={handleChangeFiscal}
+    onChange={handleFilterChange}
     className={classes.select}
     inputProps={{
       name: 'fiscal',
@@ -1008,17 +779,12 @@ const selectAll = event =>{
         icon: classes.selectIcon
       }
     }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
+   
   >
-    <MenuItem value={'2020'}>2020</MenuItem>
-    <MenuItem value={'2019'}>2019</MenuItem>
-    <MenuItem value={'2018'}>2018</MenuItem>
+    <option value={""} />
+    <option value={'2020'}>2020</option>
+    <option value={'2019'}>2019</option>
+    <option value={'2018'}>2018</option>
   </Select>
 </FormControl>
 </Grid>
@@ -1030,9 +796,9 @@ const selectAll = event =>{
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="type">Type</InputLabel>
   <Select
-   multiple
+    native
     value={values.type}
-    onChange={handleChangeType}
+    onChange={handleFilterChange}
     className={classes.select}
     inputProps={{
       name: 'type',
@@ -1041,17 +807,12 @@ const selectAll = event =>{
         icon: classes.selectIcon
       }
     }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
+   
   >
-    <MenuItem value={'Results'}>Results</MenuItem>
-    <MenuItem value={'Target'}>Target</MenuItem>
-    <MenuItem value={'SIMS'}>SIMS</MenuItem>
+    <option value={""} />
+    <option value={'Results'}>Results</option>
+    <option value={'Target'}>Target</option>
+    <option value={'SIMS'}>SIMS</option>
   </Select>
 </FormControl>
 </Grid>
@@ -1065,9 +826,9 @@ const selectAll = event =>{
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="dataSet">Data Set</InputLabel>
   <Select
-   multiple
+   native
     value={values.dataSet}
-    onChange={handleChangeDataSet}
+    onChange={handleFilterChange}
     className={classes.select}
     inputProps={{
       name: 'dataSet',
@@ -1076,16 +837,11 @@ const selectAll = event =>{
         icon: classes.selectIcon
       }
     }}
-    renderValue={selected => (
-            <div className={classes.chips}>
-              {selected.map(value => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-    )}
+  
   >
-    <MenuItem value={'facility'}>Facility Based Code List</MenuItem>
-    <MenuItem value={'community'}>Community Based Code List</MenuItem>
+    <option value={""} />
+    <option value={'facility'}>Facility Based Code List</option>
+    <option value={'community'}>Community Based Code List</option>
   </Select>
 </FormControl>
 </Grid>
@@ -1234,23 +990,23 @@ Select All
             checked={selectedDataElement.includes(dataElement.name) ? true : false}
             // label="I acknowledge that I should stop the click event propagation"
           />
-         <Grid container alignItems="center">
+         <Grid container alignItems="center" justify="space-between">
 
 
         
 
-
-          <Grid item  xs={12} md={10}>
+          <Grid item  xs={12} md={9} >
           <Typography className={classes.heading}> 
            <strong>{dataElement.name}</strong>: {dataElement.category}
            </Typography>
           </Grid>
 
           <Grid item xs={12} md={2}>
-          <Typography className={classes.heading}> 
+          <Typography> 
            <strong>Version</strong>: {dataElement.version}
           </Typography></Grid>
-          </Grid>
+         
+      </Grid>
          
         </ExpansionPanelSummary>
 
@@ -1309,7 +1065,7 @@ Select All
      </Table>
 
       {/* open the comparison panel */}
-      <Button variant="outlined" color="primary" className={classes.historyButton}>Previous Versions</Button>
+      <Button variant="outlined" color="primary" className={classes.historyButton}>See Previous Versions</Button>
        </div>
       )} />
      

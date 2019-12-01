@@ -35,3 +35,7 @@ li.breadcrumb-item:last-child::after{
   position: relative;
   min-height: 100vh;
 }
+
+.MuiPopover-paper {
+  margin-top: 1em;
+}
