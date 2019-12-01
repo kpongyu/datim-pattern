@@ -190,7 +190,7 @@ export default function Welcome(){
         <Grid item xs={12} md={6}  className={classes.buttonContainer}>
         <NavLink to="/codelist" activeClassName="sidebarActive" className={classes.buttonNav}>
         <Button variant="contained" color="primary" className={classes.button} >
-        CODE LISTS
+        DATA ELEMENTS
       </Button>
       </NavLink>
       </Grid>

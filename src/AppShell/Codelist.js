@@ -27,7 +27,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-import { Route, BrowserRouter as  NavLink } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Popover from '@material-ui/core/Popover';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -36,6 +36,44 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Drawer from '@material-ui/core/Drawer';
 import CloseIcon from '@material-ui/icons/Close';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
+
+
+//tab panel function
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      <Box p={3}>{children}</Box>
+    </Typography>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -133,7 +171,8 @@ const useStyles = makeStyles(theme => ({
     borderBottom: '1px solid #C1A783'
   },
   expansionPanelDetails:{
-    paddingTop: '30px'
+    paddingTop: '30px',
+    flexDirection:'column'
   },
   comboTable:{
     boxShadow: 'none',
@@ -323,7 +362,21 @@ const useStyles = makeStyles(theme => ({
       fontSize:'0.7em'
     }
   },
-  
+  filter:{
+    marginBottom: '1em'
+  },
+  formulaButton:{
+    marginTop: '1em',
+    backgroundColor:'#eeeeee',
+    border:0
+  },
+  tabContainer:{
+    borderBottom: '1px solid #C1A783',
+    width: '100%'
+  },
+  bigIndicator:{
+    backgroundColor:'#C1A783'
+  },
   [theme.breakpoints.down('sm')]: {
     // styles
     filterContainer: {
@@ -382,6 +435,8 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function Codelist() {
+
+
 
   const classes = useStyles();
 
@@ -592,6 +647,11 @@ const selectAll = event =>{
   };
 
 
+//set initial panel state and panel handle change function
+const [panel, setPanel] = React.useState(0);
+const handleChange = (event, newPanel) => {
+  setPanel(newPanel);
+};
 
 
 
@@ -609,7 +669,7 @@ const selectAll = event =>{
      {/* hero section */}
      <Grid container alignItems="center" >
      <Grid item xs={12} md={7} >
-      <headings.H1>Code lists</headings.H1>
+      <headings.H1>Data Elements</headings.H1>
       </Grid>
 
 
@@ -725,16 +785,44 @@ const selectAll = event =>{
   >
     <option value={""} />
     <option value={'DATIM'}>DATIM</option>
-    <option value={'PDH'}>PDH</option>
-    <option value={'MOH'}>MOH</option>
+    <option value={'PDH'} disabled>PDH</option>
+    <option value={'MOH'} disabled>MOH</option>
   </Select>
 </FormControl>
 </Grid>
 
+
+{/* data set filter */}
+<Grid item xs={12} className={classes.filter}>
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="dataSet">Data Set</InputLabel>
+  <Select
+   native
+    value={values.dataSet}
+    onChange={handleFilterChange}
+    className={classes.select}
+    inputProps={{
+      name: 'dataSet',
+      id: 'dataSet',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+  
+  >
+    <option value={""} />
+    <option value={'facility'}>Facility Based Code List</option>
+    <option value={'community'}>Community Based Code List</option>
+  </Select>
+</FormControl>
+</Grid>
+
+
+
 {/* frequency filter */}
 <Grid item xs={12} className={classes.filter}  >
 <FormControl className={classes.formControl}>
-  <InputLabel htmlFor="frequency">Frequency</InputLabel>
+  <InputLabel htmlFor="frequency">Reporting Frequency</InputLabel>
   <Select
     native
     value={values.frequency}
@@ -750,9 +838,9 @@ const selectAll = event =>{
    
   >
     <option value={""} />
-    <option value={'quarterly'}>quarterly</option>
-    <option value={'semiAnnual'}>semiAnnual</option>
-    <option value={'annual'}>annual</option>
+    <option value={'quarterly'}>Quarterly</option>
+    <option value={'semiAnnual'}>Semi-Annual</option>
+    <option value={'annual'}>Annual</option>
   </Select>
 </FormControl>
 </Grid>
@@ -821,30 +909,7 @@ const selectAll = event =>{
 
 
 
-{/* data set filter */}
-<Grid item xs={12} className={advanced ? classes.filter : classes.hide}>
-<FormControl className={classes.formControl}>
-  <InputLabel htmlFor="dataSet">Data Set</InputLabel>
-  <Select
-   native
-    value={values.dataSet}
-    onChange={handleFilterChange}
-    className={classes.select}
-    inputProps={{
-      name: 'dataSet',
-      id: 'dataSet',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-  
-  >
-    <option value={""} />
-    <option value={'facility'}>Facility Based Code List</option>
-    <option value={'community'}>Community Based Code List</option>
-  </Select>
-</FormControl>
-</Grid>
+
 
 
 
@@ -1001,9 +1066,9 @@ Select All
            </Typography>
           </Grid>
 
-          <Grid item xs={12} md={2}>
+          <Grid item xs={12} md={3}>
           <Typography> 
-           <strong>Version</strong>: {dataElement.version}
+          <strong>Data Element UID</strong>: {dataElement.uid}
           </Typography></Grid>
          
       </Grid>
@@ -1019,15 +1084,13 @@ Select All
         <Grid container>
         <Grid item  xs={12} className={classes.expansionPanelLeft}>
           <Typography>
-          <strong>Indicator Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
-          {dataElement.indicatorCode}
-          </NavLink>
-
-          <br/>
+         
           <strong>Description</strong>: {dataElement.description}<br/>
-      
-          <strong>Source</strong>: {dataElement.source}<br/>
-          <strong>Data Element UID</strong>: {dataElement.uid}
+          {/* <strong>Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
+          {dataElement.indicatorCode}
+          </NavLink> */}
+        
+          
         
           </Typography>
         </Grid>
@@ -1064,8 +1127,82 @@ Select All
      </TableBody>
      </Table>
 
-      {/* open the comparison panel */}
-      <Button variant="outlined" color="primary" className={classes.historyButton}>See Previous Versions</Button>
+      {/* open the formula panel */}
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          className={classes.formulaButton}
+        >
+          <Typography className={classes.heading}>Formula</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails  className={classes.expansionPanelDetails}>
+
+          <div className={classes.tableContainer} >
+       
+          {/* indicator tabs */}
+        <Tabs value={panel} onChange={handleChange} className={classes.tabContainer}  classes={{ indicator: classes.bigIndicator }}>
+          <Tab label="HUMAN READABLE FORMAT" {...a11yProps(0)} />
+          <Tab label="UID FORMAT" {...a11yProps(1)} />
+        </Tabs>
+
+        <TabPanel value={panel} index={0} className={classes.tabPanel}>
+        <Table className={classes.table} aria-label="simple table">
+        <TableBody>
+        <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+          Numerator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+        {dataElement.readableNumerator}
+           </TableCell> 
+           </TableRow>
+
+           <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+           Denominator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+           {dataElement.readableDenominator}
+           </TableCell> 
+           </TableRow>
+
+
+          </TableBody>
+        </Table>
+        </TabPanel>
+
+        <TabPanel value={panel} index={1} className={classes.tabPanel}>
+        <Table className={classes.table} aria-label="simple table">
+        <TableBody>
+        <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+          Numerator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+        {dataElement.uidNumerator}
+           </TableCell> 
+           </TableRow>
+
+           <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+           Denominator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+           {dataElement.uidDenominator}
+           </TableCell> 
+           </TableRow>
+
+
+          </TableBody>
+        </Table>
+        </TabPanel>
+
+        </div>
+      
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
        </div>
       )} />
      

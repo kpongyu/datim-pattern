@@ -22,7 +22,10 @@ export const initialState = {
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'XWK6yAwhol8',
         version: '2020-v2',
-        
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -68,7 +71,10 @@ export const initialState = {
       shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
       uid: 'XWK6yAwhol8', 
       version: '2020-v2',
-      
+      readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+      readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+      uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+      uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )', 
       indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
       combos:[
         { 
@@ -114,7 +120,10 @@ export const initialState = {
     shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
     uid: 'XWK6yAwhol8', 
     version: '2020-v1',
-    
+    readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+    readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+    uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+    uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
     indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
     combos:[
       { 
@@ -160,7 +169,10 @@ export const initialState = {
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'XWK6yAwhol8', 
         version: '2020-v1',
-        
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         combos:[
           { 
@@ -205,6 +217,10 @@ export const initialState = {
         description: 'Voluptatum nisl nobis! Feugiat et facilisi vehicula quos. Doloribus exercitationem cursus diamlorem, suscipit cupidatat egestas, architecto', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'D8gXql7mhrZ', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2019-v1',
         combos:[
@@ -233,6 +249,10 @@ export const initialState = {
         description: 'Voluptatibus velit per, taciti senectus incidunt. Tellus donec commodi nunc, donec convallis', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'Z6qsl1ezjTS', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2018-v2',
         combos:[
@@ -260,6 +280,10 @@ export const initialState = {
         description: 'Nec cubilia maiores, porro accumsan voluptatem proident reprehenderit quisquam! Tellus est rutrum, justo', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'mFvVvrRvZgo', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2019-v1',
         combos:[
@@ -287,6 +311,10 @@ export const initialState = {
         description: 'Feugiat inventore penatibus odio proin, facere sit culpa mi, mauris! Sem, morbi, optio vel cras fugit nesciunt tellus', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'Duf3Ks5vfNL', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2020-v1',
         combos:[
@@ -314,6 +342,10 @@ export const initialState = {
         description: 'Ipsam dis adipiscing mauris, eleifend laboris distinctio natoque nostrum incididunt? Natoque, fusce', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'GT81rJIJrrd', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2020-v1',
         combos:[
@@ -341,6 +373,10 @@ export const initialState = {
         description: 'Morbi minima blandit maecenas, pharetra corporis excepturi vel lacinia a. Class laborum, pretium ad', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'OZ9CHCMYJMS', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2020-v1',
         combos:[
@@ -368,6 +404,10 @@ export const initialState = {
         description: 'Fugiat sed tempora in itaque curae cursus ad, deleniti voluptatibus dictum sagittis quod corporis', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'pKH3YTAShEe', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2018-v3',
         combos:[
@@ -395,6 +435,10 @@ export const initialState = {
         description: 'Semper repudiandae expedita et, hendrerit. Repellendus hendrerit! Maiores sagittis, condimentum mus mus quod', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'yoxGr2OW5vT', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2018-v2',
         combos:[
@@ -422,6 +466,10 @@ export const initialState = {
         description: 'Officia quidem. Mollitia illum dolores pede sed ante tellus urna leo magnis deserunt molestiae', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'fpW7iq7zFNN', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2019-v2',
         combos:[
@@ -449,6 +497,10 @@ export const initialState = {
         description: 'Mollit similique sed sem enim, quaerat modi litora! Impedit volutpat! Consequatur lectus nonummy, orci quisquam', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'wJSHzXjl3ev', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2019-v1',
         combos:[
@@ -476,6 +528,10 @@ export const initialState = {
         description: 'Facere eveniet, labore convallis anim numquam, adipiscing aliquip, odit labore quae incidunt eiusmod libero', 
         shortName: 'CXCA_SCRN (N, DSD, Age/Sex/HIV/Scrn/Visit)', code: 'CXCA_SCRN_N_DSD_Age_Sex_HIV_Scrn_Visit',
         uid: 'fSXIwl6nGZV', 
+        readableNumerator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised',
+        readableDenominator:'VMMC_CIRC (N, DSD, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, DSD, TechFollowUp>14days/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp/Sex): Voluntary Circumcised + VMMC_CIRC (N, TA, TechFollowUp>14days/Sex): Voluntary Circumcised',
+        uidNumerator:'( #{cObJTp3DWdY} + #{oIOtyrMpzGE} )',
+        uidDenominator:'( #{cObJTp3DWdY} + #{tUWykiXBnjC} + #{oIOtyrMpzGE} + #{ZaVDy67viEs} )',
         indicatorChanges: 'New Indicator', reportFrequency: 'Semi-Annually', reportingLevel: 'Facility',
         version: '2018-v2',
         combos:[
@@ -497,8 +553,9 @@ export const initialState = {
         name: 'VMMC_CIRC',
         frequency: 'Quarterly',
         level: 'Facility',
-        target: 'target1',
+        type:'Target',
         group: 'prevention',
+        fiscal: '2020',
 
 
         changes: [
@@ -584,8 +641,9 @@ export const initialState = {
         name: 'TX_NEW',
         frequency: 'Quarterly',
         level: 'Facility',
-        target: 'target1',
+        type:'Results',
         group: 'prevention',
+        fiscal: '2020',
 
         changes: [
           'Age/sex disaggregates updated.',
@@ -660,8 +718,9 @@ export const initialState = {
         name: 'PMTCT_STAT (including PMTCT_STAT_POS)',
         frequency: 'Quarterly',
         level: 'Facility',
-        target: 'target2',
+        type:'Target',
         group: 'testing',
+        fiscal: '2019',
 
 
         changes: [
@@ -751,8 +810,9 @@ export const initialState = {
         name: 'HTS_SELF',
         frequency: 'Quarterly',
         level: 'Community',
-        target: 'target1',
+        type:'Results',
         group: 'treatment',
+        fiscal: '2020',
 
         changes: [
           'Age disaggregations updated.',
@@ -834,8 +894,9 @@ export const initialState = {
         name: 'HTS_TST',
         frequency: 'Quarterly',
         level: 'Facility',
-        target: 'target1',
+        type:'Target',
         group: 'viral',
+        fiscal: '2020',
 
         changes: [
           'Age disaggregations updated.',
@@ -917,8 +978,9 @@ export const initialState = {
         name: 'OVC_HIVSTAT',
         frequency: 'Annually',
         level: 'Facility',
-        target: 'target3',
+        type:'Results',
         group: 'health-system',
+        fiscal: '2019',
 
 
         changes: [
@@ -1001,8 +1063,9 @@ export const initialState = {
         name: 'PMTCT_EID',
         frequency: 'Annually',
         level: 'Community',
-        target: 'target2',
+        type:'Target',
         group: 'host-country',
+        fiscal: '2018',
 
 
         changes: [
@@ -1085,8 +1148,9 @@ export const initialState = {
         name: 'PMTCT_FO',
         frequency: 'Monthly',
         level: 'Facility',
-        target: 'target1',
+        type:'Results',
         group: 'health-system',
+        fiscal: 2019,
 
 
         changes: [
@@ -1169,8 +1233,9 @@ export const initialState = {
         name: 'PMTCT_HEI_POS',
         frequency: 'Semi-Annually',
         level: 'Community',
-        target: 'target3',
+        type:'Target',
         group: 'testing',
+        fiscal: '2020',
 
 
         changes: [
@@ -1253,8 +1318,9 @@ export const initialState = {
         name: 'PMTCT_STAT',
         frequency: 'Semi-Annually',
         level: 'Facility',
-        target: 'target2',
+        type:'Results',
         group: 'prevention',
+        fiscal: 2018,
 
 
         changes: [
@@ -1337,9 +1403,9 @@ export const initialState = {
         name: 'TB_STAT',
         frequency: 'Quarterly',
         level: 'Facility',
-        target: 'target3',
+        type:'Target',
         group: 'treatment',
-
+        fiscal: 2019,
 
 
         changes: [

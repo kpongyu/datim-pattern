@@ -69,6 +69,41 @@ function a11yProps(index) {
   };
 }
 
+//formular panel function
+function FormularPanel(props) {
+  event.stopPropagation();
+  event.preventDefault();
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`formular-tabpanel-${index}`}
+      aria-labelledby={`formular-tab-${index}`}
+      {...other}
+    >
+      <Box p={3}>{children}</Box>
+    </Typography>
+  );
+}
+
+FormularPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function formularProps(index) {
+  return {
+    id: `formular-tab-${index}`,
+    'aria-controls': `formular-tabpanel-${index}`,
+  };
+}
+
+
+
 const ExpandTitle = styled.p`
     margin:0;
     padding:0;
@@ -137,6 +172,7 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '20px',
     paddingRight: '20px',
     minHeight: '50px',
+    marginBottom:'1em'
   },
   searchForm:{
     display: 'flex',
@@ -276,6 +312,11 @@ const useStyles = makeStyles(theme => ({
      paddingBottom: '1em',
      cursor: 'pointer'
    },
+   indicatorListItemActive:{
+    paddingBottom: '1em',
+    cursor: 'pointer',
+    fontWeight:'bold'
+  },
    button:{
     backgroundColor: '#C1A783',
     color: '#000000',
@@ -329,6 +370,11 @@ const useStyles = makeStyles(theme => ({
   cardList:{
     fontWeight: 300
   },
+  formulaButton:{
+    marginTop: '1em',
+    backgroundColor:'#eeeeee',
+    border:0
+  },
   [theme.breakpoints.down('sm')]: {
     // styles
     filterContainer: {
@@ -370,8 +416,8 @@ export default function Indicator() {
     //initial filter state
     const [values, setValues] = React.useState({
       frequency: "",
-      level: "", 
-      target: ""
+      fiscal: "", 
+      type: ""
     });
 
 
@@ -382,6 +428,13 @@ export default function Indicator() {
     const [panel, setPanel] = React.useState(0);
     const handleChange = (event, newPanel) => {
       setPanel(newPanel);
+    };
+
+    const [formularPanel, setFormularPanel] = React.useState(0);
+    const handleFormularChange = (event, newFormularPanel) => {
+      event.stopPropagation();
+      event.preventDefault();
+      setFormularPanel(newFormularPanel);
     };
 
    
@@ -419,25 +472,25 @@ export default function Indicator() {
     //get indicator from context, get the filtering elements from the indicator, and divide the indicator based on grouping
 
     indicators.map(indicator => {
-      allIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+      allIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
 
       if(indicator.group === "prevention"){
-        preventionIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+        preventionIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
       }
       if(indicator.group === "testing"){
-        testingIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+        testingIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
       }
       if(indicator.group === "treatment"){
-        treatmentIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+        treatmentIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
       }
       if(indicator.group === "viral"){
-        viralIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+        viralIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
       }
       if(indicator.group === "health-system"){
-        healthSystemIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+        healthSystemIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
       }
       if(indicator.group === "host-country"){
-        hostCountryIndicatorCounter.push([indicator.name, indicator.frequency, indicator.level, indicator.target, indicator.group]);
+        hostCountryIndicatorCounter.push([indicator.name, indicator.frequency, indicator.fiscal, indicator.type, indicator.group]);
       }
       return true;
     });
@@ -539,10 +592,12 @@ export default function Indicator() {
     const tempHostCountryIndicator = [];
 
 
+
+
     allIndicators.map(indicator => {
       if((values.frequency ==='' ? true : indicator[1] === values.frequency) &&
-         (values.level ===''? true : indicator[2] === values.level) &&
-         (values.target ==='' ? true: indicator[3] === values.target)
+         (values.fiscal ===''? true : indicator[2] === values.fiscal) &&
+         (values.type ==='' ? true: indicator[3] === values.type)
         ){
 
             if(indicator[4]==='prevention'){
@@ -591,12 +646,72 @@ return (
 {/* sidebar */}
 <Grid item xs={12} md={3}>
   <Paper className={classes.sidebar}>
-       <h4 className={classes.sidebarTitle}>INDICATOR NAVIGATION</h4>
+       <h4 className={classes.sidebarTitle}>INDICATOR FILTERS</h4>
 
 
 
 {/* filters */}
 <form className={classes.filterContainer} autoComplete="off">
+
+
+
+
+
+
+
+{/* fiscal filter */}
+<Grid item xs={12} className={classes.filter} >
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="fiscal">Fiscal Year</InputLabel>
+<Select
+native
+value={values.fiscal}
+onChange={handleFilterChange}
+className={classes.select}
+inputProps={{
+ name: 'fiscal',
+ id: 'fiscal',
+ classes: {
+   icon: classes.selectIcon
+ }
+}}
+
+>
+<option value={""} />
+<option value={'2020'}>2020</option>
+<option value={'2019'}>2019</option>
+<option value={'2018'}>2018</option>
+</Select>
+</FormControl>
+</Grid>
+
+
+
+{/* type filter */}
+<Grid item xs={12} className={classes.filter} >
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="type">Type</InputLabel>
+<Select
+native
+value={values.type}
+onChange={handleFilterChange}
+className={classes.select}
+inputProps={{
+ name: 'type',
+ id: 'type',
+ classes: {
+   icon: classes.selectIcon
+ }
+}}
+
+>
+<option value={""} />
+<option value={'Target'}>Targets</option>
+<option value={'Results'}>Results</option>
+</Select>
+</FormControl>
+</Grid>
+
 
 
 {/* frequency filter */}
@@ -620,62 +735,6 @@ inputProps={{
 <option value={'Quarterly'}>Quarterly</option>
 <option value={'Semi-Annually'}>Semi-Annually</option>
 <option value={'Annually'}>Annually</option>
-</Select>
-</FormControl>
-</Grid>
-
-
-
-
-{/* level filter */}
-<Grid item xs={12} className={classes.filter} >
-<FormControl className={classes.formControl}>
-<InputLabel htmlFor="level">Reporting Level</InputLabel>
-<Select
-native
-value={values.level}
-onChange={handleFilterChange}
-className={classes.select}
-inputProps={{
- name: 'level',
- id: 'level',
- classes: {
-   icon: classes.selectIcon
- }
-}}
-
->
-<option value={""} />
-<option value={'Facility'}>Facility</option>
-<option value={'Community'}>Community</option>
-</Select>
-</FormControl>
-</Grid>
-
-
-
-{/* target filter */}
-<Grid item xs={12} className={classes.filter} >
-<FormControl className={classes.formControl}>
-<InputLabel htmlFor="target">Target</InputLabel>
-<Select
-native
-value={values.target}
-onChange={handleFilterChange}
-className={classes.select}
-inputProps={{
- name: 'target',
- id: 'target',
- classes: {
-   icon: classes.selectIcon
- }
-}}
-
->
-<option value={""} />
-<option value={'target1'}>Target1</option>
-<option value={'target2'}>Target2</option>
-<option value={'target3'}>Target3</option>
 </Select>
 </FormControl>
 </Grid>
@@ -704,7 +763,7 @@ inputProps={{
               {
                 preventionIndicator.map(indicator =>{
                   return(
-                    <div onClick={() => updateIndicator(indicator[0])} className={classes.indicatorListItem} key={Math.random()}>
+                    <div onClick={() => updateIndicator(indicator[0])} className={currentIndicator.name===indicator[0] ? classes.indicatorListItemActive : classes.indicatorListItem} key={Math.random()}>
                     {indicator[0]}
                     </div>
                   )
@@ -885,6 +944,7 @@ otherwise display the indicator details and data elements related*/}
 
 
      {/* Indicator changes */}
+
         <ExpansionPanel
              defaultExpanded={true}
         >
@@ -929,61 +989,26 @@ otherwise display the indicator details and data elements related*/}
                 <ExpandTitle>Description</ExpandTitle>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
+                <div>
                 <p className={classes.childContent}>
                {currentIndicator.description}
                 </p>
-       </ExpansionPanelDetails>
-       </ExpansionPanel>
-
-
-      {/* Indicator reporting level */}
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-               
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>Reporting level</ExpandTitle>
-                <ExpandSubTitle> {currentIndicator.level}</ExpandSubTitle>
-        </ExpansionPanelSummary>
-        </ExpansionPanel>
-
-
-        <ExpansionPanel>
-       <ExpansionPanelSummary
-               
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>Reporting frequency</ExpandTitle>
-                <ExpandSubTitle>{currentIndicator.frequency}</ExpandSubTitle>
-        </ExpansionPanelSummary>
-        </ExpansionPanel>
-
-
-
-   {/* Indicator calculate */}
-        <ExpansionPanel
-             defaultExpanded={true}
-        >
- 
-       <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-               
-              >
-                <ExpandTitle>How to calculate annual total</ExpandTitle>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <p className={classes.childContent}>
-               {currentIndicator.howtoCalculate}
+                <p>
+                  <strong>Reporting level</strong>: {currentIndicator.level} <br/>
+                  <strong>Reporting frequency</strong>: {currentIndicator.frequency} <br/>
+                  <strong>How to calculate annual total</strong>:  {currentIndicator.howtoCalculate} <br/>
                 </p>
+                </div>
        </ExpansionPanelDetails>
        </ExpansionPanel>
 
+
+     
+
+
+      
+
+  
 
 
    {/* Indicator numerator */}
@@ -1204,18 +1229,18 @@ otherwise display the indicator details and data elements related*/}
           className={classes.expansionPanelSummary}
 
         >
-         <Grid container alignItems="center">
+         <Grid container alignItems="center" justify="space-between">
        
-          <Grid item  xs={11} md={10}>
+          <Grid item  xs={11} md={9}>
          
           <Typography className={classes.heading}> 
            <strong>{dataElement.name}</strong>: {dataElement.category}
            </Typography>
           </Grid>
 
-          <Grid item xs={12} md={2}>
+          <Grid item xs={12} md={3}>
           <Typography className={classes.heading}> 
-          <strong>Version</strong>: {dataElement.version}
+          <strong>Data Element UID</strong>: {dataElement.uid}
           </Typography></Grid>
           </Grid>
          
@@ -1230,16 +1255,13 @@ otherwise display the indicator details and data elements related*/}
         <Grid container>
         <Grid item  xs={12} className={classes.expansionPanelLeft}>
           <Typography>
-          <strong>Indicator Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
-          {dataElement.indicatorCode}
-          </NavLink>
 
-          <br/>
           <strong>Description</strong>: {dataElement.description}<br/>
-          {/* <strong>Short Name</strong>: {dataElement.shortName}<br/>
-          <strong>Code</strong>: {dataElement.code}<br/> */}
+          {/* <strong>Code</strong>: <NavLink to="/indicator" activeClassName="sidebarActive" className={classes.buttonNav}>
+          {dataElement.indicatorCode}
+          </NavLink> */}
           <strong>Source</strong>: {dataElement.source}<br/>
-          <strong>Data Element UID</strong>: {dataElement.uid}
+        
         
 
           </Typography>
@@ -1274,44 +1296,85 @@ otherwise display the indicator details and data elements related*/}
         </Table>
 
 
-         {/* open the comparison panel */}
-          <Button variant="outlined" color="primary" className={classes.historyButton}>Previous Versions</Button>
-
-
-       
-        {/* material table that might be used later
+         {/* open the formula panel */}
         
-        <Route render={({ history}) => (
-           <div className={classes.tableContainer}>
-    <MaterialTable
-        title="Disaggregations"
-        columns={[
-          { title: 'Name', field: 'name', defaultFilter: '',  filtering: false },
-          { title: 'UID', field: 'uid',  filtering: false  },
-          { title: 'Code', field: 'code',  filtering: false },
-          { title: 'Age Group', field: 'ageGroup',  
-          lookup: { '15-19': '15-19', '20-24': '20-24', "25-29": '25-29', '30-34': '30-34', '35-39':'35-39', '40-44':'40-44', "45-49":'45-49', "50+":'50+', "unknown": "Unknown Age" }},
-          { title: 'Visit Type', field: 'visitType', 
-          lookup: { 'firstTime': 'First Time', 'followUp': 'Follow Up', "rescreened": 'Rescreened'}
-          },
-          { title: 'Visit Result', field: 'visitResult',
-          lookup: { 'positive': 'Positive', 'negative': 'Negative', "suspected": 'Suspected'}
-          },
-        ]}
-        data={dataElement.combos}        
-        options={{
-          filtering: true,
-          cellStyle: {
-            maxWidth: '200px'
-          }
-        }}
-     
+         <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          className={classes.formulaButton}
+        >
+          <Typography className={classes.heading}>Formula</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails  className={classes.expansionPanelDetails}>
+
+          <div className={classes.tableContainer} >
        
-        onRowClick={()=>{history.push('/indicator')}}
-      /> */
+          {/* indicator tabs */}
+        <Tabs value={formularPanel} onChange={handleFormularChange} className={classes.tabContainer}  classes={{ indicator: classes.bigIndicator }}>
+          <Tab label="HUMAN READABLE FORMAT" {...formularProps(0)} />
+          <Tab label="UID FORMAT" {...formularProps(1)} />
+        </Tabs>
+
+        <FormularPanel value={formularPanel} index={0} className={classes.tabPanel}>
+        <Table className={classes.table} aria-label="simple table">
+        <TableBody>
+        <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+          Numerator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+        {dataElement.readableNumerator}
+           </TableCell> 
+           </TableRow>
+
+           <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+           Denominator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+           {dataElement.readableDenominator}
+           </TableCell> 
+           </TableRow>
+
+
+          </TableBody>
+        </Table>
+        </FormularPanel>
+
+        <FormularPanel value={formularPanel} index={1} className={classes.tabPanel}>
+        <Table className={classes.table} aria-label="simple table">
+        <TableBody>
+        <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+          Numerator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+        {dataElement.uidNumerator}
+           </TableCell> 
+           </TableRow>
+
+           <TableRow key={Math.random()}>
+           <TableCell component="th" scope="row">
+           Denominator
+           </TableCell> 
+           <TableCell component="th" scope="row">
+           {dataElement.uidDenominator}
+           </TableCell> 
+           </TableRow>
+
+
+          </TableBody>
+        </Table>
+        </FormularPanel>
+
+        </div>
       
-      
-      }
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+       
+        
       
      
      

@@ -39,3 +39,7 @@ li.breadcrumb-item:last-child::after{
 .MuiPopover-paper {
   margin-top: 1em;
 }
+
+li{
+  font-weight: 300;
+}
