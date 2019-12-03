@@ -821,7 +821,7 @@ const handleChange = (event, newPanel) => {
 
 
 {/* type filter */}
-<Grid item xs={12}  >
+<Grid item xs={12} className={classes.filter}  >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="type">Type</InputLabel>
   <Select
