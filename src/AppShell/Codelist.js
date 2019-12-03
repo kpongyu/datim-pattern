@@ -792,67 +792,8 @@ const handleChange = (event, newPanel) => {
 </Grid>
 
 
-{/* data set filter */}
-<Grid item xs={12} className={classes.filter}>
-<FormControl className={classes.formControl}>
-  <InputLabel htmlFor="dataSet">Data Set</InputLabel>
-  <Select
-   native
-    value={values.dataSet}
-    onChange={handleFilterChange}
-    className={classes.select}
-    inputProps={{
-      name: 'dataSet',
-      id: 'dataSet',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-  
-  >
-    <option value={""} />
-    <option value={'facility'}>Facility Based Code List</option>
-    <option value={'community'}>Community Based Code List</option>
-  </Select>
-</FormControl>
-</Grid>
-
-
-
-{/* frequency filter */}
-<Grid item xs={12} className={classes.filter}  >
-<FormControl className={classes.formControl}>
-  <InputLabel htmlFor="frequency">Reporting Frequency</InputLabel>
-  <Select
-    native
-    value={values.frequency}
-    onChange={handleFilterChange}
-    className={classes.select}
-    inputProps={{
-      name: 'frequency',
-      id: 'frequency',
-      classes: {
-        icon: classes.selectIcon
-      }
-    }}
-   
-  >
-    <option value={""} />
-    <option value={'quarterly'}>Quarterly</option>
-    <option value={'semiAnnual'}>Semi-Annual</option>
-    <option value={'annual'}>Annual</option>
-  </Select>
-</FormControl>
-</Grid>
-
-
-
-
-
-
-
 {/* fiscal year filter */}
-     <Grid item xs={12} className={classes.filter} >
+<Grid item xs={12} className={classes.filter} >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="fiscal">Fiscal Year</InputLabel>
   <Select
@@ -880,7 +821,7 @@ const handleChange = (event, newPanel) => {
 
 
 {/* type filter */}
-<Grid item xs={12} className={advanced ? classes.filter : classes.hide} >
+<Grid item xs={12}  >
 <FormControl className={classes.formControl}>
   <InputLabel htmlFor="type">Type</InputLabel>
   <Select
@@ -908,10 +849,58 @@ const handleChange = (event, newPanel) => {
 
 
 
+{/* data set filter */}
+<Grid item xs={12} className={advanced ? classes.filter : classes.hide}>
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="dataSet">Data Set</InputLabel>
+  <Select
+   native
+    value={values.dataSet}
+    onChange={handleFilterChange}
+    className={classes.select}
+    inputProps={{
+      name: 'dataSet',
+      id: 'dataSet',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+  
+  >
+    <option value={""} />
+    <option value={'facility'}>Facility Based Code List</option>
+    <option value={'community'}>Community Based Code List</option>
+  </Select>
+</FormControl>
+</Grid>
 
 
 
-
+{/* frequency filter */}
+<Grid item xs={12} className={advanced ? classes.filter : classes.hide} >
+<FormControl className={classes.formControl}>
+  <InputLabel htmlFor="frequency">Reporting Frequency</InputLabel>
+  <Select
+    native
+    value={values.frequency}
+    onChange={handleFilterChange}
+    className={classes.select}
+    inputProps={{
+      name: 'frequency',
+      id: 'frequency',
+      classes: {
+        icon: classes.selectIcon
+      }
+    }}
+   
+  >
+    <option value={""} />
+    <option value={'quarterly'}>Quarterly</option>
+    <option value={'semiAnnual'}>Semi-Annual</option>
+    <option value={'annual'}>Annual</option>
+  </Select>
+</FormControl>
+</Grid>
 
 
 </form>
