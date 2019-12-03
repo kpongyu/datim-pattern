@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as color_palette from '../Styles/Colors';
 import styled from 'styled-components';
-import { BrowserRouter as NavLink } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
+import { Route, Link, BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
 import './Sidebar.css';
 
 
